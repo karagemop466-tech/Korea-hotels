@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Korea Trip — Seoul · Gyeongju · Busan</title>
+<style>
+  :root{
+    --bg:#f6f5f2; --card:#ffffff; --ink:#1f2933; --muted:#6b7280;
+    --brand:#b03a2e; --brand2:#1f5c46; --accent:#d9a441;
+    --budget:#2e7d32; --mid:#b8860b; --premium:#7b1fa2;
+    --border:#e5e0d6; --shadow:0 6px 24px rgba(0,0,0,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+
+  header.hero{background:linear-gradient(135deg,#2d3a2e 0%,#1f5c46 55%,#b03a2e 130%);color:#fff;padding:40px 0 34px}
+  header.hero h1{margin:0 0 6px;font-size:1.9rem;letter-spacing:.3px}
+  header.hero .sub{opacity:.92;font-size:1.02rem;margin-bottom:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:999px;font-size:.82rem}
+  .chip b{font-weight:700}
+
+  nav.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px}
+  .sn{border:1px solid var(--border);background:#fff;padding:9px 14px;border-radius:10px;cursor:pointer;font-size:.85rem;font-weight:600;box-shadow:var(--shadow)}
+  .sn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+  nav.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px}
+  .tab{padding:11px 18px;border-radius:10px;background:#fff;border:1px solid var(--border);cursor:pointer;font-weight:600;font-size:.95rem;box-shadow:var(--shadow)}
+  .tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .tab .city-nights{display:block;font-weight:400;font-size:.75rem;opacity:.8}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center}
+  .toolbar .label{font-size:.85rem;color:var(--muted);margin-right:4px}
+  .btn{border:1px solid var(--border);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600}
+  .btn.active{color:#fff}
+  .btn.t-budget.active{background:var(--budget);border-color:var(--budget)}
+  .btn.t-mid.active{background:var(--mid);border-color:var(--mid)}
+  .btn.t-premium.active{background:var(--premium);border-color:var(--premium)}
+  .btn.t-all.active{background:var(--ink);border-color:var(--ink)}
+  .btn.t-fits.active{background:var(--brand2);border-color:var(--brand2)}
+
+  .summary{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:8px 0 22px;box-shadow:var(--shadow)}
+  .summary h3{margin:0 0 8px;font-size:1.05rem}
+  .summary p{margin:4px 0;color:var(--muted);font-size:.9rem}
+  .summary .rec{color:var(--brand2);font-weight:600}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  @media (max-width: 600px) {
+    .grid{grid-template-columns:1fr;gap:14px}
+    .hotel-head,.hotel-body,.hotel-foot{padding:12px 14px}
+    .rooms{font-size:.75rem}
+    .toolbar{flex-wrap:wrap}
+  }
+  .hotel{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .hotel-head{padding:16px 18px 10px;border-bottom:1px solid var(--border)}
+  .hotel-head .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .hotel-name{font-size:1.05rem;font-weight:700;margin:0}
+  .badge{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;color:#fff;white-space:nowrap}
+  .b-budget{background:var(--budget)} .b-mid{background:var(--mid)} .b-premium{background:var(--premium)}
+  .fit-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:10px;font-size:.78rem;font-weight:600}
+  .fit-row.fits{background:#e9f7ef;border:1px solid #bfe6ce;color:#14532d}
+  .fit-row.no{background:#f6f1f1;border:1px solid #e4d8d8;color:#7a3b3b}
+  .fit-row .fit-badge{font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;background:#1f5c46;color:#fff;white-space:nowrap}
+  .fit-row.no .fit-badge{background:#8a4b4b}
+  .fit-row .fit-reason{opacity:.9}
+  .stars{color:var(--accent);font-size:.8rem;margin-top:2px}
+  .area{font-size:.85rem;color:var(--muted);margin-top:3px}
+  .price{font-size:.92rem;margin-top:8px;font-weight:600}
+  .price span{font-weight:400;color:var(--muted)}
+  .dir-comp{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;font-size:.78rem}
+  .dc{background:#f3faf6;border:1px solid #d7e8dc;color:var(--brand2);padding:3px 8px;border-radius:8px}
+  .dc.ota{background:#f6f3ff;border-color:#e2dcf5;color:#4a3a8a}
+
+  .hotel-body{padding:16px 18px;flex:1}
+  .kv{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .kv .ci{background:#f1f6f1;color:var(--brand2);font-weight:600;font-size:.78rem;padding:5px 11px;border-radius:8px}
+  .section-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700;margin:14px 0 6px}
+  .rooms{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px}
+  .rooms td{padding:6px 4px;border-bottom:1px dashed var(--border);vertical-align:top}
+  .rooms tr:last-child td{border-bottom:none}
+  .rooms tr.room-row{cursor:pointer}
+  .rooms tr.room-row:hover{background:#f7faf7}
+  .rooms .rname{font-weight:600;color:var(--ink);white-space:nowrap}
+  .rooms .rprice{font-weight:700;color:var(--brand2);white-space:nowrap;text-align:right;padding-right:6px}
+  .rooms .rnote{color:var(--muted);font-size:.72rem;text-align:right}
+  .rooms .rbed{font-size:.7rem;font-weight:700}
+  .rbed.one{color:#1f8a4c}
+  .rbed.two{color:#b03a2e}
+  .bookroom{font-size:.7rem;color:var(--brand);font-weight:700}
+  .policies{list-style:none;margin:0;padding:0}
+  .policies li{font-size:.82rem;margin:4px 0;padding-left:18px;position:relative}
+  .policies li:before{content:"•";position:absolute;left:2px;color:var(--brand)}
+  .promos{list-style:none;margin:0;padding:0}
+  .promos li{font-size:.82rem;margin:4px 0;padding-left:18px;position:relative}
+  .promos li:before{content:"✦";position:absolute;left:0;color:var(--accent)}
+  .why{font-size:.84rem;color:var(--brand2);background:#f3faf6;border:1px solid #d7e8dc;border-radius:10px;padding:10px 12px;margin-top:12px}
+  .highlights{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .hl{font-size:.72rem;background:#f3f1ea;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:#555}
+
+  .hotel-foot{padding:12px 18px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px}
+  .cta{flex:1;text-align:center;padding:9px 8px;border-radius:9px;font-weight:700;font-size:.8rem}
+  .cta-official{background:var(--brand2);color:#fff}
+  .cta-official:hover{background:#17463a}
+  .cta-live{background:var(--brand);color:#fff}
+  .cta-live:hover{background:#932f25}
+  .cta-compare{background:#fff;border:1px solid var(--border);color:var(--ink)}
+  .cta-compare:hover{border-color:var(--brand);color:var(--brand)}
+  .cta:not(a){cursor:default;color:var(--muted);background:#f3f1ea}
+
+  /* Accessibility */
+  button:focus, input:focus, select:focus {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin:18px 0;box-shadow:var(--shadow)}
+  .panel h2{margin:0 0 6px;font-size:1.25rem}
+  .panel .sub{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  .calc-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+  .calc-row:last-of-type{border-bottom:none}
+  .calc-row .city{font-weight:700;width:90px}
+  .calc-row select{padding:7px;border:1px solid var(--border);border-radius:8px;min-width:260px;background:#fff}
+  .calc-row .nights{font-size:.85rem;color:var(--muted)}
+  .calc-row .subtotal{margin-left:auto;font-weight:700;color:var(--brand2)}
+  .budget-total{margin-top:14px;font-size:1.1rem;font-weight:800;color:var(--brand)}
+  .budget-note{font-size:.8rem;color:var(--muted)}
+
+  .timeline{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .day{border:1px solid var(--border);border-radius:9px;padding:6px 8px;font-size:.72rem;background:#faf9f6;min-width:86px}
+  .day.hd{background:#eef4ff;border-color:#cddefa}
+  .day b{display:block;font-size:.78rem}
+  .day .dcity{color:var(--brand2);font-weight:600}
+  .day.travel{background:#fdf3e7;border-color:#f0d9b8}
+
+  .checklist{list-style:none;margin:8px 0 0;padding:0}
+  .checklist li{padding:8px 0;border-bottom:1px dashed var(--border);display:flex;align-items:center;gap:10px;font-size:.9rem}
+  .checklist li:last-child{border-bottom:none}
+  .checklist input{transform:scale(1.15)}
+  .checklist .meta{color:var(--muted);font-size:.78rem}
+  .checklist .why{font-size:.8rem;background:none;border:none;padding:0;color:var(--brand2)}
+
+  footer{margin:40px 0 30px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);padding-top:18px}
+  .note{background:#fdf6e6;border:1px solid #ecd9a8;color:#6b5410;padding:12px 16px;border-radius:10px;font-size:.85rem;margin-bottom:22px}
+  .hidden{display:none}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--brand2);color:#fff;padding:11px 18px;border-radius:10px;font-size:.85rem;box-shadow:var(--shadow);z-index:99;opacity:0;transition:opacity .3s}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <h1>South Korea Trip · Hotel Planner</h1>
+    <div class="sub">Seoul → Gyeongju → Busan · Best value hotels with official booking info, rules & deals</div>
+    <div class="chips">
+      <span class="chip">📅 <b id="chip-dates">Oct 31 – Nov 22, 2026</b> · <b id="chip-nights">22</b> nights</span>
+      <span class="chip">🎯 <b>Balance price &amp; quality</b></span>
+      <span class="chip">🏨 <b>Official-site deals &amp; check-in rules</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="subnav">
+    <div class="sn active" data-view="hotels">🏨 Hotels</div>
+    <div class="sn" data-view="budget">💰 Budget calculator</div>
+    <div class="sn" data-view="planner">🗓️ Day planner</div>
+    <div class="sn" data-view="loyalty">⭐ Loyalty tracker</div>
+    <div class="sn" data-view="deals">✦ Deal watchlist</div>
+    <div class="sn" onclick="exportSelected()">📤 Export</div>
+    <div class="sn" onclick="showComparison()">⚖️ Compare</div>
+  </nav>
+
+  <div id="selection-summary" style="display:none; background:#f0f7f4; border:1px solid #bfe6ce; border-radius:12px; padding:14px 18px; margin:12px 0;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+      <b style="color:#14532d;">✅ Selected Rooms</b>
+      <div>
+        <button onclick="showComparison()" style="background:#2e7d32; color:white; border:none; padding:4px 10px; border-radius:6px; font-size:0.75rem; cursor:pointer; margin-right:6px;">⚖️ Compare Selected</button>
+        <button onclick="clearSelection()" style="background:none; border:1px solid #b03a2e; color:#b03a2e; padding:4px 10px; border-radius:6px; font-size:0.75rem; cursor:pointer;">Clear all</button>
+      </div>
+    </div>
+    <div id="selection-list" style="font-size:0.9rem; line-height:1.4;"></div>
+  </div>
+
+  <div id="view-hotels" class="view">
+    <!-- Our Must-Haves Banner -->
+    <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-size: 0.95rem;">
+      <b style="color: #1b5e20; font-size: 1.05rem;">✅ Our Must-Haves (Non-Negotiable)</b>
+      <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; color: #2e7d32;">
+        <div>🛏 <strong>One single bed</strong> (Queen size or larger — approx 150cm+ wide). <strong>Not</strong> two beds pushed together or two doubles.</div>
+        <div>🚿 <strong>Private bathroom</strong> in the room</div>
+        <div>🚇 <strong>Near subway / KTX station</strong> (walking distance)</div>
+      </div>
+      <div style="margin-top: 6px; font-size: 0.85rem; color: #388e3c;">
+        Use the <strong>"Matches Our Must-Haves"</strong> filter below to see only hotels that meet all three requirements.
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Live prices:</b> Rates move daily and depend on your exact nights &amp; room type. Each card lists <b>per-room pricing</b>, a <b>Direct vs OTA</b> hint, and a <b>"Get live price"</b> button that opens the hotel's official booking engine for your dates. Click any room row to mark it for booking. Book <b>direct</b> for loyalty perks &amp; best-rate guarantees.
+      <br><small style="color:#6b5410">Data last updated: August 2026 — Prices are estimates. Always verify current rates.</small>
+    </div>
+
+    <details style="margin: 10px 0 20px; background: #f9f7f0; border: 1px solid #e8d9b8; border-radius: 10px; padding: 12px 16px;">
+      <summary style="cursor: pointer; font-weight: 600; color: #6b5410;">📖 How to use this planner</summary>
+      <div style="margin-top: 12px; font-size: 0.92rem; line-height: 1.5;">
+        <ol style="margin: 8px 0 0 18px; padding: 0;">
+          <li><strong>Select a city</strong> using the tabs (Seoul, Busan, Cheonan, or Daejeon)</li>
+          <li><strong>Filter</strong> by price tier, features (laundry, bed type), or use the search bar</li>
+          <li><strong>Click "Matches Our Must-Haves"</strong> to see only hotels meeting our 3 requirements</li>
+          <li><strong>Review details</strong>: room types, prices, official rules, and deals</li>
+          <li><strong>Click "Get live price"</strong> to check current rates on the official site</li>
+          <li><strong>Use the Budget tab</strong> to estimate your total trip cost</li>
+        </ol>
+        <p style="margin: 12px 0 0; color: #6b5410;"><strong>Tip:</strong> All data is static. Prices are estimates from August 2026.</p>
+      </div>
+    </details>
+
+    <details style="margin: 10px 0 20px; background: #f9f7f0; border: 1px solid #e8d9b8; border-radius: 10px; padding: 12px 16px;">
+      <summary style="cursor: pointer; font-weight: 600; color: #6b5410;">📖 How to use this planner</summary>
+      <div style="margin-top: 12px; font-size: 0.92rem; line-height: 1.5;">
+        <ol style="margin: 8px 0 0 18px; padding: 0;">
+          <li><strong>Select a city</strong> using the tabs (Seoul, Busan, Cheonan, or Daejeon)</li>
+          <li><strong>Filter</strong> by price tier, features (laundry, bed type), or use the search bar</li>
+          <li><strong>Click "Fits my needs"</strong> to see only hotels matching: 2 people + one queen/king bed + private bathroom</li>
+          <li><strong>Review details</strong>: room types, prices, official rules, and deals</li>
+          <li><strong>Click "Get live price"</strong> to check current rates on the official site</li>
+          <li><strong>Use the Budget tab</strong> to estimate your total trip cost</li>
+        </ol>
+        <p style="margin: 12px 0 0; color: #6b5410;"><strong>Tip:</strong> All data is static. Prices are estimates from August 2026.</p>
+      </div>
+    </details>
+      <b>Live prices:</b> Rates move daily and depend on your exact nights &amp; room type. Each card lists <b>per-room pricing</b>, a <b>Direct vs OTA</b> hint, and a <b>"Get live price"</b> button that opens the hotel's official booking engine for your dates. Click any room row to mark it for booking. Book <b>direct</b> for loyalty perks &amp; best-rate guarantees.<br><small style="color:#6b5410">Data last updated: August 2026 — Prices are estimates. Always verify current rates.</small>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+    <div class="summary" id="summary"></div>
+    <div class="toolbar">
+      <span class="label">Price tier:</span>
+      <button class="btn t-all active" data-filter="all">All</button>
+      <button class="btn t-budget" data-filter="budget">💰 Budget</button>
+      <button class="btn t-mid" data-filter="mid">💎 Mid-range</button>
+      <button class="btn t-premium" data-filter="premium">🏆 Premium</button>
+      <span class="label" style="margin-left:8px">Our Requirements:</span>
+      <button class="btn t-fits active" data-filter="fits" title="One Queen/King bed + Private bathroom + Near station">✓ Matches Our Must-Haves</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div id="view-budget" class="view hidden">
+    <div class="panel">
+      <h2>💰 Trip budget calculator</h2>
+      <div class="sub">Pick a hotel per city (or leave blank to skip). Uses your nights from the itinerary. Prices are nightly estimates for a room for two.</div>
+      <div id="calc-body"></div>
+      <div class="budget-total" id="budget-total"></div>
+      <div class="budget-note">*Hotel estimates only. KTX fares added (Seoul→Gyeongju ≈₩49,300 / Gyeongju→Busan ≈₩10,400). Book direct on official sites for guaranteed live rates.</div>
+    </div>
+  </div>
+
+  <div id="view-planner" class="view hidden">
+    <div class="panel">
+      <h2>🗓️ Day-by-day planner</h2>
+      <div class="sub">22 nights (Oct 31 – Nov 22). Travel days shown in amber. Choose your hotel per city and the timeline marks when you check in/out.</div>
+      <div id="timeline"></div>
+      <div style="margin-top:14px" class="sub">Set each city's hotel to populate check-in/check-out on the calendar.</div>
+    </div>
+  </div>
+
+  <div id="view-loyalty" class="view hidden">
+    <div class="panel">
+      <h2>⭐ Loyalty programs — sign up &amp; earn</h2>
+      <div class="sub">Joining is free and unlocks member rates, points, and perks. Your progress is saved in your browser.</div>
+      <ul class="checklist" id="loyalty-list"></ul>
+    </div>
+  </div>
+
+  <div id="view-deals" class="view hidden">
+    <div class="panel">
+      <h2>✦ Deal &amp; booking watchlist</h2>
+      <div class="sub">Current promotions per hotel. Tick items you've acted on; progress saves in your browser. Re-check the official site before your dates.</div>
+      <ul class="checklist" id="deals-list"></ul>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>Sources &amp; accuracy:</b> Check-in/check-out times, policies, room types/prices, and bed types are sourced from each hotel's official website, Korea Tourism Organization, and major booking platforms at the time of research (Aug 2026). Per-room prices are typical nightly USD ranges for the 2026 autumn season and are <b>estimates</b> — always confirm the current rate &amp; cancellation terms for your exact dates and room on the official site before booking.</p>
+    <p>Official links open the hotel's own booking page. Compare links let you cross-shop OTAs. Book <b>direct</b> when possible for best-rate guarantees and loyalty points.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = {"trip":{"title":"South Korea Trip — Seoul · Gyeongju · Busan","checkIn":"2026-10-31","checkOut":"2026-11-22","nights":22,"note":"Oct 31 – Nov 22, 2026 (22 nights). Autumn shoulder season — leaf-peeping, mild temps, lighter crowds than summer, and generally better hotel rates than spring high season. Prices below are typical nightly USD figures for a standard double; always confirm the live rate for YOUR dates on the hotel's official site."},"split":{"recommended":"Seoul 8 nights (Oct 31–Nov 8) · Gyeongju 6 nights (Nov 8–Nov 14) · Busan 8 nights (Nov 14–Nov 22)","rationale":"Seoul is the biggest city and main transport hub, so bookending the trip there is practical. Gyeongju is compact (5–7 nights = relaxed pace + day trips to Bulguksa & Yangdong Village). Busan is large and spread across two personalities (Haeundae beachside vs. Nampo old town), so 7–9 nights lets you split between neighborhoods.","alternatives":["More Seoul: 10 / 4 / 8 (Gyeongju trimmed to a long weekend)","More Gyeongju: 8 / 7 / 7 (relaxed heritage immersion)"]},"itinerary":{"_readme":"This file is READY to ingest your planned itinerary. Fill in the dates and locations below, and the planner's budget calculator + day planner will automatically use them. The app also reads a good default from the values here.","trip":{"name":"South Korea Trip","checkIn":"2026-10-31","checkOut":"2026-11-22","note":"Total 22 nights. You can adjust start/end and the per-city nights anytime."},"legs":[{"city":"Seoul","nights":8,"dates":"Oct 31 – Nov 8","locations":["Myeongdong (shopping / central)","Gwanghwamun & Gyeongbokgung (palaces / historic)"],"hotelChoice":null,"note":"Edit this to your actual dates and preferred neighborhood."},{"city":"Gyeongju","nights":6,"dates":"Nov 8 – Nov 14","locations":["Old Town / Hwangnam-dong (hanok village, near tombs)","Bomun Lake Resort (resort hotels)"],"hotelChoice":null,"note":"No subway in Gyeongju - KTX arrives at Singyeongju, ~20 min taxi/bus to town."},{"city":"Busan","nights":8,"dates":"Nov 14 – Nov 22","locations":["Haeundae (beach / resort)","Busan Station / Dong-gu (KTX arrivals, harbour)"],"hotelChoice":null,"note":"Consider splitting Busan between Haeundae and Busan Station."}],"alternatives":[{"city":"Cheonan","nights":6,"dates":"Nov 8 – Nov 14","locations":["Cheonan Station / Central area","Cheonan-Asan KTX Station area"],"hotelChoice":null,"note":"Recommended third city: direct on Seoul–Busan KTX corridor. Excellent cost + transport balance. 5 hotels available in data/hotels.json."},{"city":"Daejeon","nights":6,"dates":"Nov 8 – Nov 14","locations":["Daejeon Station area","Yuseong / Government Complex"],"hotelChoice":null,"note":"Strong alternative third city: larger city with hot springs and more dining options. 6 hotels available in data/hotels.json."}]},"hotels":[{"id":"seoul-l7-myeongdong","city":"Seoul","name":"L7 MYEONGDONG by LOTTE HOTELS","tier":"mid","stars":4,"area":"Myeongdong (central Seoul)","neighborhood":"Myeongdong shopping district, 2-min walk to Myeongdong Station (Line 4)","priceFrom":150,"priceTo":210,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Early check-in / late check-out subject to availability & charge.","Free Wi-Fi throughout. No pool. Pets not allowed.","Breakfast available (American & Asian options)."],"rooms":[{"name":"Deluxe Double","price":"$150–185/night","note":"Most popular; city/Namsan view","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Corner Deluxe","price":"$185–210/night","note":"Corner windows, more light","bed":"king/queen","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe Twin","price":"$160–195/night","note":"Two beds for sharing","bed":"twin","oneBed":false,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":false}],"promos":["LOTTE Members: sign up free for member-only rates and reward points (L7 is a Lotte Hotels brand).","L7 runs periodic 'Flash Deals' and room packages (e.g. N Seoul Tower observatory + cable-car tickets) — check the hotel's Official Offers page.","Booking direct on lottehotel.com unlocks member packages not shown on OTAs."],"amenities":["Fitness center","Rooftop bar/lounge","Laundry","Convenience store"],"officialUrl":"https://www.lottehotel.com/myeongdong-l7/en/main.html","officialLabel":"Official site (lottehotel.com)","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/L7-Myeongdong-by-Lotte-Hotels","compareLabel":"Compare rates (KAYAK)","why":"Best-value 'design-lifestyle' Lotte hotel in the heart of Myeongdong. Trendy, great location, member perks.","highlights":["2-min walk to Myeongdong Station","Rooftop sky terrace","LOTTE member rates & packages"],"fits":true,"fitReason":"Queen deluxe · Myeongdong Stn ~2 min","lat":37.5612,"lng":126.987,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"2 min walk to Myeongdong Station"},{"id":"seoul-nine-tree","city":"Seoul","name":"Nine Tree by Parnas Seoul Myeongdong 1","tier":"mid","stars":3,"area":"Myeongdong","neighborhood":"2-min walk to Myeongdong Station Exit 8; near Seoul Airport Limousine bus stops","priceFrom":100,"priceTo":145,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free in-room Wi-Fi.","No on-site pool. Standard Korean 3-star business-hotel rules."],"rooms":[{"name":"Standard Double","price":"$92–105/night","note":"Entry level, compact","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Double","price":"$105–118/night","note":"Most booked","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$120–138/night","note":"Larger, corner options","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Parnas Nine Tree runs seasonal 'early-bird' and multi-night stay deals on its official site.","Often cheaper than 4-star neighbors while delivering clean, reliable quality — a top value pick."],"amenities":["Gym","Restaurant","Laundry","Business center"],"officialUrl":"https://www.ninetreehotel.com/eng/myeongdong1/main.do","officialLabel":"Official site (ninetreehotel.com)","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/Nine-Tree-by-Parnas-Seoul-Myeongdong-1","compareLabel":"Compare rates (KAYAK)","why":"Consistently recommended mid-range value pick — clean, modern, unbeatable Myeongdong location.","highlights":["2-min walk to station","Airport-limousine bus steps away","Great value per square foot"],"fits":true,"fitReason":"Double/Deluxe · Myeongdong Stn ~1 min","lat":37.5603,"lng":126.9835,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"1 min walk to Myeongdong Station"},{"id":"seoul-ibis-styles","city":"Seoul","name":"Ibis Styles Ambassador Seoul Myeongdong","tier":"budget","stars":3,"area":"Myeongdong","neighborhood":"Central Myeongdong; within walking distance of N Seoul Tower cable car & airport limousine stops","priceFrom":90,"priceTo":130,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Free breakfast included (typical Ibis Styles perk).","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$90–110/night","note":"Compact, free breakfast","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Superior","price":"$110–130/night","note":"More space, quiet floors","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Accor ALL loyalty program — earn points & member rates; complimentary drink/upgrade potential for ALL members.","Watch Accor ALL 'members flash sales' for up to 50%-off 'Private Sales'.","Rooms are compact but clean & functional — great price-to-quality."],"amenities":["Free breakfast","Roof terrace","Top-floor restaurant","Free Wi-Fi"],"officialUrl":"https://all.accor.com/hotel/1976/index.en.shtml","officialLabel":"Official site (all.accor.com / Accor ALL)","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/Ibis-Styles-Ambassador-Seoul-Myeongdong","compareLabel":"Compare rates (KAYAK)","why":"Best budget-quality balance: free breakfast, central location, reliable Accor standard.","highlights":["Free breakfast","Roof terrace views","Accor ALL points"],"fits":true,"fitReason":"Double · Myeongdong Stn ~3 min","lat":37.5614,"lng":126.9838,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":false,"stationWalkTime":"3 min walk to Myeongdong Station"},{"id":"seoul-ibis-insadong","city":"Seoul","name":"Ibis Ambassador Insadong (newly refurbished)","tier":"mid","stars":4,"area":"Insadong / Jongno (historic & arts district)","neighborhood":"Overlooks Ikseon-dong Hanok village; walkable to Gyeongbokgung, Bukchon & Jogyesa","priceFrom":110,"priceTo":155,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Recently refurbished modern rooms.","Free Wi-Fi."],"rooms":[{"name":"Standard","price":"$110–130/night","note":"Fresh post-renovation rooms","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Superior","price":"$130–155/night","note":"Hanok village view","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Accor ALL membership benefits & member-only rates.","Newly renovated — currently strong value vs. legacy competitors in the area."],"amenities":["Gym","Restaurant","Free Wi-Fi","Laundry"],"officialUrl":"https://all.accor.com/hotel/1888/index.en.shtml","officialLabel":"Official site (all.accor.com / Accor ALL)","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/Ibis-Ambassador-Insadong","compareLabel":"Compare rates (KAYAK)","why":"Freshly renovated mid-range hotel in the most atmospheric old-city district, near palaces & hanok villages.","highlights":["Newly refurbished","Ikseon-dong hanok views","Near palaces & museums"],"fits":true,"fitReason":"Superior double · Anguk Stn ~5 min","lat":37.5742,"lng":126.9832,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true},{"id":"seoul-four-seasons","city":"Seoul","name":"Four Seasons Hotel Seoul","tier":"premium","stars":5,"area":"Gwanghwamun (historic heart)","neighborhood":"Steps from Gwanghwamun & Gyeongbokgung Palace; museum/gallery district","priceFrom":420,"priceTo":640,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Standard Four Seasons service standards & flexible cancellation on flexible rates.","On-site restaurants & bars incl. Yu Yuan (Michelin-star Cantonese) & Charles H. speakeasy."],"rooms":[{"name":"Deluxe","price":"$420–500/night","note":"Palace/city view","bed":"king/queen","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Premier","price":"$500–640/night","note":"Larger, upgraded view","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Best Rate Guarantee when booking direct on fourseasons.com.","Seasonal packages (e.g. spa, dining, sightseeing) on the official Offers page."],"amenities":["Indoor pool","Spa","Michelin-star dining","Gym","Kids club"],"officialUrl":"https://www.fourseasons.com/seoul/","officialLabel":"Official site (fourseasons.com)","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/Four-Seasons-Seoul","compareLabel":"Compare rates (KAYAK)","why":"Top-tier luxury with palace views — the splurge option if budget allows a few nights.","highlights":["Gyeongbokgung Palace views","Michelin dining","Best-rate guarantee direct booking"],"fits":true,"fitReason":"King/queen deluxe · Gwanghwamun Stn ~5 min","lat":37.5702,"lng":126.9742,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":false},{"id":"seoul-fairmont","city":"Seoul","name":"Fairmont Ambassador Seoul","tier":"premium","stars":5,"area":"Yeouido (financial district, Han River)","neighborhood":"On the Han River; beside The Hyundai Seoul luxury mall","priceFrom":300,"priceTo":430,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Fairmont is part of Accor's ALL loyalty program."],"rooms":[{"name":"Deluxe King","price":"$300–360/night","note":"City view","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Corner Deluxe","price":"$360–430/night","note":"Han River view","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Fairmont is part of Accor's ALL loyalty program.","Look for Accor ALL member rates & packages on the official site.","Best-rate guarantee when booking direct."],"amenities":["Indoor pool","Spa","Multiple restaurants & bars","Gym"],"officialUrl":"https://www.fairmont.com/seoul/","officialLabel":"Official site (fairmont.com)","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/Fairmont-Ambassador-Seoul","compareLabel":"Compare rates (KAYAK)","why":"Modern luxury on the river in Yeouido — great if you like malls & a calmer, polished base.","highlights":["Han River location","The Hyundai Seoul next door","Accor ALL points"],"fits":true,"fitReason":"Deluxe king · Yeouinaru Stn ~8 min","lat":37.526,"lng":126.9275,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":false},{"id":"busan-shilla-stay","city":"Busan","name":"Shilla Stay Busan Haeundae","tier":"budget","stars":4,"area":"Haeundae (beach)","neighborhood":"Near Haeundae Beach & BEXCO; convenient to public transport","priceFrom":72,"priceTo":115,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Children of any age welcome; guests 18+ charged as adults.","Minimum check-in age 20. No pets. No cots/extra beds.","Free Wi-Fi & free parking available."],"rooms":[{"name":"Standard","price":"$70–88/night","note":"Entry level","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$72–95/night","note":"Good value upgrade","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Premier","price":"$90–108/night","note":"Higher floors / beach side","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Family Twin","price":"$100–118/night","note":"Two beds, family-friendly","bed":"twin","oneBed":false,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":false}],"promos":["Shilla Rewards membership — earn points (3% room / 1% F&B) & tier perks across Shilla Stay & Shilla hotels.","Watch official site for member-only rates & packages."],"amenities":["Pool","Gym","Free parking","Free Wi-Fi","Laundry"],"officialUrl":"https://www.shillastay.com/haeundae/main.do?lang=en","officialLabel":"Official site (shillastay.com)","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/Shilla-Stay-Haeundae","compareLabel":"Compare rates (KAYAK)","why":"The most-booked, best-value beachside pick in Busan — reliable Shilla quality at a great price.","highlights":["Near Haeundae Beach & BEXCO","Free parking & Wi-Fi","Shilla Rewards points"],"fits":true,"fitReason":"Queen/King · Haeundae Stn ~5-9 min","lat":35.1601,"lng":129.1587,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"5-9 min walk to Haeundae Station"},{"id":"busan-l7-haeundae","city":"Busan","name":"L7 HAEUNDAE by LOTTE HOTELS","tier":"mid","stars":4,"area":"Haeundae (beach)","neighborhood":"Beachfront Haeundae; walk to Gwangan Bridge views","priceFrom":115,"priceTo":165,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi. No pets.","Breakfast available."],"rooms":[{"name":"Standard","price":"$115–140/night","note":"City view","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$140–165/night","note":"Sea / Gwangan view","bed":"double/queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["LOTTE Members member-only rates & packages.","Infinity pool & heated jacuzzi are a highlight — check if included in your rate."],"amenities":["Infinity pool","Heated jacuzzi","Gym","Restaurant","Laundry"],"officialUrl":"https://www.lottehotel.com/haeundae-l7/en/main.html","officialLabel":"Official site (lottehotel.com)","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/L7-Haeundae-by-Lotte","compareLabel":"Compare rates (KAYAK)","why":"Trendy beachfront L7 with a rooftop infinity pool — superb mid-range splurge near the beach.","highlights":["Rooftop infinity pool","Beachfront Haeundae","LOTTE member perks"],"fits":true,"fitReason":"Deluxe double · Haeundae Stn ~10 min","lat":35.1565,"lng":129.1555,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"10 min walk to Haeundae Station"},{"id":"busan-asti","city":"Busan","name":"ASTI Hotel Busan Station","tier":"mid","stars":4,"area":"Busan Station (Dong-gu)","neighborhood":"Steps from KTX Busan Station & Chinatown; harbour views","priceFrom":80,"priceTo":120,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Rooftop restaurant & harbour views.","Convenient if arriving/departing by KTX high-speed rail."],"rooms":[{"name":"Standard","price":"$72–90/night","note":"Compact, harbour view","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$90–110/night","note":"Larger, popular","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Executive","price":"$120–145/night","note":"Top floors / suite feel","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Official site often lists early-bird & length-of-stay discounts.","Excellent value 4-star — a strong price-to-quality choice near the station."],"amenities":["Rooftop restaurant","Gym","Free Wi-Fi","Business center"],"officialUrl":"https://www.astihotel.com","officialLabel":"Official site (astihotel.com)","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/ASTI-Hotel-Busan-Station","compareLabel":"Compare rates (KAYAK)","why":"Modern 4-star next to KTX station — ideal for the day you arrive/leave by train, great value.","highlights":["Steps from KTX","Rooftop harbour views","Strong value"],"fits":true,"fitReason":"Double/King · Busan Stn ~1 min","lat":35.1162,"lng":129.0417,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":false,"stationWalkTime":"1 min walk to Busan Station"},{"id":"busan-grand-josun","city":"Busan","name":"Grand Josun Busan","tier":"premium","stars":5,"area":"Haeundae (beachfront)","neighborhood":"Directly on Haeundae Beach, sea-facing","priceFrom":180,"priceTo":270,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Grand Josun is part of The Josun Hotels brand (Lotte affiliate).","Free breakfast options; best-rate guarantee on official site."],"rooms":[{"name":"Superior","price":"$133–165/night","note":"Entry 5-star, city view","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$150–185/night","note":"Popular, partial sea view","bed":"double/queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"King","price":"$180–220/night","note":"Sea view","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Premier","price":"$220–270/night","note":"Beachfront premium","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["The Josun Hospitality membership (Josun Rewards / Lotte-affiliated perks).","Book direct on josun.com for best-rate guarantee & packages."],"amenities":["Indoor pool","Spa & sauna","Beach access","Multiple restaurants","Gym"],"officialUrl":"https://www.josun.com/eng/hotel/main/index.do","officialLabel":"Official site (josun.com)","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/Grand-Josun-Busan","compareLabel":"Compare rates (KAYAK)","why":"Excellent value 5-star beachfront — a rare case where premium is nearly mid-range priced.","highlights":["Haeundae Beachfront","5-star at 4-star prices","Pool & spa"],"fits":true,"fitReason":"King · Haeundae Stn ~7-10 min","lat":35.1572,"lng":129.1626,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":false},{"id":"busan-park-hyatt","city":"Busan","name":"Park Hyatt Busan","tier":"premium","stars":5,"area":"Haeundae (marine city)","neighborhood":"Haeundae Marine City with Gwangan Bridge & marina views","priceFrom":220,"priceTo":320,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","World of Hyatt program — earn/night points & member rates.","Spa, gym, indoor pool."],"rooms":[{"name":"Deluxe King","price":"$220–260/night","note":"Marina/Gwangan view","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Grand Deluxe","price":"$260–320/night","note":"Larger, corner","bed":"king","oneBed":true,"bedNote":"Single king bed (not two beds pushed together)","bedType":"king","bedSize":"King (approx 180x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["World of Hyatt member rates & points.","Book direct on hyatt.com for best-rate guarantee."],"amenities":["Indoor pool","Spa","Fine dining","Marina views","Gym"],"officialUrl":"https://www.hyatt.com/park-hyatt/busan","officialLabel":"Official site (hyatt.com)","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/Park-Hyatt-Busan","compareLabel":"Compare rates (KAYAK)","why":"Sleek luxury overlooking the marina & Gwangan Bridge — the premium pick with loyalty value.","highlights":["Gwangan Bridge views","World of Hyatt points","Marina location"],"fits":true,"fitReason":"Deluxe king · Dongbaek Stn ~8 min","lat":35.1528,"lng":129.1496,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":false},{"id":"gyeongju-hwangnamkwan","city":"Gyeongju","name":"Hwangnamkwan Hanok Hotel (황남관 한옥호텔)","tier":"mid","stars":4,"area":"Gyeongju Old Town (Hwangnam-dong)","neighborhood":"Inside the historic hanok village near Cheomseongdae & the ancient tomb complex","priceFrom":80,"priceTo":130,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Hanok (traditional Korean) accommodation — ondol heated floors.","Book early: Gyeongju Old Town options sell out fast.","Free Wi-Fi in most rooms."],"rooms":[{"name":"Standard Hanok","price":"$80–105/night","note":"Traditional room, ondol","bed":"ondol","oneBed":true,"bedNote":"Ondol floor bedding"},{"name":"Deluxe Hanok","price":"$105–130/night","note":"Larger, courtyard view","bed":"ondol","oneBed":true,"bedNote":"Ondol floor bedding"}],"promos":["Best overall cultural-value pick — traditional Korean experience without a luxury price tag.","Hanbok rental & atmosphere included in stay; watch for seasonal packages."],"amenities":["Hanok courtyard","Ondol floors","Hanbok rental","Free Wi-Fi"],"officialUrl":"https://www.hwangnamkwan.co.kr","officialLabel":"Official site (hwangnamkwan.co.kr)","compareUrl":"https://www.kayak.com/hotels/Gyeongju,c41830/Hwangnamkwan-Hanok-Hotel","compareLabel":"Compare rates (KAYAK)","why":"The iconic central hanok stay — the cultural centerpiece of a Gyeongju visit.","highlights":["Authentic hanok","Old Town center","Hanbok rental"],"fits":false,"fitReason":"Hanok ondol beds · no subway in Gyeongju","lat":35.8364,"lng":129.2286},{"id":"gyeongju-commodore","city":"Gyeongju","name":"Commodore Hotel Gyeongju","tier":"mid","stars":4,"area":"Bomun Lake Resort","neighborhood":"Bomun Tourist Complex by Bomun Lake; 20+ yrs established","priceFrom":90,"priceTo":140,"currency":"USD","checkIn":"14:00","checkOut":"12:00","policies":["Check-in from 14:00; check-out by 12:00 (per Korea Tourism Org).","Children not allowed in some room types; extra bed for adults KRW 36,300/night.","No pets. Breakfast available (separate charge).","262 rooms; 20-min walk around Bomun Lake."],"rooms":[{"name":"Superior","price":"$66–80/night","note":"Entry level","bed":"double","oneBed":true,"bedNote":"Superior"},{"name":"Deluxe","price":"$80–95/night","note":"Most popular","bed":"double","oneBed":true,"bedNote":"Deluxe"},{"name":"Double (lake view)","price":"$100–130/night","note":"Bomun Lake-facing","bed":"double","oneBed":true,"bedNote":"Lake-view double"}],"promos":["Official site (commodorehotel.co.kr) often runs seasonal lake-view & length-of-stay packages.","Good-value established resort with outdoor pool (seasonal)."],"amenities":["Outdoor pool (seasonal)","Sauna","Tennis court","Korean & Japanese restaurants","Business center"],"officialUrl":"https://www.commodorehotel.co.kr","officialLabel":"Official site (commodorehotel.co.kr)","compareUrl":"https://www.kayak.com/hotels/Gyeongju,c41830/Commodore-Hotel-Gyeongju","compareLabel":"Compare rates (KAYAK)","why":"Solid Bomun-area value resort close to the lake walking path — a reliable mid-range base.","highlights":["Bomun Lake location","Outdoor pool & sauna","Established & reliable"],"fits":false,"fitReason":"No subway in Gyeongju","lat":35.8265,"lng":129.244},{"id":"gyeongju-lahan","city":"Gyeongju","name":"Lahan Select Gyeongju","tier":"premium","stars":5,"area":"Bomun Lake Resort","neighborhood":"Bomun Lake waterfront; lake & mountain views","priceFrom":130,"priceTo":190,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Lahan is a premium hotel brand (lottery/hotel group).","Free Wi-Fi; multiple dining venues."],"rooms":[{"name":"Deluxe","price":"$100–120/night","note":"Entry, lake/mountain view","bed":"double","oneBed":true,"bedNote":"Deluxe"},{"name":"Double","price":"$108–130/night","note":"Most booked","bed":"double","oneBed":true,"bedNote":"Double"},{"name":"Queen","price":"$120–150/night","note":"Larger, lake front","bed":"queen","oneBed":true,"bedNote":"Queen"}],"promos":["Lahan official site offers member rates & packages (e.g. 'LAHAN STAY' breakfast package).","Best-value 'premium' lakefront option in Gyeongju."],"amenities":["Pool","Spa & sauna","Lake-view rooms","Restaurants","Gym","Kids area"],"officialUrl":"https://www.lahan.com/gyeongju/en/main.do","officialLabel":"Official site (lahan.com)","compareUrl":"https://www.kayak.com/hotels/Gyeongju,c41830/Lahan-Select-Gyeongju","compareLabel":"Compare rates (KAYAK)","why":"Modern luxury on Bomun Lake — premium feel at an approachable price.","highlights":["Bomun Lake views","Modern 5-star","Great premium value"],"fits":false,"fitReason":"No subway in Gyeongju","lat":35.8332,"lng":129.2402},{"id":"gyeongju-hilton","city":"Gyeongju","name":"Hilton Gyeongju","tier":"premium","stars":5,"area":"Bomun Lake Resort","neighborhood":"484-7 Bomun-ro; near Wooyang Museum of Contemporary Art & K-POP Museum","priceFrom":140,"priceTo":220,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00–23:59; check-out by 11:00.","Children older than 1 year welcome; no cots/extra beds.","No pets. Groups (9+ rooms) have different policies.","24-hour front desk, valet parking, currency exchange."],"rooms":[{"name":"King","price":"$125–140/night","note":"Entry","bed":"king","oneBed":true,"bedNote":"King"},{"name":"Deluxe","price":"$140–165/night","note":"Most popular","bed":"double/queen","oneBed":true,"bedNote":"Deluxe"},{"name":"Standard (twin)","price":"$150–185/night","note":"Two beds","bed":"twin","oneBed":false,"bedNote":"Two beds"},{"name":"Executive","price":"$250–380/night","note":"Lounge access / suite","bed":"king","oneBed":true,"bedNote":"Executive"}],"promos":["Hilton Honors points & member rates — book direct on hilton.com for best-rate guarantee.","Indoor & outdoor pools, water slide, kids' play areas."],"amenities":["Indoor & outdoor pools","Kids' pool","Water slide","Spa & sauna","Restaurants","Fitness","Valet parking"],"officialUrl":"https://www.hilton.com/en/hotels/kyjgyhi-hilton-gyeongju/","officialLabel":"Official site (hilton.com)","compareUrl":"https://www.kayak.com/hotels/Gyeongju,c41830/Hilton-Gyeongju","compareLabel":"Compare rates (KAYAK)","why":"Big resort-style international hotel with pools & family amenities — premium with loyalty value.","highlights":["Resort pools & water slide","Hilton Honors points","Family-friendly"],"fits":false,"fitReason":"No subway in Gyeongju","lat":35.8401,"lng":129.2861},{"id":"gyeongju-gg-hotel","city":"Gyeongju","name":"GG Hotel Gyeongju","tier":"budget","stars":3,"area":"Gyeongju city center","neighborhood":"Near Gyeongju Intercity Bus Terminal; central & walkable","priceFrom":55,"priceTo":75,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00 (typical).","Clean, central, traveler-friendly budget hotel.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$55–66/night","note":"Compact, central","bed":"double","oneBed":true,"bedNote":"Standard Double"},{"name":"Deluxe","price":"$66–78/night","note":"More space","bed":"double","oneBed":true,"bedNote":"Deluxe"}],"promos":["One of the best budget value picks — clean & central for a very low price.","Book early — budget rooms in Gyeongju sell out during peak periods."],"amenities":["Free Wi-Fi","Laundry","24-hr reception"],"officialUrl":null,"officialLabel":"Book via OTA (no official English site)","compareUrl":"https://www.kayak.com/hotels/Gyeongju,c41830/GG-Hotel-Gyeongju","compareLabel":"Compare rates (KAYAK)","why":"Clean, central, very affordable — the smart budget base in Gyeongju.","highlights":["Central","Budget-friendly","Clean & reliable"],"fits":false,"fitReason":"No subway in Gyeongju","lat":35.84,"lng":129.2116},{"id":"cheonan-shilla-stay","city":"Cheonan","name":"Shilla Stay Cheonan","tier":"mid","stars":4,"area":"Cheonan Station / Bus Terminal","neighborhood":"Central Cheonan near Cheonan Station and bus terminal; easy access to KTX via short taxi or subway","priceFrom":65,"priceTo":95,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi throughout. Free parking available.","Children welcome; standard Shilla Stay policies apply."],"rooms":[{"name":"Standard Double","price":"$65–80/night","note":"Most popular entry level","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$75–95/night","note":"Larger room, popular upgrade","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Shilla Rewards membership — earn points (3% room / 1% F&B) across Shilla Stay properties.","Often has member-only rates and breakfast packages on the official site."],"amenities":["Fitness center","Restaurant","Bar / lounge","Free Wi-Fi","Laundry","Business center"],"officialUrl":"https://www.shillastay.com/cheonan/main.do?lang=en","officialLabel":"Official site (shillastay.com)","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/Shilla-Stay-Cheonan","compareLabel":"Compare rates (KAYAK)","why":"Best overall value and reliability — trusted Shilla brand at a much lower price than Seoul or Busan.","highlights":["Excellent reviews (8.3–8.4/10)","Gym + restaurant on site","Very convenient central location"],"fits":true,"fitReason":"Queen/Double · Cheonan Station ~5–10 min walk or short taxi","lat":36.8257,"lng":127.1433,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"8 min walk to Cheonan Station"},{"id":"cheonan-ramada-encore","city":"Cheonan","name":"Ramada Encore by Wyndham Cheonan","tier":"mid","stars":3,"area":"Central Cheonan","neighborhood":"Convenient central location with easy access to Cheonan Station and shopping","priceFrom":60,"priceTo":90,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Free Wi-Fi. Parking available.","Breakfast often included or available as package."],"rooms":[{"name":"Standard Double","price":"$60–75/night","note":"Clean and functional","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$70–90/night","note":"Larger with better views","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Wyndham Rewards program — earn points and member rates.","Frequent breakfast packages and early-bird deals."],"amenities":["Restaurant","Free Wi-Fi","Laundry","Business center"],"officialUrl":"https://www.wyndhamhotels.com/ramada/cheonan-south-korea/ramada-encore-cheonan/overview","officialLabel":"Official site (wyndhamhotels.com)","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/Ramada-Encore-Cheonan","compareLabel":"Compare rates (KAYAK)","why":"Strong value mid-range chain with consistent quality and good breakfast reviews.","highlights":["8.3/10 average rating","Great breakfast options","Central & convenient"],"fits":true,"fitReason":"Double/Queen · Cheonan Station ~10 min","lat":36.81,"lng":127.15,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"10 min walk to Cheonan Station"},{"id":"cheonan-on-city","city":"Cheonan","name":"ON City Hotel","tier":"mid","stars":3,"area":"Cheonan Station area","neighborhood":"Near Cheonan Station; good access to transport and local amenities","priceFrom":55,"priceTo":80,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi. Fitness center available."],"rooms":[{"name":"Standard Double","price":"$55–68/night","note":"Entry level, clean","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$65–80/night","note":"More space","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Frequently listed as one of the best value 3-star options in Cheonan."],"amenities":["Fitness center","Free Wi-Fi","Restaurant options nearby","Laundry facilities"],"officialUrl":"https://www.oncityhotel.com","officialLabel":"Book via OTA (Trip.com / Booking.com)","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/ON-City-Hotel","compareLabel":"Compare rates (KAYAK)","why":"Excellent budget-mid value with fitness amenities and strong guest feedback.","highlights":["Fitness center","Very affordable","Good location near station"],"fits":true,"fitReason":"Double/Queen · Cheonan Station ~5–8 min","lat":36.82,"lng":127.14,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"7 min walk to Cheonan Station"},{"id":"cheonan-sono-belle","city":"Cheonan","name":"Sono Belle Cheonan","tier":"mid","stars":4,"area":"Cheonan area","neighborhood":"Resort-style property with good access to KTX and city center","priceFrom":80,"priceTo":120,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi. Seasonal pool available."],"rooms":[{"name":"Deluxe","price":"$80–100/night","note":"Standard resort room","bed":"double/queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Suite / Superior","price":"$100–120/night","note":"Larger with better views","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Higher-end option with resort amenities at still-reasonable prices."],"amenities":["Pool (seasonal)","Spa","Restaurant","Gym","Free Wi-Fi","Laundry facilities"],"officialUrl":"https://www.sonohotelsresorts.com","officialLabel":"Book via OTA","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/Sono-Belle-Cheonan","compareLabel":"Compare rates (KAYAK)","why":"Best resort-style pick for a more relaxing 6-night stay while staying cost-effective.","highlights":["Pool & spa","Higher comfort level","Good value for 4-star"],"fits":true,"fitReason":"Queen · ~15–20 min to Cheonan-Asan KTX","lat":36.83,"lng":127.16,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"15 min to Cheonan-Asan KTX"},{"id":"cheonan-best-western-asan","city":"Cheonan","name":"Best Western Asan Hotel","tier":"mid","stars":3,"area":"Cheonan-Asan Station area","neighborhood":"Very close to Cheonan-Asan KTX station — ideal for rail travelers","priceFrom":70,"priceTo":100,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi and parking."],"rooms":[{"name":"Standard Double","price":"$70–85/night","note":"Clean chain standard","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$80–100/night","note":"Larger room","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Best Western Rewards loyalty program."],"amenities":["Restaurant","Free Wi-Fi","Parking","Business center","Laundry facilities"],"officialUrl":"https://www.bestwestern.com/en_US/book/hotel-details.cheonan-south-korea.html","officialLabel":"Official site (bestwestern.com)","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/Best-Western-Asan-Hotel","compareLabel":"Compare rates (KAYAK)","why":"Best location for pure KTX convenience — right by the high-speed station.","highlights":["Closest to Cheonan-Asan KTX","Reliable international chain","Parking included"],"fits":true,"fitReason":"Double/Queen · Cheonan-Asan KTX ~5–8 min walk","lat":36.84,"lng":127.13,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"5 min walk to Cheonan-Asan KTX"},{"id":"daejeon-toyoko-inn","city":"Daejeon","name":"Toyoko Inn Daejeon Government Complex","tier":"budget","stars":3,"area":"Government Complex / Dunsan","neighborhood":"Near Government Complex Daejeon Metro Station; convenient for business and central access","priceFrom":48,"priceTo":70,"currency":"USD","checkIn":"15:00","checkOut":"10:00","policies":["Check-in from 15:00; check-out by 10:00.","Free breakfast often included. Free Wi-Fi.","Reliable Japanese chain known for consistency."],"rooms":[{"name":"Standard Double","price":"$48–60/night","note":"Compact, clean, functional","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$55–70/night","note":"Slightly larger","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Frequent free breakfast promotion for direct or member bookings.","Toyoko Inn loyalty program benefits."],"amenities":["Free breakfast (often)","Free Wi-Fi","Laundry","Business center"],"officialUrl":"https://www.toyoko-inn.com/eng/hotel/00235/index.html","officialLabel":"Official site (toyoko-inn.com)","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/Toyoko-Inn-Daejeon-Government-Complex","compareLabel":"Compare rates (KAYAK)","why":"Best budget/reliable chain option — excellent value with consistent quality and often free breakfast.","highlights":["Frequently includes breakfast","Very affordable","Good central location"],"fits":true,"fitReason":"Double · Government Complex Stn ~3–5 min","lat":36.35,"lng":127.38,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"6 min walk to Daejeon Station"},{"id":"daejeon-ramada","city":"Daejeon","name":"Ramada by Wyndham Daejeon","tier":"mid","stars":3,"area":"Central Daejeon","neighborhood":"Good access to Daejeon Station and city center","priceFrom":65,"priceTo":95,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Free Wi-Fi. Fitness center available."],"rooms":[{"name":"Standard Double","price":"$65–80/night","note":"Clean mid-range standard","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$75–95/night","note":"Larger room","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Wyndham Rewards points and member rates."],"amenities":["Fitness center","Restaurant","Free Wi-Fi","Business center","Laundry facilities"],"officialUrl":"https://www.wyndhamhotels.com/ramada/daejeon-south-korea/ramada-daejeon/overview","officialLabel":"Book via OTA or Wyndham site","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/Ramada-by-Wyndham-Daejeon","compareLabel":"Compare rates (KAYAK)","why":"Solid mid-range international chain option with good amenities.","highlights":["Fitness center","Reliable brand","Central location"],"fits":true,"fitReason":"Double/Queen · Daejeon Station area ~10–15 min","lat":36.35,"lng":127.39,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"8 min walk to Daejeon Station"},{"id":"daejeon-lotte-city","city":"Daejeon","name":"LOTTE City Hotel Daejeon","tier":"mid","stars":4,"area":"Yuseong / Convention area","neighborhood":"Near Daejeon Convention Center and Yuseong Hot Springs district","priceFrom":80,"priceTo":110,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi. Multiple dining options."],"rooms":[{"name":"Deluxe","price":"$80–95/night","note":"Popular standard room","bed":"double/queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Superior / Suite","price":"$95–110/night","note":"Larger with better views","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Lotte Rewards program benefits."],"amenities":["Multiple restaurants","Gym","Free Wi-Fi","Business center","Laundry facilities"],"officialUrl":"https://www.lottehotel.com/city/daejeon/en/","officialLabel":"Book via OTA or Lotte site","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/LOTTE-City-Hotel-Daejeon","compareLabel":"Compare rates (KAYAK)","why":"Premium-feel mid-range option near convention center and hot springs area.","highlights":["Near convention center","Good dining options","Higher comfort level"],"fits":true,"fitReason":"Queen · Yuseong area ~10–15 min to station","lat":36.36,"lng":127.36,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"12 min walk to Yuseong Hot Springs area"},{"id":"daejeon-benikea-daelim","city":"Daejeon","name":"Benikea Daelim Hotel","tier":"budget","stars":3,"area":"Near Daejeon Station","neighborhood":"Very close to Daejeon KTX Station — ideal for rail travelers","priceFrom":45,"priceTo":65,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi. Basic but clean."],"rooms":[{"name":"Standard Double","price":"$45–55/night","note":"Budget-friendly entry","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$52–65/night","note":"Slightly larger","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["One of the most affordable options near the station."],"amenities":["Free Wi-Fi","Laundry"],"officialUrl":"https://benikea.com","officialLabel":"Book via OTA","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/Benikea-Daelim-Hotel","compareLabel":"Compare rates (KAYAK)","why":"Best ultra-budget pick right by the KTX station.","highlights":["Closest to Daejeon Station","Very low price","Convenient for train travel"],"fits":true,"fitReason":"Double · Daejeon Station ~2–5 min walk","lat":36.35,"lng":127.39,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"4 min walk to Daejeon Station"},{"id":"daejeon-hotel-stendhal","city":"Daejeon","name":"Hotel Stendhal","tier":"mid","stars":3,"area":"Yuseong / Hot Springs area","neighborhood":"Near Yuseong Hot Springs and Chungnam National University","priceFrom":70,"priceTo":95,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$70–82/night","note":"Clean and comfortable","bed":"double","oneBed":true,"bedNote":"Single double bed (not two beds pushed together)","bedType":"double","bedSize":"Double (approx 140x200cm)","privateBathroom":true,"oneBedOnly":true},{"name":"Deluxe","price":"$80–95/night","note":"Popular upgrade","bed":"queen","oneBed":true,"bedNote":"Single queen bed (not two beds pushed together)","bedType":"queen","bedSize":"Queen (approx 150x200cm)","privateBathroom":true,"oneBedOnly":true}],"promos":["Popular choice for hot springs visitors."],"amenities":["Free Wi-Fi","Restaurant nearby","Laundry facilities"],"officialUrl":null,"officialLabel":"Book via OTA (no official English site)","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/Hotel-Stendhal","compareLabel":"Compare rates (KAYAK)","why":"Good mid-range option in the popular Yuseong hot springs district.","highlights":["Near hot springs","Good reviews","Relaxed area"],"fits":true,"fitReason":"Double/Queen · Yuseong area","lat":36.36,"lng":127.35,"priceNote":"Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.","hasOnSiteLaundry":true,"stationWalkTime":"10 min walk to Yuseong area"},{"id":"cheonan-brown-dot","city":"Cheonan","name":"Cheonan Brown Dot Hotel Cheonan Station","tier":"budget","stars":3,"area":"Cheonan Station area","neighborhood":"Very close to Cheonan Station","priceFrom":45,"priceTo":70,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$45–58/night","note":"Budget-friendly near station","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["Often one of the cheapest decent options near the station."],"amenities":["Free Wi-Fi","Laundry facilities"],"hasOnSiteLaundry":true,"officialUrl":null,"officialLabel":"Book via OTA (no official English site)","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/Cheonan-Brown-Dot-Hotel-Cheonan-Station","compareLabel":"Compare rates (KAYAK)","why":"Excellent budget pick right by Cheonan Station.","highlights":["Closest budget option to station","Good value"],"fits":true,"fitReason":"Double · Cheonan Station ~2–4 min","lat":36.81,"lng":127.15},{"id":"cheonan-mains","city":"Cheonan","name":"The Mains Hotel","tier":"mid","stars":3,"area":"Central Cheonan","neighborhood":"Good central location with restaurant","priceFrom":55,"priceTo":80,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$55–72/night","note":"Clean with restaurant on site","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["Has on-site restaurant."],"amenities":["Restaurant","Free Wi-Fi","Laundry facilities"],"hasOnSiteLaundry":true,"officialUrl":null,"officialLabel":"Book via OTA (no official English site)","compareUrl":"https://www.kayak.com/hotels/Cheonan,c58525/The-Mains-Hotel","compareLabel":"Compare rates (KAYAK)","why":"Good mid-range value with restaurant.","highlights":["On-site restaurant","Solid reviews"],"fits":true,"fitReason":"Double · Central Cheonan","lat":36.82,"lng":127.15},{"id":"daejeon-hotel-interciti","city":"Daejeon","name":"Hotel Interciti","tier":"mid","stars":3,"area":"Yuseong area","neighborhood":"Near hot springs and university","priceFrom":65,"priceTo":90,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$65–82/night","note":"Popular in Yuseong","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["Good location near hot springs."],"amenities":["Free Wi-Fi","Laundry facilities"],"hasOnSiteLaundry":true,"officialUrl":null,"officialLabel":"Book via OTA (no official English site)","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/Hotel-Interciti","compareLabel":"Compare rates (KAYAK)","why":"Solid mid-range choice in the popular Yuseong district.","highlights":["Near hot springs","Good reviews"],"fits":true,"fitReason":"Double · Yuseong area","lat":36.36,"lng":127.35},{"id":"daejeon-aank-air","city":"Daejeon","name":"Aank Air Hotel Daejeon Station","tier":"budget","stars":3,"area":"Daejeon Station area","neighborhood":"Very close to Daejeon KTX Station","priceFrom":42,"priceTo":62,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$42–55/night","note":"Budget option near station","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["One of the cheapest decent options near the station."],"amenities":["Free Wi-Fi"],"hasOnSiteLaundry":false,"officialUrl":null,"officialLabel":"Book via OTA (no official English site)","compareUrl":"https://www.kayak.com/hotels/Daejeon,c61292/Aank-Air-Hotel-Daejeon-Station","compareLabel":"Compare rates (KAYAK)","why":"Great budget pick right by Daejeon Station.","highlights":["Closest budget option to station","Very affordable"],"fits":true,"fitReason":"Double · Daejeon Station ~3–5 min","lat":36.35,"lng":127.39},{"id":"seoul-skypark-myeongdong3","city":"Seoul","name":"Hotel Skypark Myeongdong 3","tier":"mid","stars":3,"area":"Myeongdong","neighborhood":"Central Myeongdong, excellent location","priceFrom":95,"priceTo":135,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$95–120/night","note":"Popular Myeongdong hotel","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["Consistently high ratings for location."],"amenities":["Free Wi-Fi","Laundry facilities"],"hasOnSiteLaundry":true,"officialUrl":"https://www.skyparkhotel.com","officialLabel":"Book via OTA","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/Hotel-Skypark-Myeongdong-3","compareLabel":"Compare rates (KAYAK)","why":"Excellent location in the heart of Myeongdong.","highlights":["Prime Myeongdong location","High guest ratings"],"fits":true,"fitReason":"Double · Myeongdong Stn ~3 min","lat":37.561,"lng":126.985},{"id":"seoul-lescape","city":"Seoul","name":"L'Escape, A Luxury Collection Hotel, Seoul Myeongdong","tier":"premium","stars":5,"area":"Myeongdong","neighborhood":"Central Myeongdong","priceFrom":280,"priceTo":420,"currency":"USD","checkIn":"15:00","checkOut":"12:00","policies":["Check-in from 15:00; check-out by 12:00.","Free Wi-Fi."],"rooms":[{"name":"Deluxe King","price":"$280–350/night","note":"Luxury Collection standard","bed":"king","bedType":"king","bedSize":"King (approx 180x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single King bed (not two beds pushed together)"}],"promos":["Marriott Bonvoy points."],"amenities":["Gym","Restaurant","Free Wi-Fi"],"hasOnSiteLaundry":true,"officialUrl":"https://www.marriott.com/hotels/travel/selak-lescape-a-luxury-collection-hotel-seoul-myeongdong/","officialLabel":"Book via Marriott or OTA","compareUrl":"https://www.kayak.com/hotels/Seoul,c40k/LEscape-A-Luxury-Collection-Hotel-Seoul-Myeongdong","compareLabel":"Compare rates (KAYAK)","why":"Luxury option in prime Myeongdong location.","highlights":["Luxury Collection","Excellent location"],"fits":true,"fitReason":"King · Myeongdong Stn ~4 min","lat":37.562,"lng":126.984},{"id":"busan-toyoko-haeundae2","city":"Busan","name":"Toyoko Inn Busan Haeundae 2","tier":"budget","stars":3,"area":"Haeundae","neighborhood":"Near Haeundae Beach","priceFrom":55,"priceTo":80,"currency":"USD","checkIn":"15:00","checkOut":"10:00","policies":["Check-in from 15:00; check-out by 10:00.","Free breakfast often included."],"rooms":[{"name":"Standard Double","price":"$55–72/night","note":"Reliable budget chain near beach","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["Often includes breakfast."],"amenities":["Free breakfast (often)","Free Wi-Fi"],"hasOnSiteLaundry":true,"officialUrl":"https://www.toyoko-inn.com/eng/search/detail/00256/","officialLabel":"Book via OTA","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/Toyoko-Inn-Busan-Haeundae-2","compareLabel":"Compare rates (KAYAK)","why":"Great budget option near Haeundae Beach.","highlights":["Near beach","Often includes breakfast"],"fits":true,"fitReason":"Double · Haeundae area","lat":35.16,"lng":129.16},{"id":"busan-ramada-encore-haeundae","city":"Busan","name":"Ramada Encore by Wyndham Busan Haeundae","tier":"mid","stars":3,"area":"Haeundae","neighborhood":"Haeundae area","priceFrom":75,"priceTo":105,"currency":"USD","checkIn":"15:00","checkOut":"11:00","policies":["Check-in from 15:00; check-out by 11:00.","Free Wi-Fi."],"rooms":[{"name":"Standard Double","price":"$75–95/night","note":"Good value in Haeundae","bed":"double","bedType":"double","bedSize":"Double (approx 140x200cm)","oneBed":true,"oneBedOnly":true,"privateBathroom":true,"bedNote":"Single Double bed (not two beds pushed together)"}],"promos":["Wyndham Rewards."],"amenities":["Free Wi-Fi","Laundry facilities"],"hasOnSiteLaundry":true,"officialUrl":"https://www.wyndhamhotels.com/ramada/busan-south-korea/ramada-encore-haeundae/overview","officialLabel":"Book via OTA","compareUrl":"https://www.kayak.com/hotels/Busan,c41830/Ramada-Encore-by-Wyndham-Busan-Haeundae","compareLabel":"Compare rates (KAYAK)","why":"Solid mid-range option in Haeundae.","highlights":["Good value","Reliable chain"],"fits":true,"fitReason":"Double · Haeundae area","lat":35.16,"lng":129.16}]};
+
+const TIERS={budget:"Budget",mid:"Mid-range",premium:"Premium"};
+let activeCity="Seoul", activeFilter="all", activeView="hotels";
+const LS={
+  get(k,d){try{return JSON.parse(localStorage.getItem('kht_'+k))??d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('kht_'+k,JSON.stringify(v))}catch(e){}}
+};
+let pickedRooms=LS.get('rooms',{});   // hotelId -> roomIndex
+let booked=LS.get('loyalty',{});      // loyalty id -> done
+let dealsDone=LS.get('deals',{});     // deal key -> done
+
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+/* ---- tabs & summary ---- */
+function renderTabs(){
+  const cities=["Seoul","Gyeongju","Busan"];
+  const tabs=document.getElementById("tabs");
+  tabs.innerHTML=cities.map(c=>{
+    const n=DATA.hotels.filter(h=>h.city===c).length;
+    const leg=DATA.itinerary.legs.find(l=>l.city===c);
+    const nights=leg?leg.nights:"—";
+    return `<div class="tab ${c===activeCity?'active':''}" data-city="${c}">${c}<span class="city-nights">${nights} nights · ${n} picks</span></div>`;
+  }).join("");
+  tabs.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{activeCity=t.dataset.city;activeFilter="all";document.querySelectorAll(".btn").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));renderGrid();});
+}
+function renderSummary(){
+  const el=document.getElementById("summary");
+  el.innerHTML=`<h3>📌 Recommended night split</h3>
+    <p class="rec">${DATA.split.recommended}</p>
+    <p>${DATA.split.rationale}</p>
+    <p><b>Alternatives:</b> ${DATA.split.alternatives.join(" · ")}</p>`;
+}
+
+/* ---- card ---- */
+function bedBadge(r){
+  if(r.oneBedOnly) {
+    const sizeNote = r.bedSize ? ` (${r.bedSize.split('(')[0].trim()})` : '';
+    return `<span class="rbed one" style="background:#e8f5e9; padding:2px 8px; border-radius:4px;">🛏 One Bed${sizeNote} ✓</span>`;
+  }
+  return `<span class="rbed two" style="background:#ffebee; padding:2px 8px; border-radius:4px;">2 beds ✗</span>`;
+}
+function card(h){
+  const tierLabel=TIERS[h.tier];
+  const official=h.officialUrl
+    ? `<a class="cta cta-official" href="${h.officialUrl}" target="_blank" rel="noopener">🔗 Official site</a>`
+    : `<span class="cta">No direct English site</span>`;
+  // Must-Have Score Badge + Value Score
+  let mustHaveScore = h.fits 
+    ? `<span class="hl" style="background:#c8e6c9;color:#1b5e20;border-color:#81c784;">✅ Perfect Match</span>` 
+    : `<span class="hl" style="background:#ffcdd2;color:#b71c1c;border-color:#ef9a9a;">❌ Missing Requirements</span>`;
+  
+  // Simple value score (lower price + higher stars = better value)
+  const avgPrice = (h.priceFrom + h.priceTo) / 2;
+  let valueBadge = '';
+  if (h.fits) {
+    if (avgPrice < 80 && h.stars >= 3) valueBadge = `<span class="hl" style="background:#fff8e1;color:#f57c00;">💎 Best Value</span>`;
+    else if (avgPrice < 120 && h.stars >= 4) valueBadge = `<span class="hl" style="background:#e3f2fd;color:#1565c0;">⭐ Good Value</span>`;
+  }
+
+  const fit = h.fits
+    ? `<div class="fit-row fits"><span class="fit-badge">✓ Matches Our Must-Haves</span><span class="fit-reason">${h.fitReason}</span></div>`
+    : `<div class="fit-row no"><span class="fit-badge">Doesn't fully match</span><span class="fit-reason">${h.fitReason}</span></div>`;
+  const rooms=h.rooms.map((r,i)=>{
+    const picked = pickedRooms[h.id]===i;
+    return `<tr class="room-row ${picked?'picked':''}" data-hid="${h.id}" data-ridx="${i}" style="${picked?'background:#eef6ee;':''}">
+      <td class="rname">${r.name} ${bedBadge(r)}</td>
+      <td class="rprice">${r.price}</td>
+      <td class="rnote">${r.note}<br><span class="bookroom">${picked?'✔ Selected':'Tap to select →'}</span></td>
+    </tr>`;
+  }).join("");
+  return `<article class="hotel" data-hid="${h.id}">
+    <div class="hotel-head">
+      <div class="top">
+        <h3 class="hotel-name">${h.name}</h3>
+        <span class="badge b-${h.tier}">${tierLabel}</span>
+      </div>
+      <div class="stars">${"★".repeat(h.stars)}${"☆".repeat(5-h.stars)}</div>
+      ${mustHaveScore}
+      <div class="area">📍 ${h.area} — ${h.neighborhood}</div>
+      ${h.stationWalkTime ? `<div style="font-size:0.75rem;color:#666;margin-top:2px;">🚇 ${h.stationWalkTime} to station</div>` : ''}
+      <div class="price">${h.price}/night <span>· room for two (est.)</span></div>
+      <div class="dir-comp">
+        <span class="dc">Direct ≈${h.price}</span>
+        <a class="dc ota" href="${h.compareUrl}" target="_blank" rel="noopener">Compare OTA →</a>
+        <a class="dc" href="https://www.google.com/maps/search/?api=1&query=${h.lat},${h.lng}" target="_blank" rel="noopener">🗺 Map</a>
+      </div>
+      ${fit}
+    </div>
+    <div class="hotel-body">
+      <div class="kv"><span class="ci">🛎 Check-in ${h.checkIn}</span><span class="ci">🕚 Check-out ${h.checkOut}</span></div>
+      <div class="section-label">Rooms &amp; rates (per night, est.)</div>
+      <table class="rooms">${rooms}</table>
+      <div class="section-label">Official rules</div>
+      <ul class="policies">${h.policies.map(p=>`<li>${p}</li>`).join("")}</ul>
+      <div class="section-label">Deals &amp; promotions</div>
+      <ul class="promos">${h.promos.map(p=>`<li>${p}</li>`).join("")}</ul>
+      <div class="why">🏅 ${h.why}</div>
+      <div class="highlights">${h.highlights.map(x=>`<span class="hl">${x}</span>`).join("")}</div>
+    </div>
+    <div class="hotel-foot">
+      ${official}
+      <a class="cta cta-live" href="${h.officialUrl}" target="_blank" rel="noopener">💸 Get live price</a>
+      <a class="cta cta-compare" href="${h.compareUrl}" target="_blank" rel="noopener">Compare rates</a>
+    </div>
+  </article>`;
+}
+
+let searchTerm = "";
+
+function renderGrid(){
+  const grid=document.getElementById("grid");
+  let list=DATA.hotels.filter(h=>h.city===activeCity);
+
+  if (activeFilter === "budget" || activeFilter === "mid" || activeFilter === "premium") {
+    list = list.filter(h => h.tier === activeFilter);
+  } else if (activeFilter === "fits") {
+    list = list.filter(h => h.fits);
+  } else if (activeFilter === "laundry") {
+    list = list.filter(h => h.hasOnSiteLaundry);
+  } else if (activeFilter === "queenking") {
+    list = list.filter(h => h.rooms.some(r => r.bedType === "queen" || r.bedType === "king"));
+  } else if (activeFilter === "onebed") {
+    list = list.filter(h => h.rooms.some(r => r.oneBedOnly));
+  }
+
+  if (searchTerm) {
+    const term = searchTerm.toLowerCase();
+    list = list.filter(h =>
+      h.name.toLowerCase().includes(term) ||
+      h.area.toLowerCase().includes(term) ||
+      h.neighborhood.toLowerCase().includes(term)
+    );
+  }
+
+  grid.innerHTML=list.length?list.map(card).join(""):`<p>No hotels match this filter for ${activeCity}.</p>`;
+  grid.querySelectorAll(".room-row").forEach(row=>row.onclick=()=>{
+    const hid=row.dataset.hid, ridx=parseInt(row.dataset.ridx);
+    pickedRooms[hid]=(pickedRooms[hid]===ridx)?null:ridx;
+    LS.set('rooms',pickedRooms);
+    const h=DATA.hotels.find(x=>x.id===hid);
+    const room=h.rooms[ridx];
+    if(pickedRooms[hid]===ridx){ toast("Selected: "+h.name+" — "+room.name); } else { toast("Deselected room"); }
+    renderGrid();
+  });
+}
+
+// Search input handler
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("search");
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchTerm = e.target.value;
+      renderGrid();
+    });
+  }
+});
+
+/* ---- budget calculator ---- */
+function currency(n){return '$'+n.toFixed(0);}
+function renderBudget(){
+  const body=document.getElementById("calc-body");
+  const rows=DATA.itinerary.legs.map(leg=>{
+    const hotels=DATA.hotels.filter(h=>h.city===leg.city);
+    const sel=LS.get('hotel_'+leg.city,'');
+    const options=`<option value="">— choose a hotel —</option>`+hotels.map(h=>`<option value="${h.id}" ${sel===h.id?'selected':''}>${h.name} (${h.price}/night)</option>`).join("");
+    return `<div class="calc-row">
+      <div class="city">${leg.city}</div>
+      <select data-city="${leg.city}">${options}</select>
+      <div class="nights">× ${leg.nights} nights</div>
+      <div class="subtotal" id="st-${leg.city}">—</div>
+    </div>`;
+  }).join("");
+  body.innerHTML=rows;
+  body.querySelectorAll("select").forEach(s=>s.onchange=()=>{
+    LS.set('hotel_'+s.dataset.city, s.value);
+    renderBudget();
+    renderPlanner();
+  });
+  let total=0;
+  DATA.itinerary.legs.forEach(leg=>{
+    const sel=LS.get('hotel_'+leg.city,'');
+    const st=document.getElementById('st-'+leg.city);
+    if(sel){ const h=DATA.hotels.find(x=>x.id===sel); const cost=h.priceFrom*leg.nights; total+=cost; st.textContent='≈ '+currency(cost); }
+    else st.textContent='—';
+  });
+  // KTX
+  const ktx=36+8;
+  document.getElementById('budget-total').textContent='Estimated hotels + KTX ≈ '+currency(total+ktx)+' (hotels '+currency(total)+' + KTX '+currency(ktx)+')';
+}
+
+/* ---- day planner timeline ---- */
+const MONTHS=["Oct","Nov"];
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function fmtDay(d){return (d.getMonth()==9?'Oct ':'Nov ')+d.getDate();}
+function renderPlanner(){
+  const start=new Date(DATA.itinerary.trip.checkIn); // 2026-10-31
+  let cur=new Date(start);
+  const total=DATA.itinerary.trip.checkOut? (()=>{const e=new Date(DATA.itinerary.trip.checkOut);return Math.round((e-start)/86400000);})():22;
+  const el=document.getElementById('timeline');
+  let html='';
+  let day=0;
+  DATA.itinerary.legs.forEach((leg,li)=>{
+    const sel=LS.get('hotel_'+leg.city,'');
+    const h=sel?DATA.hotels.find(x=>x.id===sel):null;
+    for(let i=0;i<leg.nights;i++){
+      const isLast=day===total-1;
+      html+=`<div class="day ${isLast?'hd':''}" title="${h?h.name+' · check-in '+h.checkIn+' / check-out '+h.checkOut:''}">
+        <b>Night ${day+1}</b><span class="dcity">${leg.city}</span>${h?'<span style="font-size:.68rem">'+h.checkIn+'→'+h.checkOut+'</span>':''}
+      </div>`;
+      day++;
+      cur=addDays(cur,1);
+    }
+    if(li<DATA.itinerary.legs.length-1){
+      html+=`<div class="day travel"><b>Travel</b><span>➜ ${DATA.itinerary.legs[li+1].city}</span></div>`;
+    }
+  });
+  el.innerHTML=html;
+}
+
+/* ---- loyalty ---- */
+const LOYALTY=[
+  {id:"lotte",name:"LOTTE Members",hotels:"L7 Myeongdong · L7 Haeundae",benefit:"Member-only rates, points, Flash Deals & packages",url:"https://www.lottehotel.com"},
+  {id:"accor",name:"Accor ALL",hotels:"Ibis Styles · Ibis Insadong · Fairmont",benefit:"Points, member rates, Private Sales flash offers",url:"https://all.accor.com"},
+  {id:"shilla",name:"Shilla Rewards",hotels:"Shilla Stay Haeundae",benefit:"Earn 3% room / 1% F&B; tier perks",url:"https://www.shillahotels.com"},
+  {id:"josun",name:"The Josun Hospitality",hotels:"Grand Josun Busan",benefit:"Brand perks + best-rate guarantee",url:"https://www.josun.com"},
+  {id:"hilton",name:"Hilton Honors",hotels:"Hilton Gyeongju",benefit:"Points, member rates, resort perks",url:"https://www.hilton.com/en/hilton-honors/"},
+  {id:"hyatt",name:"World of Hyatt",hotels:"Park Hyatt Busan",benefit:"Points, member rates",url:"https://www.hyatt.com/hyatt-rewards"},
+  {id:"fs",name:"Four Seasons direct",hotels:"Four Seasons Seoul",benefit:"Best-rate guarantee + seasonal packages",url:"https://www.fourseasons.com/seoul/"}
+];
+function renderLoyalty(){
+  const el=document.getElementById("loyalty-list");
+  el.innerHTML=LOYALTY.map(l=>`<li>
+    <input type="checkbox" data-id="${l.id}" ${booked[l.id]?'checked':''}>
+    <div><b>${l.name}</b> · <span class="meta">${l.hotels}</span><br><span class="why">${l.benefit}</span> · <a href="${l.url}" target="_blank" rel="noopener">join/sign in →</a></div>
+  </li>`).join("");
+  el.querySelectorAll("input").forEach(i=>i.onchange=()=>{booked[i.dataset.id]=i.checked;LS.set('loyalty',booked);toast(booked[i.dataset.id]?"Marked joined":"Unmarked");});
+}
+
+/* ---- deals ---- */
+function renderDeals(){
+  const el=document.getElementById("deals-list");
+  const deals=[];
+  DATA.hotels.forEach(h=>{
+    h.promos.forEach((p,pi)=>{
+      const key=h.id+'_'+pi;
+      deals.push({key,label:`<b>${h.name}</b> — ${p}`,city:h.city,url:h.officialUrl});
+    });
+  });
+  el.innerHTML=deals.map(d=>`<li>
+    <input type="checkbox" data-key="${d.key}" ${dealsDone[d.key]?'checked':''}>
+    <div>${d.label}<br><span class="meta">${d.city}</span> · <a href="${d.url||'#'}" target="_blank" rel="noopener">check on official site →</a></div>
+  </li>`).join("");
+  el.querySelectorAll("input").forEach(i=>i.onchange=()=>{dealsDone[i.dataset.key]=i.checked;LS.set('deals',dealsDone);toast("Watchlist updated");});
+}
+
+// Export selected hotels
+function exportSelected(){
+  const selected=[];
+  Object.keys(pickedRooms).forEach(hid=>{
+    if(pickedRooms[hid]!==null){
+      const h=DATA.hotels.find(x=>x.id===hid);
+      const room=h.rooms[pickedRooms[hid]];
+      selected.push(`${h.name} — ${room.name} (${room.price})`);
+    }
+  });
+  if(selected.length===0){
+    alert("No rooms selected yet. Click on rooms in the Hotels tab first.");
+    return;
+  }
+  const text="Selected Hotels:\n\n"+selected.join("\n")+"\n\nTrip: Oct 31 – Nov 22, 2026";
+  navigator.clipboard.writeText(text).then(()=>{
+    alert("Copied to clipboard!\n\n"+text);
+  }).catch(()=>{
+    prompt("Copy this text:", text);
+  });
+}
+
+function updateSelectionSummary(){
+  const container = document.getElementById("selection-summary");
+  const list = document.getElementById("selection-list");
+  const selected = [];
+  
+  Object.keys(pickedRooms).forEach(hid => {
+    if (pickedRooms[hid] !== null) {
+      const h = DATA.hotels.find(x => x.id === hid);
+      const room = h.rooms[pickedRooms[hid]];
+      selected.push(`<div style="margin:4px 0;">• <b>${h.name}</b> — ${room.name} (${room.price})</div>`);
+    }
+  });
+  
+  if (selected.length > 0) {
+    list.innerHTML = selected.join("");
+    container.style.display = "block";
+  } else {
+    container.style.display = "none";
+  }
+}
+
+function clearSelection(){
+  pickedRooms = {};
+  localStorage.setItem('kht_rooms', JSON.stringify(pickedRooms));
+  renderGrid();
+  updateSelectionSummary();
+}
+
+// Override room click to update summary
+const originalRenderGrid = renderGrid;
+renderGrid = function(){
+  originalRenderGrid();
+  updateSelectionSummary();
+}
+
+/* ---- view switching ---- */
+function showView(v){
+  activeView=v;
+  document.querySelectorAll(".sn").forEach(s=>s.classList.toggle("active",s.dataset.view===v));
+  ["hotels","budget","planner","loyalty","deals"].forEach(x=>document.getElementById("view-"+x).classList.toggle("hidden",x!==v));
+  if(v==="budget")renderBudget();
+  if(v==="planner")renderPlanner();
+  if(v==="loyalty")renderLoyalty();
+  if(v==="deals")renderDeals();
+}
+
+document.querySelectorAll(".sn").forEach(s=>s.onclick=()=>showView(s.dataset.view));
+document.querySelectorAll(".btn").forEach(b=>b.onclick=()=>{
+  activeFilter = b.dataset.filter;
+  document.querySelectorAll(".btn").forEach(x => x.classList.remove("active"));
+  b.classList.add("active");
+  renderGrid();
+});
+
+/* ---- init ---- */
+function init(){
+  document.getElementById("chip-nights").textContent=DATA.trip.nights;
+  renderTabs(); renderSummary(); renderGrid();
+  showView("hotels");
+  
+  // Keyboard shortcut: Press "/" to focus search
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "/" && document.getElementById("search")) {
+      e.preventDefault();
+      document.getElementById("search").focus();
+    }
+  });
+  
+  // Show keyboard hint
+  const searchInput = document.getElementById("search");
+  if (searchInput) {
+    searchInput.placeholder = "Search hotels... (Press / to focus)";
+  }
+}
+init();
+
+// Side-by-side Comparison Modal
+function showComparison() {
+  const selectedHotels = [];
+  
+  Object.keys(pickedRooms).forEach(hid => {
+    if (pickedRooms[hid] !== null) {
+      const h = DATA.hotels.find(x => x.id === hid);
+      const room = h.rooms[pickedRooms[hid]];
+      selectedHotels.push({ hotel: h, room: room });
+    }
+  });
+
+  if (selectedHotels.length < 2) {
+    alert("Please select at least 2 hotels to compare.");
+    return;
+  }
+
+  if (selectedHotels.length > 4) {
+    alert("You can compare a maximum of 4 hotels at once.");
+    return;
+  }
+
+  // Create modal
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:1000;';
+  
+  let html = `
+    <div style="background:white;max-width:1200px;width:95%;max-height:90vh;overflow:auto;border-radius:16px;padding:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="margin:0;">Hotel Comparison</h2>
+        <button onclick="this.closest('.modal').remove()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">×</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+  `;
+
+  selectedHotels.forEach(({ hotel, room }) => {
+    const score = hotel.fits ? '✅ Perfect Match' : '⚠️ Check Requirements';
+    
+    html += `
+      <div style="border:1px solid #ddd;border-radius:12px;padding:16px;">
+        <h3 style="margin:0 0 8px 0;">${hotel.name}</h3>
+        <div style="color:#666;margin-bottom:12px;">${hotel.area}</div>
+        
+        <div style="background:#f8f9fa;padding:12px;border-radius:8px;margin-bottom:12px;">
+          <div><strong>Room:</strong> ${room.name}</div>
+          <div><strong>Bed:</strong> ${room.bedNote || room.bed}</div>
+          <div><strong>Price:</strong> ${room.price}</div>
+        </div>
+
+        <div style="margin:12px 0;">
+          <div style="font-weight:600;margin-bottom:6px;">Key Details</div>
+          <div style="font-size:0.9rem;line-height:1.6;">
+            <div>✓ Private Bathroom: ${room.privateBathroom ? 'Yes' : 'No'}</div>
+            <div>✓ One Bed Only: ${room.oneBedOnly ? 'Yes' : 'No'}</div>
+            <div>✓ Laundry: ${hotel.hasOnSiteLaundry ? 'Yes' : 'No'}</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div style="font-size:0.85rem;color:#666;margin-bottom:4px;">Match Status</div>
+          <div style="font-weight:600;color:${hotel.fits ? '#2e7d32' : '#e65100'};">${score}</div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+          ${hotel.officialUrl ? `<a href="${hotel.officialUrl}" target="_blank" class="cta cta-official" style="flex:1;text-align:center;padding:8px;font-size:0.8rem;">Official Site</a>` : ''}
+          <a href="${hotel.compareUrl}" target="_blank" class="cta cta-compare" style="flex:1;text-align:center;padding:8px;font-size:0.8rem;">Compare Rates</a>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `</div></div>`;
+  modal.innerHTML = html;
+  modal.className = 'modal';
+  document.body.appendChild(modal);
+}
+</script>
+</body>
+</html>

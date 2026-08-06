@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Korea Trip — Seoul · Gyeongju · Busan</title>
+<style>
+  :root{
+    --bg:#f6f5f2; --card:#ffffff; --ink:#1f2933; --muted:#6b7280;
+    --brand:#b03a2e; --brand2:#1f5c46; --accent:#d9a441;
+    --budget:#2e7d32; --mid:#b8860b; --premium:#7b1fa2;
+    --border:#e5e0d6; --shadow:0 6px 24px rgba(0,0,0,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+
+  header.hero{background:linear-gradient(135deg,#2d3a2e 0%,#1f5c46 55%,#b03a2e 130%);color:#fff;padding:40px 0 34px}
+  header.hero h1{margin:0 0 6px;font-size:1.9rem;letter-spacing:.3px}
+  header.hero .sub{opacity:.92;font-size:1.02rem;margin-bottom:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:999px;font-size:.82rem}
+  .chip b{font-weight:700}
+
+  nav.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px}
+  .sn{border:1px solid var(--border);background:#fff;padding:9px 14px;border-radius:10px;cursor:pointer;font-size:.85rem;font-weight:600;box-shadow:var(--shadow)}
+  .sn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+  nav.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px}
+  .tab{padding:11px 18px;border-radius:10px;background:#fff;border:1px solid var(--border);cursor:pointer;font-weight:600;font-size:.95rem;box-shadow:var(--shadow)}
+  .tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .tab .city-nights{display:block;font-weight:400;font-size:.75rem;opacity:.8}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center}
+  .toolbar .label{font-size:.85rem;color:var(--muted);margin-right:4px}
+  .btn{border:1px solid var(--border);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600}
+  .btn.active{color:#fff}
+  .btn.t-budget.active{background:var(--budget);border-color:var(--budget)}
+  .btn.t-mid.active{background:var(--mid);border-color:var(--mid)}
+  .btn.t-premium.active{background:var(--premium);border-color:var(--premium)}
+  .btn.t-all.active{background:var(--ink);border-color:var(--ink)}
+  .btn.t-fits.active{background:var(--brand2);border-color:var(--brand2)}
+
+  .summary{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:8px 0 22px;box-shadow:var(--shadow)}
+  .summary h3{margin:0 0 8px;font-size:1.05rem}
+  .summary p{margin:4px 0;color:var(--muted);font-size:.9rem}
+  .summary .rec{color:var(--brand2);font-weight:600}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  @media (max-width: 600px) {
+    .grid{grid-template-columns:1fr;gap:14px}
+    .hotel-head,.hotel-body,.hotel-foot{padding:12px 14px}
+    .rooms{font-size:.75rem}
+    .toolbar{flex-wrap:wrap}
+  }
+  .hotel{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .hotel-head{padding:16px 18px 10px;border-bottom:1px solid var(--border)}
+  .hotel-head .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .hotel-name{font-size:1.05rem;font-weight:700;margin:0}
+  .badge{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;color:#fff;white-space:nowrap}
+  .b-budget{background:var(--budget)} .b-mid{background:var(--mid)} .b-premium{background:var(--premium)}
+  .fit-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:10px;font-size:.78rem;font-weight:600}
+  .fit-row.fits{background:#e9f7ef;border:1px solid #bfe6ce;color:#14532d}
+  .fit-row.no{background:#f6f1f1;border:1px solid #e4d8d8;color:#7a3b3b}
+  .fit-row .fit-badge{font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;background:#1f5c46;color:#fff;white-space:nowrap}
+  .fit-row.no .fit-badge{background:#8a4b4b}
+  .fit-row .fit-reason{opacity:.9}
+  .stars{color:var(--accent);font-size:.8rem;margin-top:2px}
+  .area{font-size:.85rem;color:var(--muted);margin-top:3px}
+  .price{font-size:.92rem;margin-top:8px;font-weight:600}
+  .price span{font-weight:400;color:var(--muted)}
+  .dir-comp{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;font-size:.78rem}
+  .dc{background:#f3faf6;border:1px solid #d7e8dc;color:var(--brand2);padding:3px 8px;border-radius:8px}
+  .dc.ota{background:#f6f3ff;border-color:#e2dcf5;color:#4a3a8a}
+
+  .hotel-body{padding:16px 18px;flex:1}
+  .kv{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .kv .ci{background:#f1f6f1;color:var(--brand2);font-weight:600;font-size:.78rem;padding:5px 11px;border-radius:8px}
+  .section-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700;margin:14px 0 6px}
+  .rooms{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px}
+  .rooms td{padding:6px 4px;border-bottom:1px dashed var(--border);vertical-align:top}
+  .rooms tr:last-child td{border-bottom:none}
+  .rooms tr.room-row{cursor:pointer}
+  .rooms tr.room-row:hover{background:#f7faf7}
+  .rooms .rname{font-weight:600;color:var(--ink);white-space:nowrap}
+  .rooms .rprice{font-weight:700;color:var(--brand2);white-space:nowrap;text-align:right;padding-right:6px}
+  .rooms .rnote{color:var(--muted);font-size:.72rem;text-align:right}
+  .rooms .rbed{font-size:.7rem;font-weight:700}
+  .rbed.one{color:#1f8a4c}
+  .rbed.two{color:#b03a2e}
+  .bookroom{font-size:.7rem;color:var(--brand);font-weight:700}
+  .policies{list-style:none;margin:0;padding:0}
+  .policies li{font-size:.82rem;margin:4px 0;padding-left:18px;position:relative}
+  .policies li:before{content:"•";position:absolute;left:2px;color:var(--brand)}
+  .promos{list-style:none;margin:0;padding:0}
+  .promos li{font-size:.82rem;margin:4px 0;padding-left:18px;position:relative}
+  .promos li:before{content:"✦";position:absolute;left:0;color:var(--accent)}
+  .why{font-size:.84rem;color:var(--brand2);background:#f3faf6;border:1px solid #d7e8dc;border-radius:10px;padding:10px 12px;margin-top:12px}
+  .highlights{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .hl{font-size:.72rem;background:#f3f1ea;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:#555}
+
+  .hotel-foot{padding:12px 18px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px}
+  .cta{flex:1;text-align:center;padding:9px 8px;border-radius:9px;font-weight:700;font-size:.8rem}
+  .cta-official{background:var(--brand2);color:#fff}
+  .cta-official:hover{background:#17463a}
+  .cta-live{background:var(--brand);color:#fff}
+  .cta-live:hover{background:#932f25}
+  .cta-compare{background:#fff;border:1px solid var(--border);color:var(--ink)}
+  .cta-compare:hover{border-color:var(--brand);color:var(--brand)}
+  .cta:not(a){cursor:default;color:var(--muted);background:#f3f1ea}
+
+  /* Accessibility */
+  button:focus, input:focus, select:focus {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin:18px 0;box-shadow:var(--shadow)}
+  .panel h2{margin:0 0 6px;font-size:1.25rem}
+  .panel .sub{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  .calc-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+  .calc-row:last-of-type{border-bottom:none}
+  .calc-row .city{font-weight:700;width:90px}
+  .calc-row select{padding:7px;border:1px solid var(--border);border-radius:8px;min-width:260px;background:#fff}
+  .calc-row .nights{font-size:.85rem;color:var(--muted)}
+  .calc-row .subtotal{margin-left:auto;font-weight:700;color:var(--brand2)}
+  .budget-total{margin-top:14px;font-size:1.1rem;font-weight:800;color:var(--brand)}
+  .budget-note{font-size:.8rem;color:var(--muted)}
+
+  .timeline{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .day{border:1px solid var(--border);border-radius:9px;padding:6px 8px;font-size:.72rem;background:#faf9f6;min-width:86px}
+  .day.hd{background:#eef4ff;border-color:#cddefa}
+  .day b{display:block;font-size:.78rem}
+  .day .dcity{color:var(--brand2);font-weight:600}
+  .day.travel{background:#fdf3e7;border-color:#f0d9b8}
+
+  .checklist{list-style:none;margin:8px 0 0;padding:0}
+  .checklist li{padding:8px 0;border-bottom:1px dashed var(--border);display:flex;align-items:center;gap:10px;font-size:.9rem}
+  .checklist li:last-child{border-bottom:none}
+  .checklist input{transform:scale(1.15)}
+  .checklist .meta{color:var(--muted);font-size:.78rem}
+  .checklist .why{font-size:.8rem;background:none;border:none;padding:0;color:var(--brand2)}
+
+  footer{margin:40px 0 30px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);padding-top:18px}
+  .note{background:#fdf6e6;border:1px solid #ecd9a8;color:#6b5410;padding:12px 16px;border-radius:10px;font-size:.85rem;margin-bottom:22px}
+  .hidden{display:none}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--brand2);color:#fff;padding:11px 18px;border-radius:10px;font-size:.85rem;box-shadow:var(--shadow);z-index:99;opacity:0;transition:opacity .3s}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <h1>South Korea Trip · Hotel Planner</h1>
+    <div class="sub">Seoul → Gyeongju → Busan · Best value hotels with official booking info, rules & deals</div>
+    <div class="chips">
+      <span class="chip">📅 <b id="chip-dates">Oct 31 – Nov 22, 2026</b> · <b id="chip-nights">22</b> nights</span>
+      <span class="chip">🎯 <b>Balance price &amp; quality</b></span>
+      <span class="chip">🏨 <b>Official-site deals &amp; check-in rules</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="subnav">
+    <div class="sn active" data-view="hotels">🏨 Hotels</div>
+    <div class="sn" data-view="budget">💰 Budget calculator</div>
+    <div class="sn" data-view="planner">🗓️ Day planner</div>
+    <div class="sn" data-view="loyalty">⭐ Loyalty tracker</div>
+    <div class="sn" data-view="deals">✦ Deal watchlist</div>
+    <div class="sn" onclick="exportSelected()">📤 Export</div>
+    <div class="sn" onclick="showComparison()">⚖️ Compare</div>
+  </nav>
+
+  <div id="selection-summary" style="display:none; background:#f0f7f4; border:1px solid #bfe6ce; border-radius:12px; padding:14px 18px; margin:12px 0;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+      <b style="color:#14532d;">✅ Selected Rooms</b>
+      <div>
+        <button onclick="showComparison()" style="background:#2e7d32; color:white; border:none; padding:4px 10px; border-radius:6px; font-size:0.75rem; cursor:pointer; margin-right:6px;">⚖️ Compare Selected</button>
+        <button onclick="clearSelection()" style="background:none; border:1px solid #b03a2e; color:#b03a2e; padding:4px 10px; border-radius:6px; font-size:0.75rem; cursor:pointer;">Clear all</button>
+      </div>
+    </div>
+    <div id="selection-list" style="font-size:0.9rem; line-height:1.4;"></div>
+  </div>
+
+  <div id="view-hotels" class="view">
+    <!-- Our Must-Haves Banner -->
+    <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-size: 0.95rem;">
+      <b style="color: #1b5e20; font-size: 1.05rem;">✅ Our Must-Haves (Non-Negotiable)</b>
+      <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; color: #2e7d32;">
+        <div>🛏 <strong>One single bed</strong> (Queen size or larger — approx 150cm+ wide). <strong>Not</strong> two beds pushed together or two doubles.</div>
+        <div>🚿 <strong>Private bathroom</strong> in the room</div>
+        <div>🚇 <strong>Near subway / KTX station</strong> (walking distance)</div>
+      </div>
+      <div style="margin-top: 6px; font-size: 0.85rem; color: #388e3c;">
+        Use the <strong>"Matches Our Must-Haves"</strong> filter below to see only hotels that meet all three requirements.
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Live prices:</b> Rates move daily and depend on your exact nights &amp; room type. Each card lists <b>per-room pricing</b>, a <b>Direct vs OTA</b> hint, and a <b>"Get live price"</b> button that opens the hotel's official booking engine for your dates. Click any room row to mark it for booking. Book <b>direct</b> for loyalty perks &amp; best-rate guarantees.
+      <br><small style="color:#6b5410">Data last updated: August 2026 — Prices are estimates. Always verify current rates.</small>
+    </div>
+
+    <details style="margin: 10px 0 20px; background: #f9f7f0; border: 1px solid #e8d9b8; border-radius: 10px; padding: 12px 16px;">
+      <summary style="cursor: pointer; font-weight: 600; color: #6b5410;">📖 How to use this planner</summary>
+      <div style="margin-top: 12px; font-size: 0.92rem; line-height: 1.5;">
+        <ol style="margin: 8px 0 0 18px; padding: 0;">
+          <li><strong>Select a city</strong> using the tabs (Seoul, Busan, Cheonan, or Daejeon)</li>
+          <li><strong>Filter</strong> by price tier, features (laundry, bed type), or use the search bar</li>
+          <li><strong>Click "Matches Our Must-Haves"</strong> to see only hotels meeting our 3 requirements</li>
+          <li><strong>Review details</strong>: room types, prices, official rules, and deals</li>
+          <li><strong>Click "Get live price"</strong> to check current rates on the official site</li>
+          <li><strong>Use the Budget tab</strong> to estimate your total trip cost</li>
+        </ol>
+        <p style="margin: 12px 0 0; color: #6b5410;"><strong>Tip:</strong> All data is static. Prices are estimates from August 2026.</p>
+      </div>
+    </details>
+
+    <details style="margin: 10px 0 20px; background: #f9f7f0; border: 1px solid #e8d9b8; border-radius: 10px; padding: 12px 16px;">
+      <summary style="cursor: pointer; font-weight: 600; color: #6b5410;">📖 How to use this planner</summary>
+      <div style="margin-top: 12px; font-size: 0.92rem; line-height: 1.5;">
+        <ol style="margin: 8px 0 0 18px; padding: 0;">
+          <li><strong>Select a city</strong> using the tabs (Seoul, Busan, Cheonan, or Daejeon)</li>
+          <li><strong>Filter</strong> by price tier, features (laundry, bed type), or use the search bar</li>
+          <li><strong>Click "Fits my needs"</strong> to see only hotels matching: 2 people + one queen/king bed + private bathroom</li>
+          <li><strong>Review details</strong>: room types, prices, official rules, and deals</li>
+          <li><strong>Click "Get live price"</strong> to check current rates on the official site</li>
+          <li><strong>Use the Budget tab</strong> to estimate your total trip cost</li>
+        </ol>
+        <p style="margin: 12px 0 0; color: #6b5410;"><strong>Tip:</strong> All data is static. Prices are estimates from August 2026.</p>
+      </div>
+    </details>
+      <b>Live prices:</b> Rates move daily and depend on your exact nights &amp; room type. Each card lists <b>per-room pricing</b>, a <b>Direct vs OTA</b> hint, and a <b>"Get live price"</b> button that opens the hotel's official booking engine for your dates. Click any room row to mark it for booking. Book <b>direct</b> for loyalty perks &amp; best-rate guarantees.<br><small style="color:#6b5410">Data last updated: August 2026 — Prices are estimates. Always verify current rates.</small>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+    <div class="summary" id="summary"></div>
+    <div class="toolbar">
+      <span class="label">Price tier:</span>
+      <button class="btn t-all active" data-filter="all">All</button>
+      <button class="btn t-budget" data-filter="budget">💰 Budget</button>
+      <button class="btn t-mid" data-filter="mid">💎 Mid-range</button>
+      <button class="btn t-premium" data-filter="premium">🏆 Premium</button>
+      <span class="label" style="margin-left:8px">Our Requirements:</span>
+      <button class="btn t-fits active" data-filter="fits" title="One Queen/King bed + Private bathroom + Near station">✓ Matches Our Must-Haves</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div id="view-budget" class="view hidden">
+    <div class="panel">
+      <h2>💰 Trip budget calculator</h2>
+      <div class="sub">Pick a hotel per city (or leave blank to skip). Uses your nights from the itinerary. Prices are nightly estimates for a room for two.</div>
+      <div id="calc-body"></div>
+      <div class="budget-total" id="budget-total"></div>
+      <div class="budget-note">*Hotel estimates only. KTX fares added (Seoul→Gyeongju ≈₩49,300 / Gyeongju→Busan ≈₩10,400). Book direct on official sites for guaranteed live rates.</div>
+    </div>
+  </div>
+
+  <div id="view-planner" class="view hidden">
+    <div class="panel">
+      <h2>🗓️ Day-by-day planner</h2>
+      <div class="sub">22 nights (Oct 31 – Nov 22). Travel days shown in amber. Choose your hotel per city and the timeline marks when you check in/out.</div>
+      <div id="timeline"></div>
+      <div style="margin-top:14px" class="sub">Set each city's hotel to populate check-in/check-out on the calendar.</div>
+    </div>
+  </div>
+
+  <div id="view-loyalty" class="view hidden">
+    <div class="panel">
+      <h2>⭐ Loyalty programs — sign up &amp; earn</h2>
+      <div class="sub">Joining is free and unlocks member rates, points, and perks. Your progress is saved in your browser.</div>
+      <ul class="checklist" id="loyalty-list"></ul>
+    </div>
+  </div>
+
+  <div id="view-deals" class="view hidden">
+    <div class="panel">
+      <h2>✦ Deal &amp; booking watchlist</h2>
+      <div class="sub">Current promotions per hotel. Tick items you've acted on; progress saves in your browser. Re-check the official site before your dates.</div>
+      <ul class="checklist" id="deals-list"></ul>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>Sources &amp; accuracy:</b> Check-in/check-out times, policies, room types/prices, and bed types are sourced from each hotel's official website, Korea Tourism Organization, and major booking platforms at the time of research (Aug 2026). Per-room prices are typical nightly USD ranges for the 2026 autumn season and are <b>estimates</b> — always confirm the current rate &amp; cancellation terms for your exact dates and room on the official site before booking.</p>
+    <p>Official links open the hotel's own booking page. Compare links let you cross-shop OTAs. Book <b>direct</b> when possible for best-rate guarantees and loyalty points.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = __DATA__;
+
+const TIERS={budget:"Budget",mid:"Mid-range",premium:"Premium"};
+let activeCity="Seoul", activeFilter="all", activeView="hotels";
+const LS={
+  get(k,d){try{return JSON.parse(localStorage.getItem('kht_'+k))??d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('kht_'+k,JSON.stringify(v))}catch(e){}}
+};
+let pickedRooms=LS.get('rooms',{});   // hotelId -> roomIndex
+let booked=LS.get('loyalty',{});      // loyalty id -> done
+let dealsDone=LS.get('deals',{});     // deal key -> done
+
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+/* ---- tabs & summary ---- */
+function renderTabs(){
+  const cities=["Seoul","Gyeongju","Busan"];
+  const tabs=document.getElementById("tabs");
+  tabs.innerHTML=cities.map(c=>{
+    const n=DATA.hotels.filter(h=>h.city===c).length;
+    const leg=DATA.itinerary.legs.find(l=>l.city===c);
+    const nights=leg?leg.nights:"—";
+    return `<div class="tab ${c===activeCity?'active':''}" data-city="${c}">${c}<span class="city-nights">${nights} nights · ${n} picks</span></div>`;
+  }).join("");
+  tabs.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{activeCity=t.dataset.city;activeFilter="all";document.querySelectorAll(".btn").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));renderGrid();});
+}
+function renderSummary(){
+  const el=document.getElementById("summary");
+  el.innerHTML=`<h3>📌 Recommended night split</h3>
+    <p class="rec">${DATA.split.recommended}</p>
+    <p>${DATA.split.rationale}</p>
+    <p><b>Alternatives:</b> ${DATA.split.alternatives.join(" · ")}</p>`;
+}
+
+/* ---- card ---- */
+function bedBadge(r){
+  if(r.oneBedOnly) {
+    const sizeNote = r.bedSize ? ` (${r.bedSize.split('(')[0].trim()})` : '';
+    return `<span class="rbed one" style="background:#e8f5e9; padding:2px 8px; border-radius:4px;">🛏 One Bed${sizeNote} ✓</span>`;
+  }
+  return `<span class="rbed two" style="background:#ffebee; padding:2px 8px; border-radius:4px;">2 beds ✗</span>`;
+}
+function card(h){
+  const tierLabel=TIERS[h.tier];
+  const official=h.officialUrl
+    ? `<a class="cta cta-official" href="${h.officialUrl}" target="_blank" rel="noopener">🔗 Official site</a>`
+    : `<span class="cta">No direct English site</span>`;
+  // Must-Have Score Badge + Value Score
+  let mustHaveScore = h.fits 
+    ? `<span class="hl" style="background:#c8e6c9;color:#1b5e20;border-color:#81c784;">✅ Perfect Match</span>` 
+    : `<span class="hl" style="background:#ffcdd2;color:#b71c1c;border-color:#ef9a9a;">❌ Missing Requirements</span>`;
+  
+  // Simple value score (lower price + higher stars = better value)
+  const avgPrice = (h.priceFrom + h.priceTo) / 2;
+  let valueBadge = '';
+  if (h.fits) {
+    if (avgPrice < 80 && h.stars >= 3) valueBadge = `<span class="hl" style="background:#fff8e1;color:#f57c00;">💎 Best Value</span>`;
+    else if (avgPrice < 120 && h.stars >= 4) valueBadge = `<span class="hl" style="background:#e3f2fd;color:#1565c0;">⭐ Good Value</span>`;
+  }
+
+  const fit = h.fits
+    ? `<div class="fit-row fits"><span class="fit-badge">✓ Matches Our Must-Haves</span><span class="fit-reason">${h.fitReason}</span></div>`
+    : `<div class="fit-row no"><span class="fit-badge">Doesn't fully match</span><span class="fit-reason">${h.fitReason}</span></div>`;
+  const rooms=h.rooms.map((r,i)=>{
+    const picked = pickedRooms[h.id]===i;
+    return `<tr class="room-row ${picked?'picked':''}" data-hid="${h.id}" data-ridx="${i}" style="${picked?'background:#eef6ee;':''}">
+      <td class="rname">${r.name} ${bedBadge(r)}</td>
+      <td class="rprice">${r.price}</td>
+      <td class="rnote">${r.note}<br><span class="bookroom">${picked?'✔ Selected':'Tap to select →'}</span></td>
+    </tr>`;
+  }).join("");
+  return `<article class="hotel" data-hid="${h.id}">
+    <div class="hotel-head">
+      <div class="top">
+        <h3 class="hotel-name">${h.name}</h3>
+        <span class="badge b-${h.tier}">${tierLabel}</span>
+      </div>
+      <div class="stars">${"★".repeat(h.stars)}${"☆".repeat(5-h.stars)}</div>
+      ${mustHaveScore}
+      <div class="area">📍 ${h.area} — ${h.neighborhood}</div>
+      ${h.stationWalkTime ? `<div style="font-size:0.75rem;color:#666;margin-top:2px;">🚇 ${h.stationWalkTime} to station</div>` : ''}
+      <div class="price">${h.price}/night <span>· room for two (est.)</span></div>
+      <div class="dir-comp">
+        <span class="dc">Direct ≈${h.price}</span>
+        <a class="dc ota" href="${h.compareUrl}" target="_blank" rel="noopener">Compare OTA →</a>
+        <a class="dc" href="https://www.google.com/maps/search/?api=1&query=${h.lat},${h.lng}" target="_blank" rel="noopener">🗺 Map</a>
+      </div>
+      ${fit}
+    </div>
+    <div class="hotel-body">
+      <div class="kv"><span class="ci">🛎 Check-in ${h.checkIn}</span><span class="ci">🕚 Check-out ${h.checkOut}</span></div>
+      <div class="section-label">Rooms &amp; rates (per night, est.)</div>
+      <table class="rooms">${rooms}</table>
+      <div class="section-label">Official rules</div>
+      <ul class="policies">${h.policies.map(p=>`<li>${p}</li>`).join("")}</ul>
+      <div class="section-label">Deals &amp; promotions</div>
+      <ul class="promos">${h.promos.map(p=>`<li>${p}</li>`).join("")}</ul>
+      <div class="why">🏅 ${h.why}</div>
+      <div class="highlights">${h.highlights.map(x=>`<span class="hl">${x}</span>`).join("")}</div>
+    </div>
+    <div class="hotel-foot">
+      ${official}
+      <a class="cta cta-live" href="${h.officialUrl}" target="_blank" rel="noopener">💸 Get live price</a>
+      <a class="cta cta-compare" href="${h.compareUrl}" target="_blank" rel="noopener">Compare rates</a>
+    </div>
+  </article>`;
+}
+
+let searchTerm = "";
+
+function renderGrid(){
+  const grid=document.getElementById("grid");
+  let list=DATA.hotels.filter(h=>h.city===activeCity);
+
+  if (activeFilter === "budget" || activeFilter === "mid" || activeFilter === "premium") {
+    list = list.filter(h => h.tier === activeFilter);
+  } else if (activeFilter === "fits") {
+    list = list.filter(h => h.fits);
+  } else if (activeFilter === "laundry") {
+    list = list.filter(h => h.hasOnSiteLaundry);
+  } else if (activeFilter === "queenking") {
+    list = list.filter(h => h.rooms.some(r => r.bedType === "queen" || r.bedType === "king"));
+  } else if (activeFilter === "onebed") {
+    list = list.filter(h => h.rooms.some(r => r.oneBedOnly));
+  }
+
+  if (searchTerm) {
+    const term = searchTerm.toLowerCase();
+    list = list.filter(h =>
+      h.name.toLowerCase().includes(term) ||
+      h.area.toLowerCase().includes(term) ||
+      h.neighborhood.toLowerCase().includes(term)
+    );
+  }
+
+  grid.innerHTML=list.length?list.map(card).join(""):`<p>No hotels match this filter for ${activeCity}.</p>`;
+  grid.querySelectorAll(".room-row").forEach(row=>row.onclick=()=>{
+    const hid=row.dataset.hid, ridx=parseInt(row.dataset.ridx);
+    pickedRooms[hid]=(pickedRooms[hid]===ridx)?null:ridx;
+    LS.set('rooms',pickedRooms);
+    const h=DATA.hotels.find(x=>x.id===hid);
+    const room=h.rooms[ridx];
+    if(pickedRooms[hid]===ridx){ toast("Selected: "+h.name+" — "+room.name); } else { toast("Deselected room"); }
+    renderGrid();
+  });
+}
+
+// Search input handler
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("search");
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchTerm = e.target.value;
+      renderGrid();
+    });
+  }
+});
+
+/* ---- budget calculator ---- */
+function currency(n){return '$'+n.toFixed(0);}
+function renderBudget(){
+  const body=document.getElementById("calc-body");
+  const rows=DATA.itinerary.legs.map(leg=>{
+    const hotels=DATA.hotels.filter(h=>h.city===leg.city);
+    const sel=LS.get('hotel_'+leg.city,'');
+    const options=`<option value="">— choose a hotel —</option>`+hotels.map(h=>`<option value="${h.id}" ${sel===h.id?'selected':''}>${h.name} (${h.price}/night)</option>`).join("");
+    return `<div class="calc-row">
+      <div class="city">${leg.city}</div>
+      <select data-city="${leg.city}">${options}</select>
+      <div class="nights">× ${leg.nights} nights</div>
+      <div class="subtotal" id="st-${leg.city}">—</div>
+    </div>`;
+  }).join("");
+  body.innerHTML=rows;
+  body.querySelectorAll("select").forEach(s=>s.onchange=()=>{
+    LS.set('hotel_'+s.dataset.city, s.value);
+    renderBudget();
+    renderPlanner();
+  });
+  let total=0;
+  DATA.itinerary.legs.forEach(leg=>{
+    const sel=LS.get('hotel_'+leg.city,'');
+    const st=document.getElementById('st-'+leg.city);
+    if(sel){ const h=DATA.hotels.find(x=>x.id===sel); const cost=h.priceFrom*leg.nights; total+=cost; st.textContent='≈ '+currency(cost); }
+    else st.textContent='—';
+  });
+  // KTX
+  const ktx=36+8;
+  document.getElementById('budget-total').textContent='Estimated hotels + KTX ≈ '+currency(total+ktx)+' (hotels '+currency(total)+' + KTX '+currency(ktx)+')';
+}
+
+/* ---- day planner timeline ---- */
+const MONTHS=["Oct","Nov"];
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function fmtDay(d){return (d.getMonth()==9?'Oct ':'Nov ')+d.getDate();}
+function renderPlanner(){
+  const start=new Date(DATA.itinerary.trip.checkIn); // 2026-10-31
+  let cur=new Date(start);
+  const total=DATA.itinerary.trip.checkOut? (()=>{const e=new Date(DATA.itinerary.trip.checkOut);return Math.round((e-start)/86400000);})():22;
+  const el=document.getElementById('timeline');
+  let html='';
+  let day=0;
+  DATA.itinerary.legs.forEach((leg,li)=>{
+    const sel=LS.get('hotel_'+leg.city,'');
+    const h=sel?DATA.hotels.find(x=>x.id===sel):null;
+    for(let i=0;i<leg.nights;i++){
+      const isLast=day===total-1;
+      html+=`<div class="day ${isLast?'hd':''}" title="${h?h.name+' · check-in '+h.checkIn+' / check-out '+h.checkOut:''}">
+        <b>Night ${day+1}</b><span class="dcity">${leg.city}</span>${h?'<span style="font-size:.68rem">'+h.checkIn+'→'+h.checkOut+'</span>':''}
+      </div>`;
+      day++;
+      cur=addDays(cur,1);
+    }
+    if(li<DATA.itinerary.legs.length-1){
+      html+=`<div class="day travel"><b>Travel</b><span>➜ ${DATA.itinerary.legs[li+1].city}</span></div>`;
+    }
+  });
+  el.innerHTML=html;
+}
+
+/* ---- loyalty ---- */
+const LOYALTY=[
+  {id:"lotte",name:"LOTTE Members",hotels:"L7 Myeongdong · L7 Haeundae",benefit:"Member-only rates, points, Flash Deals & packages",url:"https://www.lottehotel.com"},
+  {id:"accor",name:"Accor ALL",hotels:"Ibis Styles · Ibis Insadong · Fairmont",benefit:"Points, member rates, Private Sales flash offers",url:"https://all.accor.com"},
+  {id:"shilla",name:"Shilla Rewards",hotels:"Shilla Stay Haeundae",benefit:"Earn 3% room / 1% F&B; tier perks",url:"https://www.shillahotels.com"},
+  {id:"josun",name:"The Josun Hospitality",hotels:"Grand Josun Busan",benefit:"Brand perks + best-rate guarantee",url:"https://www.josun.com"},
+  {id:"hilton",name:"Hilton Honors",hotels:"Hilton Gyeongju",benefit:"Points, member rates, resort perks",url:"https://www.hilton.com/en/hilton-honors/"},
+  {id:"hyatt",name:"World of Hyatt",hotels:"Park Hyatt Busan",benefit:"Points, member rates",url:"https://www.hyatt.com/hyatt-rewards"},
+  {id:"fs",name:"Four Seasons direct",hotels:"Four Seasons Seoul",benefit:"Best-rate guarantee + seasonal packages",url:"https://www.fourseasons.com/seoul/"}
+];
+function renderLoyalty(){
+  const el=document.getElementById("loyalty-list");
+  el.innerHTML=LOYALTY.map(l=>`<li>
+    <input type="checkbox" data-id="${l.id}" ${booked[l.id]?'checked':''}>
+    <div><b>${l.name}</b> · <span class="meta">${l.hotels}</span><br><span class="why">${l.benefit}</span> · <a href="${l.url}" target="_blank" rel="noopener">join/sign in →</a></div>
+  </li>`).join("");
+  el.querySelectorAll("input").forEach(i=>i.onchange=()=>{booked[i.dataset.id]=i.checked;LS.set('loyalty',booked);toast(booked[i.dataset.id]?"Marked joined":"Unmarked");});
+}
+
+/* ---- deals ---- */
+function renderDeals(){
+  const el=document.getElementById("deals-list");
+  const deals=[];
+  DATA.hotels.forEach(h=>{
+    h.promos.forEach((p,pi)=>{
+      const key=h.id+'_'+pi;
+      deals.push({key,label:`<b>${h.name}</b> — ${p}`,city:h.city,url:h.officialUrl});
+    });
+  });
+  el.innerHTML=deals.map(d=>`<li>
+    <input type="checkbox" data-key="${d.key}" ${dealsDone[d.key]?'checked':''}>
+    <div>${d.label}<br><span class="meta">${d.city}</span> · <a href="${d.url||'#'}" target="_blank" rel="noopener">check on official site →</a></div>
+  </li>`).join("");
+  el.querySelectorAll("input").forEach(i=>i.onchange=()=>{dealsDone[i.dataset.key]=i.checked;LS.set('deals',dealsDone);toast("Watchlist updated");});
+}
+
+// Export selected hotels
+function exportSelected(){
+  const selected=[];
+  Object.keys(pickedRooms).forEach(hid=>{
+    if(pickedRooms[hid]!==null){
+      const h=DATA.hotels.find(x=>x.id===hid);
+      const room=h.rooms[pickedRooms[hid]];
+      selected.push(`${h.name} — ${room.name} (${room.price})`);
+    }
+  });
+  if(selected.length===0){
+    alert("No rooms selected yet. Click on rooms in the Hotels tab first.");
+    return;
+  }
+  const text="Selected Hotels:\n\n"+selected.join("\n")+"\n\nTrip: Oct 31 – Nov 22, 2026";
+  navigator.clipboard.writeText(text).then(()=>{
+    alert("Copied to clipboard!\n\n"+text);
+  }).catch(()=>{
+    prompt("Copy this text:", text);
+  });
+}
+
+function updateSelectionSummary(){
+  const container = document.getElementById("selection-summary");
+  const list = document.getElementById("selection-list");
+  const selected = [];
+  
+  Object.keys(pickedRooms).forEach(hid => {
+    if (pickedRooms[hid] !== null) {
+      const h = DATA.hotels.find(x => x.id === hid);
+      const room = h.rooms[pickedRooms[hid]];
+      selected.push(`<div style="margin:4px 0;">• <b>${h.name}</b> — ${room.name} (${room.price})</div>`);
+    }
+  });
+  
+  if (selected.length > 0) {
+    list.innerHTML = selected.join("");
+    container.style.display = "block";
+  } else {
+    container.style.display = "none";
+  }
+}
+
+function clearSelection(){
+  pickedRooms = {};
+  localStorage.setItem('kht_rooms', JSON.stringify(pickedRooms));
+  renderGrid();
+  updateSelectionSummary();
+}
+
+// Override room click to update summary
+const originalRenderGrid = renderGrid;
+renderGrid = function(){
+  originalRenderGrid();
+  updateSelectionSummary();
+}
+
+/* ---- view switching ---- */
+function showView(v){
+  activeView=v;
+  document.querySelectorAll(".sn").forEach(s=>s.classList.toggle("active",s.dataset.view===v));
+  ["hotels","budget","planner","loyalty","deals"].forEach(x=>document.getElementById("view-"+x).classList.toggle("hidden",x!==v));
+  if(v==="budget")renderBudget();
+  if(v==="planner")renderPlanner();
+  if(v==="loyalty")renderLoyalty();
+  if(v==="deals")renderDeals();
+}
+
+document.querySelectorAll(".sn").forEach(s=>s.onclick=()=>showView(s.dataset.view));
+document.querySelectorAll(".btn").forEach(b=>b.onclick=()=>{
+  activeFilter = b.dataset.filter;
+  document.querySelectorAll(".btn").forEach(x => x.classList.remove("active"));
+  b.classList.add("active");
+  renderGrid();
+});
+
+/* ---- init ---- */
+function init(){
+  document.getElementById("chip-nights").textContent=DATA.trip.nights;
+  renderTabs(); renderSummary(); renderGrid();
+  showView("hotels");
+  
+  // Keyboard shortcut: Press "/" to focus search
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "/" && document.getElementById("search")) {
+      e.preventDefault();
+      document.getElementById("search").focus();
+    }
+  });
+  
+  // Show keyboard hint
+  const searchInput = document.getElementById("search");
+  if (searchInput) {
+    searchInput.placeholder = "Search hotels... (Press / to focus)";
+  }
+}
+init();
+
+// Side-by-side Comparison Modal
+function showComparison() {
+  const selectedHotels = [];
+  
+  Object.keys(pickedRooms).forEach(hid => {
+    if (pickedRooms[hid] !== null) {
+      const h = DATA.hotels.find(x => x.id === hid);
+      const room = h.rooms[pickedRooms[hid]];
+      selectedHotels.push({ hotel: h, room: room });
+    }
+  });
+
+  if (selectedHotels.length < 2) {
+    alert("Please select at least 2 hotels to compare.");
+    return;
+  }
+
+  if (selectedHotels.length > 4) {
+    alert("You can compare a maximum of 4 hotels at once.");
+    return;
+  }
+
+  // Create modal
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:1000;';
+  
+  let html = `
+    <div style="background:white;max-width:1200px;width:95%;max-height:90vh;overflow:auto;border-radius:16px;padding:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="margin:0;">Hotel Comparison</h2>
+        <button onclick="this.closest('.modal').remove()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">×</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+  `;
+
+  selectedHotels.forEach(({ hotel, room }) => {
+    const score = hotel.fits ? '✅ Perfect Match' : '⚠️ Check Requirements';
+    
+    html += `
+      <div style="border:1px solid #ddd;border-radius:12px;padding:16px;">
+        <h3 style="margin:0 0 8px 0;">${hotel.name}</h3>
+        <div style="color:#666;margin-bottom:12px;">${hotel.area}</div>
+        
+        <div style="background:#f8f9fa;padding:12px;border-radius:8px;margin-bottom:12px;">
+          <div><strong>Room:</strong> ${room.name}</div>
+          <div><strong>Bed:</strong> ${room.bedNote || room.bed}</div>
+          <div><strong>Price:</strong> ${room.price}</div>
+        </div>
+
+        <div style="margin:12px 0;">
+          <div style="font-weight:600;margin-bottom:6px;">Key Details</div>
+          <div style="font-size:0.9rem;line-height:1.6;">
+            <div>✓ Private Bathroom: ${room.privateBathroom ? 'Yes' : 'No'}</div>
+            <div>✓ One Bed Only: ${room.oneBedOnly ? 'Yes' : 'No'}</div>
+            <div>✓ Laundry: ${hotel.hasOnSiteLaundry ? 'Yes' : 'No'}</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div style="font-size:0.85rem;color:#666;margin-bottom:4px;">Match Status</div>
+          <div style="font-weight:600;color:${hotel.fits ? '#2e7d32' : '#e65100'};">${score}</div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+          ${hotel.officialUrl ? `<a href="${hotel.officialUrl}" target="_blank" class="cta cta-official" style="flex:1;text-align:center;padding:8px;font-size:0.8rem;">Official Site</a>` : ''}
+          <a href="${hotel.compareUrl}" target="_blank" class="cta cta-compare" style="flex:1;text-align:center;padding:8px;font-size:0.8rem;">Compare Rates</a>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `</div></div>`;
+  modal.innerHTML = html;
+  modal.className = 'modal';
+  document.body.appendChild(modal);
+}
+</script>
+</body>
+</html>
