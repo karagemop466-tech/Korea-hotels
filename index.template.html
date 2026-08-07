@@ -309,7 +309,9 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 
 /* ---- tabs & summary ---- */
 function renderTabs(){
-  const cities=["Seoul","Gyeongju","Busan"];
+  // Dynamically support all cities present in data (Seoul, Busan, Cheonan, Daejeon, Gyeongju)
+  const allCities = Array.from(new Set(DATA.hotels.map(h=>h.city))).sort();
+  const cities = allCities.length ? allCities : ["Seoul","Gyeongju","Busan","Cheonan","Daejeon"];
   const tabs=document.getElementById("tabs");
   tabs.innerHTML=cities.map(c=>{
     const n=DATA.hotels.filter(h=>h.city===c).length;
