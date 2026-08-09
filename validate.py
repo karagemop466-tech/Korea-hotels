@@ -40,6 +40,14 @@ def validate_hotels(data):
 
     errors = 0
     warnings = 0
+    ids = [h.get('id') for h in hotels]
+    names = [str(h.get('name','')).strip().lower() for h in hotels]
+    if len(ids) != len(set(ids)):
+        print("  ❌ Duplicate hotel IDs found")
+        errors += 1
+    if len(names) != len(set(names)):
+        print("  ❌ Duplicate hotel names found in curated shortlist")
+        errors += 1
 
     for h in hotels:
         # Check required fields
@@ -55,10 +63,16 @@ def validate_hotels(data):
                     print(f"  ❌ Missing room field '{rfield}' in {h['name']}")
                     errors += 1
 
-        # Check officialUrl
+        # Published shortlist policy: every hotel must pass all three must-haves.
+        if h.get('fits') is not True:
+            print(f"  ❌ {h['name']} does not pass the must-have requirements")
+            errors += 1
         if not h.get("officialUrl"):
-            print(f"  ⚠️  No officialUrl for {h['name']} (city: {h['city']})")
-            warnings += 1
+            print(f"  ❌ No officialUrl for {h['name']} (city: {h['city']})")
+            errors += 1
+        if not any(r.get('oneBedOnly') and r.get('privateBathroom') and r.get('bedType') in ('queen','king') for r in h.get('rooms', [])):
+            print(f"  ❌ No qualifying single queen/king room for {h['name']}")
+            errors += 1
 
         # Check hasOnSiteLaundry
         if "hasOnSiteLaundry" not in h:
