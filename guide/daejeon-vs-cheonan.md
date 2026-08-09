@@ -6,6 +6,11 @@
 **Cheonan wins for most travelers** (especially for pure cost + rail efficiency).  
 **Daejeon** is better if you want a larger city with more dining/shopping options and slightly more "big-city" feel.
 
+> ⚠️ **2026-08-09 note (official-source verification):** only **2 Cheonan hotels** pass the
+> strict walk-to-station must-have rule vs **7 in Daejeon**. If station-walkability is your
+> hard requirement, **Daejeon now wins on shortlist depth**; pick Cheonan only if you're OK
+> with the verified Ramada Encore / Brown Dot, or you accept a taxi plan (e.g. Shilla Stay).
+
 ## Detailed Comparison
 
 ### 1. Transportation Cost & Efficiency
@@ -27,12 +32,10 @@
 | 4★ resort-style   | $80–120                 | $75–110                 | Tie        |
 | Average 6-night total | **$360–660**            | **$330–630**            | **Daejeon** (slight edge) |
 
-**Cheonan hotels** (from `hotels.json` additions):
-- **Shilla Stay Cheonan** — $65–95 (best overall reliability)
-- **Ramada Encore by Wyndham** — $60–90 (great breakfast)
-- **ON City Hotel** — $55–80 (strong value)
-- **Sono Belle Cheonan** — $80–120 (resort feel)
-- **Best Western Asan Hotel** — $70–100 (closest to KTX station)
+**Cheonan hotels** (strict shortlist after 2026-08-09 official-source verification):
+- **Ramada Encore by Wyndham CheonAn** — $60–90 (great breakfast; ~750 m/9 min to Bongmyeong Stn)
+- **Cheonan Brown Dot Hotel Cheonan Station** — $45–70 (0.86 km/11 min to Cheonan Stn; book via OTA)
+- *Shilla Stay Cheonan, ON City, Sono Belle, Best Western Asan, The Mains were removed — none is within a 15-min walk of a rail station (see `data/excluded.json`). With a taxi plan, Shilla Stay Cheonan (~$65–95) remains the quality pick.*
 
 **Daejeon hotels** (top researched options):
 - **Toyoko Inn Daejeon Government Complex** — $48–70 (excellent budget chain, free breakfast often)

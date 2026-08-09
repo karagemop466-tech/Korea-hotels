@@ -16,16 +16,25 @@ Perfect midway stop on the Seoul–Busan KTX corridor. Excellent balance of **lo
 - **Near Cheonan-Asan KTX Station** (best for rail convenience)
 - **Buldang / Samsung Display area** (modern hotels, good value)
 
-## Best 3–4 Star Hotel Picks (mid-range, ~$55–120/night)
+## Best 3–4 Star Hotel Picks (mid-range, ~$45–100/night)
+
+**Shortlist verified against official sources 2026-08-09** (see `guide/verification-report-2026-08-09.md`).
+Only hotels within a ~15-min walk of a rail station pass our must-have rules:
 
 | Hotel | Tier | Est. Price (USD/night) | Location | Highlights | Official / Compare |
 |-------|------|------------------------|----------|------------|--------------------|
-| **Shilla Stay Cheonan** | Mid (4★) | $65–95 | Near Cheonan Station / Bus Terminal | Reliable Shilla quality, gym, restaurant, free Wi-Fi, parking. Excellent reviews (8.3–8.4/10). Breakfast available. | Shillastay.com or Kayak |
-| **Ramada Encore by Wyndham Cheonan** | Mid (3–4★) | $60–90 | Central Cheonan | Clean, modern, good breakfast, convenient location. Strong value (8.3/10). | wyndhamhotels.com |
-| **ON City Hotel** | Budget-Mid (3★) | $55–80 | Near Cheonan Station | Good amenities, fitness center, breakfast options. Popular with travelers. | Trip.com / Booking |
-| **Sono Belle Cheonan** | Mid (4★) | $80–120 | Cheonan area | Resort-style, pool (seasonal), spa, higher-end feel. Great for relaxation. | Official site |
-| **Best Western Asan Hotel** | Mid (3–4★) | $70–100 | Near Cheonan-Asan Station | Modern chain quality, parking, restaurant. Very convenient for KTX. | bestwestern.com |
-| **The Mains Hotel** | Mid (3★) | $50–75 | Central | Affordable, clean, restaurant on-site, good reviews for value. | Booking.com |
+| **Ramada Encore by Wyndham CheonAn** | Mid (3★) | $60–90 | Bongmyeong area | Clean, modern, good breakfast. **~750 m / 9 min walk to Bongmyeong Stn (Line 1)**; ~4 km to Cheonan-Asan KTX. | wyndhamhotels.com |
+| **Cheonan Brown Dot Hotel Cheonan Station** | Budget (3★) | $45–70 | Cheonan Station area | Budget pick; private bathrooms. **0.86 km / ~11 min walk to Cheonan Stn.** Chain site offline — book via OTA. | Trip.com / Kayak |
+
+**Removed from the shortlist after 2026-08-09 verification** (were listed here earlier):
+
+| Hotel | Why it no longer qualifies |
+|-------|----------------------------|
+| **Shilla Stay Cheonan** | Great hotel, but **~1.9 km (≈25 min) from Cheonan Stn** and 15-min drive to KTX — fails the walk-to-station rule. Use with a taxi plan (like the Gyeongju exception). Official page: shillahotels.com |
+| **ON City Hotel** | In Buldang-dong, **~3.5 km from KTX / ~3 km from Cheonan Stn** — "near station" claim was wrong. |
+| **Sono Belle Cheonan** | Water-park resort **~11 km from Cheonan-Asan KTX** — no rail access on foot. |
+| **Best Western Asan Hotel** (now *SureStay Plus by Best Western Asan*) | In Tangjeong, **~6 km from Cheonan-Asan KTX** — "5-min walk to KTX" claim was wrong; official BW page invalid. |
+| **The Mains Hotel** | **~2.7 km from Cheonan Stn** (~30+ min walk) and no official site (old link pointed to shillahotels.com by mistake). |
 
 **Loyalty notes**:
 - **Shilla Stay**: Shilla Rewards points (earn 3%+).

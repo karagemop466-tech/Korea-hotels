@@ -5,7 +5,8 @@
 
 This page filters every hotel in the planner against those rules, with the bed type and
 station distance **verified against each hotel's official site / official transport info**
-as of Aug 2026.
+as of Aug 2026. The full 2026-08-09 re-verification (29 records checked, 5 removed) is in
+[verification-report-2026-08-09.md](verification-report-2026-08-09.md).
 
 ---
 
@@ -64,14 +65,14 @@ during autumn-foliage peak. For each shortlisted hotel, open its official site a
 your dates + "2 adults, 1 queen/king bed":
 
 - **L7 / Lotte:** https://www.lottehotel.com
-- **Nine Tree by Parnas:** https://www.ninetreehotel.com
-- **Ibis / Accor:** https://all.accor.com
-- **Fairmont:** https://www.fairmont.com/seoul
+- **Nine Tree by Parnas:** https://www.ninetreehotels.com (≥2026: domain changed from ninetreehotel.com)
+- **Ibis / Accor:** https://all.accor.com (Myeongdong = hotel 9771; Insadong = hotel 8002)
+- **Fairmont:** https://www.fairmont.com/en/hotels/seoul/fairmont-ambassador-seoul.html
 - **Four Seasons:** https://www.fourseasons.com/seoul
-- **Shilla Stay:** https://www.shillastay.com
-- **ASTI:** https://www.astihotel.com
-- **Grand Josun:** https://www.josun.com
-- **Park Hyatt:** https://www.hyatt.com/park-hyatt/busan
+- **Shilla Stay:** https://www.shillahotels.com/en/ (shillastay.com now redirects here)
+- **ASTI:** http://en.astihotel.co.kr/ (astihotel.com is parked/expired)
+- **Grand Josun:** https://gjb.josunhotel.com/main.do?locale=en (josun.com is not the hotel)
+- **Park Hyatt:** https://www.hyatt.com/park-hyatt/en-US/busph-park-hyatt-busan
 - **Hilton Gyeongju:** https://www.hilton.com/en/hotels/kyjgyhi-hilton-gyeongju/
 - **Lahan Select Gyeongju:** https://www.lahan.com/gyeongju/en/main.do
 - **Commodore Gyeongju:** https://www.commodorehotel.co.kr
