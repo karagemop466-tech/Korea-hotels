@@ -173,6 +173,9 @@
   .checklist input{transform:scale(1.15)}
   .checklist .meta{color:var(--muted);font-size:.78rem}
   .checklist .why{font-size:.8rem;background:none;border:none;padding:0;color:var(--brand2)}
+  .decision-panel{background:linear-gradient(135deg,#fff,#f0f7f4);border:1px solid #bfe6ce;border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .decision-panel h3{margin:0 0 2px;color:#14532d}.decision-panel p{margin:0 0 12px}
+  .decision-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:end;font-size:.82rem}.decision-controls label{display:flex;flex-direction:column;gap:4px;font-weight:600}.decision-controls input,.decision-controls select{padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:#fff;font:inherit}.decision-controls .check-label{flex-direction:row;align-items:center;margin-bottom:7px}.decision-output{margin-top:13px;padding-top:11px;border-top:1px dashed #bfe6ce;font-size:.88rem}.decision-output strong{color:#14532d}.decision-output .route-note{color:var(--muted);margin-top:4px}
 
   footer{margin:40px 0 30px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);padding-top:18px}
   .note{background:#fdf6e6;border:1px solid #ecd9a8;color:#6b5410;padding:12px 16px;border-radius:10px;font-size:.85rem;margin-bottom:22px}
@@ -270,6 +273,17 @@
     </div>
     <nav class="tabs" id="tabs"></nav>
     <div class="summary" id="summary"></div>
+    <section class="decision-panel" aria-label="Decision cockpit">
+      <div><h3>🧭 Decision cockpit</h3><p class="sub">Turn the research into a shortlist. Start with must-haves, then rank by the trade-off you care about.</p></div>
+      <div class="decision-controls">
+        <label>Max nightly budget <input id="max-price" type="number" min="0" step="10" placeholder="Any" aria-label="Maximum nightly budget"></label>
+        <label>Prioritize
+          <select id="priority"><option value="value">Best value</option><option value="price">Lowest price</option><option value="quality">Quality / stars</option><option value="location">Location / station</option></select>
+        </label>
+        <label class="check-label"><input id="strict-rooms" type="checkbox" checked> Only rooms that meet our bed + bathroom rules</label>
+      </div>
+      <div id="decision-output" class="decision-output"></div>
+    </section>
     <div class="toolbar">
       <span class="label">Price tier:</span>
       <button class="btn t-all active" data-filter="all">All</button>
@@ -389,6 +403,24 @@ function renderSummary(){
     <p><b>Alternatives:</b> ${DATA.split.alternatives.join(" · ")}</p>`;
 }
 
+// A transparent shortlist: hard requirements first, then a tunable trade-off score.
+function renderDecision(){
+  const out=document.getElementById('decision-output'); if(!out) return;
+  const max=Number(document.getElementById('max-price').value)||Infinity;
+  const priority=document.getElementById('priority').value;
+  const strict=document.getElementById('strict-rooms').checked;
+  let hotels=DATA.hotels.filter(h=>h.city===activeCity && (h.priceFrom<=max));
+  if(strict) hotels=hotels.filter(h=>h.fits && h.rooms.some(r=>r.oneBedOnly&&r.privateBathroom));
+  const score=h=>{const price=(h.priceFrom+h.priceTo)/2; const station=parseInt(h.stationWalkTime)||15;
+    if(priority==='price') return -price; if(priority==='quality') return h.stars*25-price*.08;
+    if(priority==='location') return -station*3+h.stars*5; return h.stars*22-price*.12-station*.8+(h.fits?35:0);};
+  hotels.sort((a,b)=>score(b)-score(a));
+  if(!hotels.length){out.innerHTML='<strong>No matches.</strong> Relax the price cap or untick strict room rules — do not compromise on a non-negotiable without checking the room details.';return;}
+  const picks=hotels.slice(0,3), names=picks.map((h,i)=>`<span><b>${i+1}. ${h.name}</b> (${h.price}/night · ${h.stars}★)</span>`).join(' &nbsp;·&nbsp; ');
+  const leg=DATA.itinerary.legs.find(l=>l.city===activeCity);
+  out.innerHTML=`<strong>Shortlist for ${activeCity}:</strong> ${names}<div class="route-note">Best practice: book the #1 refundable room now, keep #2 as a fallback, and re-check the official rate 30–45 days before arrival. ${leg?`Your current plan gives ${leg.nights} nights here.`:''} Compare the total for the whole stay, not just the nightly headline price.</div>`;
+}
+
 /* ---- card ---- */
 function bedBadge(r){
   if(r.oneBedOnly) {
@@ -491,7 +523,12 @@ function renderGrid(){
     );
   }
 
-  grid.innerHTML=list.length?list.map(card).join(""):`<p>No hotels match this filter for ${activeCity}.</p>`;
+  // Keep the visible list aligned with the decision cockpit's budget and room rules.
+  const max=Number(document.getElementById('max-price')?.value)||Infinity;
+  if(max<Infinity) list=list.filter(h=>h.priceFrom<=max);
+  if(document.getElementById('strict-rooms')?.checked) list=list.filter(h=>h.fits && h.rooms.some(r=>r.oneBedOnly&&r.privateBathroom));
+  grid.innerHTML=list.length?list.map(card).join(""):`<p>No hotels match this filter for ${activeCity}. Try a wider budget or turn off strict room filtering.</p>`;
+  renderDecision();
   grid.querySelectorAll(".room-row").forEach(row=>row.onclick=()=>{
     const hid=row.dataset.hid, ridx=parseInt(row.dataset.ridx);
     pickedRooms[hid]=(pickedRooms[hid]===ridx)?null:ridx;
@@ -692,6 +729,7 @@ document.querySelectorAll(".btn").forEach(b=>b.onclick=()=>{
 function init(){
   document.getElementById("chip-nights").textContent=DATA.trip.nights;
   renderTabs(); renderSummary(); renderGrid();
+  ['max-price','priority','strict-rooms'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('input',()=>{renderGrid();});});
   if (typeof renderBestOf === "function") renderBestOf();
   showView("hotels");
   

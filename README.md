@@ -10,7 +10,7 @@
 
 This is a **static information website** (no login, no backend) designed to help you:
 
-- Browse 34 carefully selected 3–5 star hotels
+- Browse 29 carefully selected 3–5 star hotels
 - Compare prices, room types, and amenities
 - Filter by budget, bed type, laundry, and "fits my needs"
 - See official booking links and clear rules
@@ -68,6 +68,7 @@ This ensures we never compromise on our core needs while still being able to com
 | **Busan**  | 7      | Haeundae beach + Station area |
 | **Cheonan**| 7      | Excellent KTX access, great value |
 | **Daejeon**| 7      | Good transport hub + hot springs area |
+| **Gyeongju** | 0 | Excluded from the must-have shortlist because the reviewed properties do not pass the near-transit requirement |
 
 All hotels include:
 - Realistic price ranges (2026 estimates)
@@ -104,7 +105,7 @@ Your live site will be available at:
 Korea-hotels/
 ├── index.html              ← The interactive planner (open this)
 ├── data/
-│   ├── hotels.json         ← All hotel data (34 hotels)
+│   ├── hotels.json         ← All hotel data (29 hotels)
 │   └── itinerary.json      ← Trip dates and cities
 ├── guide/                  ← Detailed markdown guides
 ├── build.py                ← Regenerates index.html from data
