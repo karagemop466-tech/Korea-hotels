@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>South Korea Trip — Seoul · Gyeongju · Busan</title>
+<title>South Korea Trip — Seoul · Gyeongju · Busan · Cheonan · Daejeon</title>
+<!-- Leaflet + MarkerCluster + jsPDF for Map + PDF export -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   :root{
     --bg:#f6f5f2; --card:#ffffff; --ink:#1f2933; --muted:#6b7280;
@@ -33,7 +40,7 @@
   .tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
   .tab .city-nights{display:block;font-weight:400;font-size:.75rem;opacity:.8}
 
-  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center;position:sticky;top:0;z-index:10;background:var(--bg);padding:4px 0}
   .toolbar .label{font-size:.85rem;color:var(--muted);margin-right:4px}
   .btn{border:1px solid var(--border);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600}
   .btn.active{color:#fff}
@@ -50,10 +57,28 @@
 
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
   @media (max-width: 600px) {
-    .grid{grid-template-columns:1fr;gap:14px}
-    .hotel-head,.hotel-body,.hotel-foot{padding:12px 14px}
-    .rooms{font-size:.75rem}
-    .toolbar{flex-wrap:wrap}
+    .grid{grid-template-columns:1fr;gap:12px}
+    .hotel-head,.hotel-body,.hotel-foot{padding:11px 12px}
+    .rooms{font-size:.72rem}
+    .toolbar{flex-wrap:wrap;gap:6px}
+    .toolbar .btn{padding:6px 10px;font-size:.78rem}
+    .hotel-name{font-size:.98rem}
+    .star-btn{font-size:1.15rem;padding:2px 8px}
+    .fit-row{font-size:.72rem}
+    .price{font-size:.86rem}
+    .cta{padding:7px 6px;font-size:.72rem}
+    #map{height:380px !important}
+    .wrap{padding:0 12px}
+    header.hero{padding:26px 0 22px}
+    header.hero h1{font-size:1.55rem}
+    .tab{padding:8px 12px;font-size:.88rem}
+    .sn{padding:7px 10px;font-size:.78rem}
+    .summary{padding:12px 14px}
+  }
+  @media (max-width: 420px) {
+    .grid{grid-template-columns:1fr}
+    .rooms td{padding:4px 2px}
+    .hotel-head .top{gap:4px}
   }
   .hotel{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
   .hotel-head{padding:16px 18px 10px;border-bottom:1px solid var(--border)}
@@ -110,6 +135,12 @@
   .cta-compare{background:#fff;border:1px solid var(--border);color:var(--ink)}
   .cta-compare:hover{border-color:var(--brand);color:var(--brand)}
   .cta:not(a){cursor:default;color:var(--muted);background:#f3f1ea}
+
+  .star-btn{
+    background:#fff;border:1px solid #d7e8dc;color:#b03a2e;
+    font-size:1.05rem;line-height:1;padding:1px 7px;border-radius:999px;cursor:pointer;
+  }
+  .star-btn.favorited{color:#fff;background:#b03a2e;border-color:#b03a2e}
 
   /* Accessibility */
   button:focus, input:focus, select:focus {
@@ -170,6 +201,8 @@
     <div class="sn" data-view="planner">🗓️ Day planner</div>
     <div class="sn" data-view="loyalty">⭐ Loyalty tracker</div>
     <div class="sn" data-view="deals">✦ Deal watchlist</div>
+    <div class="sn" data-view="map">🗺️ Map</div>
+    <div class="sn" data-view="favorites">⭐ Favorites <span id="fav-count" style="font-size:0.65rem;background:#e9f7ef;color:#14532d;padding:1px 6px;border-radius:999px;margin-left:3px">0</span></div>
     <div class="sn" onclick="exportSelected()">📤 Export</div>
     <div class="sn" onclick="showComparison()">⚖️ Compare</div>
   </nav>
@@ -247,6 +280,9 @@
       <button class="btn t-fits active" data-filter="fits" title="One Queen/King bed + Private bathroom + Near station">✓ Matches Our Must-Haves</button>
     </div>
     <div class="grid" id="grid"></div>
+
+    <!-- Best of each city section (clickable top-3 value fits) -->
+    <div id="best-of-section" style="margin-top:12px"></div>
   </div>
 
   <div id="view-budget" class="view hidden">
@@ -284,6 +320,32 @@
     </div>
   </div>
 
+  <div id="view-map" class="view hidden">
+    <div class="panel">
+      <h2>🗺️ Interactive Map — Hotel Locations</h2>
+      <div class="sub">Pins for all hotels (color-coded by city). Clustering enabled. Toggle "Only Must-Haves" to filter. Click pins for details + direct links.</div>
+      <div style="margin:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button onclick="toggleMapFits()" class="btn" id="map-fits-btn" style="background:#2e7d32;color:#fff">✓ Only Must-Haves (on)</button>
+        <button onclick="renderMapView()" class="btn">🔄 Refresh Map</button>
+        <span id="map-stats" style="font-size:0.85rem;color:#555"></span>
+      </div>
+      <div id="map" style="height:520px;border-radius:12px;border:1px solid #e5e0d6;overflow:hidden"></div>
+      <div style="font-size:0.75rem;color:#666;margin-top:8px">Leaflet + clustering. Data is 2026 shoulder estimates.</div>
+    </div>
+  </div>
+
+  <div id="view-favorites" class="view hidden">
+    <div class="panel">
+      <h2>⭐ Your Favorites</h2>
+      <div class="sub">Hotels you've starred. Click ★ on any hotel card to add/remove. These persist in your browser and are included in exports.</div>
+      <div style="margin:8px 0 12px">
+        <button onclick="clearFavorites()" class="btn" style="background:#b03a2e;color:#fff;border-color:#b03a2e">Clear all favorites</button>
+        <span id="fav-count-big" style="margin-left:12px;font-weight:600;color:#14532d"></span>
+      </div>
+      <div class="grid" id="favorites-grid"></div>
+    </div>
+  </div>
+
   <footer>
     <p><b>Sources &amp; accuracy:</b> Check-in/check-out times, policies, room types/prices, and bed types are sourced from each hotel's official website, Korea Tourism Organization, and major booking platforms at the time of research (Aug 2026). Per-room prices are typical nightly USD ranges for the 2026 autumn season and are <b>estimates</b> — always confirm the current rate &amp; cancellation terms for your exact dates and room on the official site before booking.</p>
     <p>Official links open the hotel's own booking page. Compare links let you cross-shop OTAs. Book <b>direct</b> when possible for best-rate guarantees and loyalty points.</p>
@@ -309,9 +371,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 
 /* ---- tabs & summary ---- */
 function renderTabs(){
-  // Dynamically support all cities present in data (Seoul, Busan, Cheonan, Daejeon, Gyeongju)
-  const allCities = Array.from(new Set(DATA.hotels.map(h=>h.city))).sort();
-  const cities = allCities.length ? allCities : ["Seoul","Gyeongju","Busan","Cheonan","Daejeon"];
+  const cities=["Seoul","Gyeongju","Busan"];
   const tabs=document.getElementById("tabs");
   tabs.innerHTML=cities.map(c=>{
     const n=DATA.hotels.filter(h=>h.city===c).length;
@@ -371,6 +431,7 @@ function card(h){
       <div class="top">
         <h3 class="hotel-name">${h.name}</h3>
         <span class="badge b-${h.tier}">${tierLabel}</span>
+        <button class="star-btn ${favorites.includes(h.id)?'favorited':''}" onclick="event.stopImmediatePropagation(); toggleFavorite('${h.id}', this); return false;" title="Toggle favorite">★</button>
       </div>
       <div class="stars">${"★".repeat(h.stars)}${"☆".repeat(5-h.stars)}</div>
       ${mustHaveScore}
@@ -631,6 +692,7 @@ document.querySelectorAll(".btn").forEach(b=>b.onclick=()=>{
 function init(){
   document.getElementById("chip-nights").textContent=DATA.trip.nights;
   renderTabs(); renderSummary(); renderGrid();
+  if (typeof renderBestOf === "function") renderBestOf();
   showView("hotels");
   
   // Keyboard shortcut: Press "/" to focus search
@@ -725,6 +787,400 @@ function showComparison() {
   modal.className = 'modal';
   document.body.appendChild(modal);
 }
+
+/* ============== NEW: Map with Leaflet Clustering + PDF Export + Map tab ============== */
+let mapInstance = null;
+let mapMarkers = null;
+let mapFitsOnly = true;
+
+function showView(v){
+  activeView=v;
+  document.querySelectorAll(".sn").forEach(s=>s.classList.toggle("active",s.dataset.view===v));
+  ["hotels","budget","planner","loyalty","deals","map"].forEach(x=>{
+    const el = document.getElementById("view-"+x);
+    if (el) el.classList.toggle("hidden", x!==v);
+  });
+  if(v==="budget") renderBudget();
+  if(v==="planner") renderPlanner();
+  if(v==="loyalty") renderLoyalty();
+  if(v==="deals") renderDeals();
+  if(v==="map") setTimeout(renderMapView, 80);
+}
+
+function renderTabs(){
+  // Support all cities from data
+  const allCities = Array.from(new Set(DATA.hotels.map(h=>h.city))).sort();
+  const tabs=document.getElementById("tabs");
+  tabs.innerHTML = allCities.map(c=>{
+    const n = DATA.hotels.filter(h=>h.city===c).length;
+    const leg = (DATA.itinerary && DATA.itinerary.legs) ? DATA.itinerary.legs.find(l=>l.city===c) : null;
+    const nights = leg ? leg.nights : "—";
+    return `<div class="tab ${c===activeCity?'active':''}" data-city="${c}">${c}<span class="city-nights">${nights} nights · ${n} picks</span></div>`;
+  }).join("");
+  tabs.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+    activeCity=t.dataset.city; activeFilter="all";
+    document.querySelectorAll(".btn").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));
+    renderGrid();
+    if (typeof renderBestOf === "function") renderBestOf();
+  });
+}
+
+function renderMapView(){
+  const container = document.getElementById("map");
+  if (!container) return;
+  const stats = document.getElementById("map-stats");
+  
+  // Destroy previous
+  if (mapInstance) {
+    mapInstance.remove();
+    mapInstance = null;
+  }
+  container.innerHTML = "";
+  
+  // Init Leaflet
+  mapInstance = L.map(container, { preferCanvas: true }).setView([36.8, 127.1], 6);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors",
+    maxZoom: 18
+  }).addTo(mapInstance);
+
+  // Prepare markers
+  let list = DATA.hotels.slice();
+  if (mapFitsOnly) list = list.filter(h => h.fits);
+
+  // City colors
+  const cityColor = {
+    "Seoul": "#b03a2e",
+    "Busan": "#1f5c46",
+    "Cheonan": "#2e7d32",
+    "Daejeon": "#7b1fa2",
+    "Gyeongju": "#b8860b"
+  };
+
+  // Use MarkerClusterGroup
+  if (!mapMarkers || !mapMarkers.clearLayers) {
+    mapMarkers = L.markerClusterGroup({
+      chunkedLoading: true,
+      disableClusteringAtZoom: 13,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      maxClusterRadius: 48
+    });
+  } else {
+    mapMarkers.clearLayers();
+  }
+
+  let added = 0;
+  list.forEach(h => {
+    if (!h.lat || !h.lng) return;
+    const color = cityColor[h.city] || "#555";
+    const icon = L.divIcon({
+      className: "hotel-pin",
+      html: `<div style="background:${color};width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);"></div>`,
+      iconSize: [14,14],
+      iconAnchor: [7,7]
+    });
+    const m = L.marker([h.lat, h.lng], {icon});
+    
+    const price = `$${h.priceFrom}–${h.priceTo}`;
+    const walk = h.stationWalkTime || (h._walkMins ? h._walkMins + " min" : "");
+    const deal = h.hasCurrentDeal ? "✦ Deal" : "";
+    const popup = `
+      <div style="min-width:210px">
+        <strong>${h.name}</strong><br>
+        <small>${h.city} • ${h.area}</small><br>
+        <span style="color:#14532d;font-weight:700">${price}/night</span> ${deal}<br>
+        <span style="font-size:0.78rem">🚇 ${walk}</span><br>
+        <div style="margin:6px 0 4px;font-size:0.78rem">
+          ${h.fits ? '✅ Must-Haves match' : '⚠️ Check requirements'} • ${h.stars}★
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
+          ${h.officialUrl ? `<a href="${h.officialUrl}" target="_blank" style="font-size:0.72rem;padding:2px 6px;background:#1f5c46;color:#fff;border-radius:4px;text-decoration:none">Official</a>` : ""}
+          <a href="${h.compareUrl}" target="_blank" style="font-size:0.72rem;padding:2px 6px;border:1px solid #ccc;border-radius:4px;text-decoration:none">Compare</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=${h.lat},${h.lng}" target="_blank" style="font-size:0.72rem;padding:2px 6px;border:1px solid #ccc;border-radius:4px;text-decoration:none">Google Maps</a>
+        </div>
+      </div>`;
+    m.bindPopup(popup);
+    mapMarkers.addLayer(m);
+    added++;
+  });
+
+  mapInstance.addLayer(mapMarkers);
+
+  // Fit bounds
+  if (added > 0) {
+    try {
+      const bounds = mapMarkers.getBounds();
+      if (bounds.isValid()) mapInstance.fitBounds(bounds.pad(0.12));
+    } catch(e){}
+  }
+
+  if (stats) stats.textContent = `${added} pins shown ${mapFitsOnly ? "(Must-Haves only)" : "(all)"} • ${list.length} total filtered`;
+}
+
+function toggleMapFits(){
+  mapFitsOnly = !mapFitsOnly;
+  const btn = document.getElementById("map-fits-btn");
+  if (btn) btn.textContent = mapFitsOnly ? "✓ Only Must-Haves (on)" : "All hotels (off)";
+  if (btn) btn.style.background = mapFitsOnly ? "#2e7d32" : "#555";
+  renderMapView();
+}
+
+/* Enhanced PDF + full export (uses jsPDF if available) */
+function exportSelected(){
+  const selected = [];
+  Object.keys(pickedRooms).forEach(hid => {
+    if (pickedRooms[hid] !== null) {
+      const h = DATA.hotels.find(x => x.id === hid);
+      if (!h) return;
+      const room = h.rooms[pickedRooms[hid]];
+      selected.push({hotel:h, room});
+    }
+  });
+
+  // Also include favorites if any
+  let favs = [];
+  try {
+    const favIds = JSON.parse(localStorage.getItem("kht_favorites") || "[]");
+    favs = DATA.hotels.filter(h => favIds.includes(h.id));
+  } catch(e){}
+
+  if (selected.length === 0 && favs.length === 0) {
+    alert("No rooms selected and no favorites. Select rooms in Hotels tab or star hotels.");
+    return;
+  }
+
+  const dateStr = "Oct 31 – Nov 22, 2026 (22 nights)";
+
+  // Clipboard text
+  let text = "🇰🇷 Korea Hotels Itinerary — Selected + Favorites\n\n";
+  text += `Trip: ${dateStr}\n\n`;
+  if (selected.length) {
+    text += "SELECTED ROOMS:\n";
+    selected.forEach(s => {
+      text += `• ${s.hotel.name} (${s.hotel.city}) — ${s.room.name} ${s.room.price}\n  ${s.hotel.stationWalkTime || ""} | ${s.hotel.why}\n`;
+    });
+  }
+  if (favs.length) {
+    text += "\nFAVORITES:\n";
+    favs.forEach(h => text += `★ ${h.name} (${h.city}) — $${h.priceFrom}–${h.priceTo} | ${h.stationWalkTime || ""}\n`);
+  }
+  text += "\nGenerated from Korea-hotels planner • 2026 data";
+
+  navigator.clipboard.writeText(text).then(() => {}).catch(()=>{});
+
+  // Download CSV
+  let csv = "Type,Hotel,City,Room,Price,Walk,Stars,Fits,Deal,Official\n";
+  selected.forEach(s => {
+    csv += `Selected,"${s.hotel.name}",${s.hotel.city},"${s.room.name}","${s.room.price}","${s.hotel.stationWalkTime||''}",${s.hotel.stars},${s.hotel.fits},${s.hotel.hasCurrentDeal||false},"${s.hotel.officialUrl||''}"\n`;
+  });
+  favs.forEach(h => {
+    csv += `Favorite,"${h.name}",${h.city},"—","$${h.priceFrom}–${h.priceTo}","${h.stationWalkTime||''}",${h.stars},${h.fits},${h.hasCurrentDeal||false},"${h.officialUrl||''}"\n`;
+  });
+  const csvBlob = new Blob([csv], {type:"text/csv"});
+  const csvUrl = URL.createObjectURL(csvBlob);
+  const a1 = document.createElement("a");
+  a1.href = csvUrl; a1.download = "korea-hotels-selected.csv";
+  a1.click(); URL.revokeObjectURL(csvUrl);
+
+  // Download TXT itinerary
+  const txtBlob = new Blob([text], {type:"text/plain"});
+  const txtUrl = URL.createObjectURL(txtBlob);
+  const a2 = document.createElement("a");
+  a2.href = txtUrl; a2.download = "korea-hotels-itinerary.txt";
+  a2.click(); URL.revokeObjectURL(txtUrl);
+
+  // PDF using jsPDF (UMD)
+  try {
+    const { jsPDF } = window.jspdf || {};
+    if (jsPDF) {
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text("South Korea Hotel Itinerary", 20, 18);
+      doc.setFontSize(11);
+      doc.text(`Dates: ${dateStr}`, 20, 26);
+      doc.text("Must-Haves: 1 Queen/King bed • Private bathroom • Near subway/KTX", 20, 32);
+
+      let y = 42;
+      doc.setFontSize(12);
+      if (selected.length) {
+        doc.text("SELECTED ROOMS", 20, y); y += 7;
+        selected.forEach((s, i) => {
+          if (y > 265) { doc.addPage(); y=20; }
+          doc.setFontSize(10);
+          doc.text(`${i+1}. ${s.hotel.name} — ${s.hotel.city}`, 20, y); y+=5;
+          doc.text(`   Room: ${s.room.name}  |  ${s.room.price}  |  ${s.hotel.stationWalkTime || ""}`, 22, y); y+=5;
+          doc.text(`   Fits: ${s.hotel.fits ? "Yes" : "No"}  •  Stars: ${s.hotel.stars}  •  Deal: ${s.hotel.hasCurrentDeal ? "Yes" : "No"}`, 22, y); y+=8;
+        });
+        y += 4;
+      }
+      if (favs.length) {
+        if (y > 255) { doc.addPage(); y=20; }
+        doc.setFontSize(12); doc.text("FAVORITES", 20, y); y += 7;
+        favs.forEach((h, i) => {
+          if (y > 265) { doc.addPage(); y=20; }
+          doc.setFontSize(10);
+          doc.text(`${i+1}. ${h.name} (${h.city})`, 20, y); y+=5;
+          doc.text(`   $${h.priceFrom}–${h.priceTo}/night  |  ${h.stationWalkTime || ""}  |  ${h.stars}★  ${h.fits?"✅":""}`, 22, y); y+=8;
+        });
+      }
+      doc.setFontSize(9);
+      doc.text("Data: 2026 shoulder estimates • Always confirm live rates on official sites.", 20, 285);
+      doc.save("korea-hotels-itinerary.pdf");
+    } else {
+      // Fallback: print dialog for PDF
+      const w = window.open("", "_blank");
+      w.document.write(`<pre style="font-family:monospace;white-space:pre-wrap">${text}</pre>`);
+      w.document.close();
+      w.print();
+    }
+  } catch(e) {
+    alert("PDF generation used fallback print. Clipboard + CSV + TXT downloaded.");
+  }
+
+  toast("Exported: clipboard + CSV + TXT + PDF (itinerary)");
+}
+
+/* === FULL Favorites support (star toggles + dedicated tab) === */
+let favorites = LS.get("favorites", []);
+
+function toggleFavorite(hid, btn) {
+  const idx = favorites.indexOf(hid);
+  if (idx === -1) {
+    favorites.push(hid);
+    if (btn) btn.classList.add("favorited");
+  } else {
+    favorites.splice(idx, 1);
+    if (btn) btn.classList.remove("favorited");
+  }
+  LS.set("favorites", favorites);
+  updateFavCount();
+  // If currently viewing favorites, refresh the grid
+  if (activeView === "favorites") renderFavorites();
+  // Refresh main grid so stars reflect state
+  if (!document.getElementById("view-favorites").classList.contains("hidden")) {
+    // already handled
+  } else {
+    const g = document.getElementById("grid");
+    if (g) renderGrid();
+  }
+}
+
+function updateFavCount() {
+  const c = favorites.length;
+  const small = document.getElementById("fav-count");
+  if (small) small.textContent = c;
+  const big = document.getElementById("fav-count-big");
+  if (big) big.textContent = c + " saved";
+}
+
+function clearFavorites() {
+  if (!confirm("Clear all favorites?")) return;
+  favorites = [];
+  LS.set("favorites", favorites);
+  updateFavCount();
+  renderFavorites();
+  renderGrid();
+}
+
+function renderFavorites() {
+  const container = document.getElementById("favorites-grid");
+  if (!container) return;
+  const favHotels = DATA.hotels.filter(h => favorites.includes(h.id));
+  updateFavCount();
+  if (favHotels.length === 0) {
+    container.innerHTML = `<p style="padding:20px;color:#666">No favorites yet. Click the ★ on any hotel card to save it here.</p>`;
+    return;
+  }
+  // Reuse card renderer (it already includes the star button logic)
+  container.innerHTML = favHotels.map(card).join("");
+  // Re-attach room click handlers for favorites view
+  container.querySelectorAll(".room-row").forEach(row => {
+    row.onclick = () => {
+      const hid = row.dataset.hid, ridx = parseInt(row.dataset.ridx);
+      pickedRooms[hid] = (pickedRooms[hid] === ridx) ? null : ridx;
+      LS.set("rooms", pickedRooms);
+      const h = DATA.hotels.find(x => x.id === hid);
+      const room = h.rooms[ridx];
+      toast(pickedRooms[hid] === ridx ? `Selected: ${h.name} — ${room.name}` : "Deselected");
+      renderFavorites();
+      renderGrid();
+    };
+  });
+}
+
+/* === FULL Best of each city (top 3 fits by value) === */
+function valueScore(h) {
+  if (!h.fits) return 9999;
+  const avgP = (h.priceFrom + h.priceTo) / 2;
+  const walk = h._walkMins || 99;
+  // Lower is better: price + walk penalty + star bonus
+  return (avgP * 0.6) + (walk * 3) - (h.stars * 8);
+}
+
+function renderBestOf() {
+  const container = document.getElementById("best-of-section");
+  if (!container) return;
+  const allCities = Array.from(new Set(DATA.hotels.map(h => h.city))).sort();
+  let html = `<div style="margin:16px 0 8px"><h3 style="margin:0 0 8px;font-size:1.05rem">🏆 Best of each city (top 3 must-haves by value)</h3>`;
+  html += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">`;
+  allCities.forEach(city => {
+    const fits = DATA.hotels.filter(h => h.city === city && h.fits);
+    const top = fits.sort((a,b) => valueScore(a) - valueScore(b)).slice(0,3);
+    if (!top.length) return;
+    html += `<div style="background:#fff;border:1px solid #d7e8dc;border-radius:12px;padding:10px 12px;box-shadow:var(--shadow)">
+      <div style="font-weight:700;margin-bottom:6px;color:#1f5c46">${city}</div>`;
+    top.forEach((h, idx) => {
+      const avg = Math.round((h.priceFrom + h.priceTo)/2);
+      html += `<div onclick="selectBestOf('${h.id}','${city}')" style="cursor:pointer;padding:4px 6px;margin:2px 0;border-radius:6px;border:1px solid #eee;font-size:.82rem;display:flex;justify-content:space-between;align-items:center">
+        <span><b>${h.name}</b> <span style="color:#666">· $${avg}</span></span>
+        <span style="font-size:.72rem;background:#e9f7ef;color:#14532d;padding:1px 5px;border-radius:4px">${h.stars}★ ${h._walkMins || "?"}m</span>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</div></div>`;
+  container.innerHTML = html;
+}
+
+function selectBestOf(hid, city) {
+  activeCity = city;
+  // auto-apply fits filter
+  activeFilter = "fits";
+  document.querySelectorAll(".btn").forEach(b => b.classList.remove("active"));
+  const fitsBtn = document.querySelector('.btn[data-filter="fits"]');
+  if (fitsBtn) fitsBtn.classList.add("active");
+  renderTabs();
+  renderGrid();
+  // scroll to the card
+  setTimeout(() => {
+    const card = document.querySelector(`article.hotel[data-hid="${hid}"]`);
+    if (card) {
+      card.scrollIntoView({behavior:"smooth", block:"center"});
+      card.style.transition = "box-shadow .3s";
+      card.style.boxShadow = "0 0 0 3px #b03a2e";
+      setTimeout(() => card.style.boxShadow = "var(--shadow)", 1600);
+    }
+  }, 120);
+}
+
+/* Init enhancements */
+const _origInit = init;
+init = function() {
+  _origInit();
+  // Add Map tab click handler (already in showView)
+  // Persist favorites count badge if element exists
+  const favCount = document.getElementById("fav-count");
+  if (favCount) favCount.textContent = favorites.length || 0;
+  // Keyboard "m" for map
+  document.addEventListener("keydown", function(e){
+    if (e.key.toLowerCase()==="m" && document.activeElement.tagName==="BODY") {
+      showView("map");
+    }
+  });
+  // expose for console if needed
+  window.KH_renderMap = renderMapView;
+};
 </script>
 </body>
 </html>
