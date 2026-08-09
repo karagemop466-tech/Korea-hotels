@@ -10,7 +10,7 @@
 
 This is a **static information website** (no login, no backend) designed to help you:
 
-- Browse 29 carefully selected 3–5 star hotels
+- Browse 24 carefully selected 3–5 star hotels (verified against official sources 2026-08-09)
 - Compare prices, room types, and amenities
 - Filter by budget, bed type, laundry, and "fits my needs"
 - See official booking links and clear rules
@@ -66,9 +66,13 @@ This ensures we never compromise on our core needs while still being able to com
 |------------|--------|----------|
 | **Seoul**  | 8      | Central locations (Myeongdong, Insadong) |
 | **Busan**  | 7      | Haeundae beach + Station area |
-| **Cheonan**| 7      | Excellent KTX access, great value |
+| **Cheonan**| 2      | Ramada Encore (Bongmyeong Stn) + Brown Dot (Cheonan Stn) — other candidates failed the walk-to-station rule (see `data/excluded.json`) |
 | **Daejeon**| 7      | Good transport hub + hot springs area |
 | **Gyeongju** | 0 | Excluded from the must-have shortlist because the reviewed properties do not pass the near-transit requirement |
+
+> **Official-source verification (2026-08-09):** every published hotel was re-checked against
+> its official hotel/chain page. See `guide/verification-report-2026-08-09.md` for the full
+> per-hotel evidence and `data/excluded.json` for the 5 Cheonan records removed from the list.
 
 All hotels include:
 - Realistic price ranges (2026 estimates)
@@ -105,8 +109,9 @@ Your live site will be available at:
 Korea-hotels/
 ├── index.html              ← The interactive planner (open this)
 ├── data/
-│   ├── hotels.json         ← All hotel data (29 hotels)
-│   └── itinerary.json      ← Trip dates and cities
+│   ├── hotels.json         ← All hotel data (24 hotels)
+│   ├── itinerary.json      ← Trip dates and cities
+│   └── excluded.json       ← Records removed after official-source verification
 ├── guide/                  ← Detailed markdown guides
 ├── build.py                ← Regenerates index.html from data
 ├── validate.py             ← Checks data quality

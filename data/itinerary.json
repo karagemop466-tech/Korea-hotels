@@ -51,7 +51,7 @@
         "Cheonan-Asan KTX Station area"
       ],
       "hotelChoice": null,
-      "note": "Recommended third city: direct on Seoul–Busan KTX corridor. Excellent cost + transport balance. 5 hotels available in data/hotels.json."
+      "note": "Recommended third city: direct on Seoul–Busan KTX corridor. Excellent cost + transport balance. 2 hotels available in data/hotels.json (strict must-have shortlist after 2026-08-09 official-source verification; see data/excluded.json for 5 Cheonan records that failed the walk-to-station rule)."
     },
     {
       "city": "Daejeon",
@@ -62,7 +62,7 @@
         "Yuseong / Government Complex"
       ],
       "hotelChoice": null,
-      "note": "Strong alternative third city: larger city with hot springs and more dining options. 6 hotels available in data/hotels.json."
+      "note": "Strong alternative third city: larger city with hot springs and more dining options. 7 hotels available in data/hotels.json (all verified against official sources 2026-08-09)."
     }
   ]
 }
