@@ -370,6 +370,8 @@
 
 <script>
 const DATA = __DATA__;
+// Display helper: nightly range string for a hotel record (single source of truth = priceFrom/priceTo).
+function priceRange(h){return '$'+h.priceFrom+'–'+h.priceTo;}
 
 const TIERS={budget:"Budget",mid:"Mid-range",premium:"Premium"};
 let activeCity="Seoul", activeFilter="all", activeView="hotels";
@@ -416,7 +418,7 @@ function renderDecision(){
     if(priority==='location') return -station*3+h.stars*5; return h.stars*22-price*.12-station*.8+(h.fits?35:0);};
   hotels.sort((a,b)=>score(b)-score(a));
   if(!hotels.length){out.innerHTML='<strong>No matches.</strong> Relax the price cap or untick strict room rules — do not compromise on a non-negotiable without checking the room details.';return;}
-  const picks=hotels.slice(0,3), names=picks.map((h,i)=>`<span><b>${i+1}. ${h.name}</b> (${h.price}/night · ${h.stars}★)</span>`).join(' &nbsp;·&nbsp; ');
+  const picks=hotels.slice(0,3), names=picks.map((h,i)=>`<span><b>${i+1}. ${h.name}</b> (${priceRange(h)}/night · ${h.stars}★)</span>`).join(' &nbsp;·&nbsp; ');
   const leg=DATA.itinerary.legs.find(l=>l.city===activeCity);
   out.innerHTML=`<strong>Shortlist for ${activeCity}:</strong> ${names}<div class="route-note">Best practice: book the #1 refundable room now, keep #2 as a fallback, and re-check the official rate 30–45 days before arrival. ${leg?`Your current plan gives ${leg.nights} nights here.`:''} Compare the total for the whole stay, not just the nightly headline price.</div>`;
 }
@@ -468,10 +470,12 @@ function card(h){
       <div class="stars">${"★".repeat(h.stars)}${"☆".repeat(5-h.stars)}</div>
       ${mustHaveScore}
       <div class="area">📍 ${h.area} — ${h.neighborhood}</div>
-      ${h.stationWalkTime ? `<div style="font-size:0.75rem;color:#666;margin-top:2px;">🚇 ${h.stationWalkTime} to station</div>` : ''}
-      <div class="price">${h.price}/night <span>· room for two (est.)</span></div>
+      ${h.transitException
+        ? `<div style="font-size:0.75rem;color:#b26a00;margin-top:2px;">🚕 <b>Transit exception</b> — ${h.stationWalkTime}</div>`
+        : (h.stationWalkTime ? `<div style="font-size:0.75rem;color:#666;margin-top:2px;">🚇 ${h.stationWalkTime} to station</div>` : '')}
+      <div class="price">${priceRange(h)}/night <span>· room for two (est.)</span></div>
       <div class="dir-comp">
-        <span class="dc">Direct ≈${h.price}</span>
+        <span class="dc">Direct ≈$${h.priceFrom}+</span>
         <a class="dc ota" href="${h.compareUrl}" target="_blank" rel="noopener">Compare OTA →</a>
         <a class="dc" href="https://www.google.com/maps/search/?api=1&query=${h.lat},${h.lng}" target="_blank" rel="noopener">🗺 Map</a>
       </div>
@@ -558,7 +562,7 @@ function renderBudget(){
   const rows=DATA.itinerary.legs.map(leg=>{
     const hotels=DATA.hotels.filter(h=>h.city===leg.city);
     const sel=LS.get('hotel_'+leg.city,'');
-    const options=`<option value="">— choose a hotel —</option>`+hotels.map(h=>`<option value="${h.id}" ${sel===h.id?'selected':''}>${h.name} (${h.price}/night)</option>`).join("");
+    const options=`<option value="">— choose a hotel —</option>`+hotels.map(h=>`<option value="${h.id}" ${sel===h.id?'selected':''}>${h.name} (${priceRange(h)}/night)</option>`).join("");
     return `<div class="calc-row">
       <div class="city">${leg.city}</div>
       <select data-city="${leg.city}">${options}</select>

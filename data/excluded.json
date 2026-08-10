@@ -1,423 +1,573 @@
 {
-  "_readme": "Records removed from the published must-have shortlist after the 2026-08-09 official-source verification (see guide/verification-report-2026-08-09.md). Each fails at least one non-negotiable requirement (near-public-transport walk rule and/or an unverifiable official source). Kept here for transparency — re-add only after re-verifying the exact property/room and documenting a taxi plan if the station rule is intentionally relaxed (see guide/verification-checklist.md).",
-  "excludedHotels": [
+ "_readme": "Records removed from the published must-have shortlist after the 2026-08-09 official-source verification (see guide/verification-report-2026-08-09.md). Each fails at least one non-negotiable requirement (near-public-transport walk rule and/or an unverifiable official source). Kept here for transparency — re-add only after re-verifying the exact property/room and documenting a taxi plan if the station rule is intentionally relaxed (see guide/verification-checklist.md).",
+ "excludedHotels": [
+  {
+   "id": "cheonan-shilla-stay",
+   "city": "Cheonan",
+   "name": "Shilla Stay Cheonan",
+   "tier": "mid",
+   "stars": 4,
+   "area": "Cheonan Station / Bus Terminal",
+   "neighborhood": "Central Cheonan near Cheonan Station and bus terminal; easy access to KTX via short taxi or subway",
+   "priceFrom": 65,
+   "priceTo": 95,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "Check-in from 15:00; check-out by 11:00.",
+    "Free Wi-Fi throughout. Free parking available.",
+    "Children welcome; standard Shilla Stay policies apply."
+   ],
+   "rooms": [
     {
-      "id": "cheonan-shilla-stay",
-      "city": "Cheonan",
-      "name": "Shilla Stay Cheonan",
-      "tier": "mid",
-      "stars": 4,
-      "area": "Cheonan Station / Bus Terminal",
-      "neighborhood": "Central Cheonan near Cheonan Station and bus terminal; easy access to KTX via short taxi or subway",
-      "priceFrom": 65,
-      "priceTo": 95,
-      "currency": "USD",
-      "checkIn": "15:00",
-      "checkOut": "11:00",
-      "policies": [
-        "Check-in from 15:00; check-out by 11:00.",
-        "Free Wi-Fi throughout. Free parking available.",
-        "Children welcome; standard Shilla Stay policies apply."
-      ],
-      "rooms": [
-        {
-          "name": "Standard Double",
-          "price": "$65–80/night",
-          "note": "Most popular entry level",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        },
-        {
-          "name": "Deluxe",
-          "price": "$75–95/night",
-          "note": "Larger room, popular upgrade",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        }
-      ],
-      "promos": [
-        "Shilla Rewards membership — earn points (3% room / 1% F&B) across Shilla Stay properties.",
-        "Often has member-only rates and breakfast packages on the official site.",
-        "Current: ~$56–72 near station (excellent value)",
-        "Current ~$56–72 (best value near KTX)",
-        "Current ~$56–72 (KTX convenience)"
-      ],
-      "amenities": [
-        "Fitness center",
-        "Restaurant",
-        "Bar / lounge",
-        "Free Wi-Fi",
-        "Laundry",
-        "Business center"
-      ],
-      "officialUrl": "https://www.shillastay.com/cheonan/main.do?lang=en",
-      "officialLabel": "Official site (shillastay.com)",
-      "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/Shilla-Stay-Cheonan",
-      "compareLabel": "Compare rates (KAYAK)",
-      "why": "Best overall value and reliability — trusted Shilla brand at a much lower price than Seoul or Busan.",
-      "highlights": [
-        "Excellent reviews (8.3–8.4/10)",
-        "Gym + restaurant on site",
-        "Very convenient central location"
-      ],
-      "fits": false,
-      "fitReason": "Queen/Double · Cheonan Station ~5–10 min walk or short taxi",
-      "lat": 36.8257,
-      "lng": 127.1433,
-      "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
-      "hasOnSiteLaundry": true,
-      "stationWalkTime": "8 min walk to Cheonan Station",
-      "_walkMins": 8,
-      "_bedSizes": [
-        "queen"
-      ],
-      "hasCurrentDeal": true,
-      "excludedOn": "2026-08-09",
-      "exclusionReasons": [
-        "Overstated transit access: record claimed \"~8 min walk to Cheonan Station\". Actual straight-line distance is ~1.9 km (≈25-min walk); Cheonan-Asan KTX is a 15-min drive. Fails the 1–15 min walk rule.",
-        "Property itself is fully verified (177 Dongseo-daero, Seobuk-gu; 309 rooms; coin laundry; opened property page on shillahotels.com)."
-      ],
-      "verificationEvidence": [
-        "Official Shilla page: https://www.shillahotels.com/en/shillastay/cheonan/index.do",
-        "Tripadvisor location grade 40/100; KAYAK listing confirms 177 Dongseo-daero address."
-      ],
-      "verificationNote": "Best quality hotel in Cheonan, but the must-have list only covers walk-to-station properties. Re-add only with a documented taxi plan (same rule as the Gyeongju exception)."
+     "name": "Standard Double",
+     "price": "$65–80/night",
+     "note": "Most popular entry level",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
     },
     {
-      "id": "cheonan-on-city",
-      "city": "Cheonan",
-      "name": "ON City Hotel",
-      "tier": "mid",
-      "stars": 3,
-      "area": "Cheonan Station area",
-      "neighborhood": "Near Cheonan Station; good access to transport and local amenities",
-      "priceFrom": 55,
-      "priceTo": 80,
-      "currency": "USD",
-      "checkIn": "15:00",
-      "checkOut": "11:00",
-      "policies": [
-        "Check-in from 15:00; check-out by 11:00.",
-        "Free Wi-Fi. Fitness center available."
-      ],
-      "rooms": [
-        {
-          "name": "Standard Double",
-          "price": "$55–68/night",
-          "note": "Entry level, clean",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        },
-        {
-          "name": "Deluxe",
-          "price": "$65–80/night",
-          "note": "More space",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        }
-      ],
-      "promos": [
-        "Frequently listed as one of the best value 3-star options in Cheonan."
-      ],
-      "amenities": [
-        "Fitness center",
-        "Free Wi-Fi",
-        "Restaurant options nearby",
-        "Laundry facilities"
-      ],
-      "officialUrl": "https://www.oncityhotel.com",
-      "officialLabel": "Book via OTA (Trip.com / Booking.com)",
-      "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/ON-City-Hotel",
-      "compareLabel": "Compare rates (KAYAK)",
-      "why": "Excellent budget-mid value with fitness amenities and strong guest feedback.",
-      "highlights": [
-        "Fitness center",
-        "Very affordable",
-        "Good location near station"
-      ],
-      "fits": false,
-      "fitReason": "Double/Queen · Cheonan Station ~5–8 min",
-      "lat": 36.82,
-      "lng": 127.14,
-      "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
-      "hasOnSiteLaundry": true,
-      "stationWalkTime": "7 min walk to Cheonan Station",
-      "_walkMins": 7,
-      "_bedSizes": [
-        "queen"
-      ],
-      "hasCurrentDeal": true,
-      "excludedOn": "2026-08-09",
-      "exclusionReasons": [
-        "Not near public transport: located in Buldang-dong (105, Buldang 4-ro, Seobuk-gu), ~3.5 km from Cheonan-Asan KTX and ~3 km from Cheonan Station; nearest rail access requires a taxi."
-      ],
-      "verificationEvidence": [
-        "VISITKOREA official listing: \"just a 5-minute drive away from the KTX Cheonan Asan Station\", address 105 Buldang 4-ro, Seobuk-gu — https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=63352"
-      ],
-      "verificationNote": "Record claimed \"7 min walk to Cheonan Station\" — that is incorrect."
-    },
-    {
-      "id": "cheonan-sono-belle",
-      "city": "Cheonan",
-      "name": "Sono Belle Cheonan",
-      "tier": "mid",
-      "stars": 4,
-      "area": "Cheonan area",
-      "neighborhood": "Resort-style property with good access to KTX and city center",
-      "priceFrom": 80,
-      "priceTo": 120,
-      "currency": "USD",
-      "checkIn": "15:00",
-      "checkOut": "11:00",
-      "policies": [
-        "Check-in from 15:00; check-out by 11:00.",
-        "Free Wi-Fi. Seasonal pool available."
-      ],
-      "rooms": [
-        {
-          "name": "Deluxe",
-          "price": "$80–100/night",
-          "note": "Standard resort room",
-          "bed": "queen",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "oneBedOnly": true,
-          "privateBathroom": true,
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)"
-        },
-        {
-          "name": "Suite / Superior",
-          "price": "$100–120/night",
-          "note": "Larger with better views",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        }
-      ],
-      "promos": [
-        "Higher-end option with resort amenities at still-reasonable prices."
-      ],
-      "amenities": [
-        "Pool (seasonal)",
-        "Spa",
-        "Restaurant",
-        "Gym",
-        "Free Wi-Fi",
-        "Laundry facilities"
-      ],
-      "officialUrl": "https://www.sonohotelsresorts.com",
-      "officialLabel": "Book via OTA",
-      "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/Sono-Belle-Cheonan",
-      "compareLabel": "Compare rates (KAYAK)",
-      "why": "Best resort-style pick for a more relaxing 6-night stay while staying cost-effective.",
-      "highlights": [
-        "Pool & spa",
-        "Higher comfort level",
-        "Good value for 4-star"
-      ],
-      "fits": false,
-      "fitReason": "Queen · ~15–20 min to Cheonan-Asan KTX",
-      "lat": 36.83,
-      "lng": 127.16,
-      "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
-      "hasOnSiteLaundry": true,
-      "stationWalkTime": "15 min to Cheonan-Asan KTX",
-      "_walkMins": 15,
-      "_bedSizes": [
-        "queen"
-      ],
-      "hasCurrentDeal": true,
-      "excludedOn": "2026-08-09",
-      "exclusionReasons": [
-        "Not near public transport: a water-park resort (Tedin/Ocean Adventure) at 200 Jonghaphyuyangji-ro, Seongnam-myeon — roughly 11 km from Cheonan-Asan KTX and far from any subway/rail station. Record claimed \"~15 min to Cheonan-Asan KTX\" which is actually a 20+ min drive, not a walk.",
-        "Star level: listed 4★ in this dataset; rated 3★ on major OTAs."
-      ],
-      "verificationEvidence": [
-        "VISITKOREA official listing (Sono Belle Cheonan Ocean Adventure), address 200 Jonghaphyuyangji-ro — https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=89151",
-        "Official chain site operates: https://www.sonohotelsresorts.com"
-      ],
-      "verificationNote": "Fine resort for a car-based stay; does not meet the near-transit rule."
-    },
-    {
-      "id": "cheonan-best-western-asan",
-      "city": "Cheonan",
-      "name": "Best Western Asan Hotel",
-      "tier": "mid",
-      "stars": 3,
-      "area": "Cheonan-Asan Station area",
-      "neighborhood": "Very close to Cheonan-Asan KTX station — ideal for rail travelers",
-      "priceFrom": 70,
-      "priceTo": 100,
-      "currency": "USD",
-      "checkIn": "15:00",
-      "checkOut": "11:00",
-      "policies": [
-        "Check-in from 15:00; check-out by 11:00.",
-        "Free Wi-Fi and parking."
-      ],
-      "rooms": [
-        {
-          "name": "Standard Double",
-          "price": "$70–85/night",
-          "note": "Clean chain standard",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        },
-        {
-          "name": "Deluxe",
-          "price": "$80–100/night",
-          "note": "Larger room",
-          "bed": "queen",
-          "oneBed": true,
-          "bedNote": "Single queen bed (not two beds pushed together)",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "privateBathroom": true,
-          "oneBedOnly": true
-        }
-      ],
-      "promos": [
-        "Best Western Rewards loyalty program."
-      ],
-      "amenities": [
-        "Restaurant",
-        "Free Wi-Fi",
-        "Parking",
-        "Business center",
-        "Laundry facilities"
-      ],
-      "officialUrl": "https://www.bestwestern.com/en_US/book/hotel-details.cheonan-south-korea.html",
-      "officialLabel": "Official site (bestwestern.com)",
-      "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/Best-Western-Asan-Hotel",
-      "compareLabel": "Compare rates (KAYAK)",
-      "why": "Best location for pure KTX convenience — right by the high-speed station.",
-      "highlights": [
-        "Closest to Cheonan-Asan KTX",
-        "Reliable international chain",
-        "Parking included"
-      ],
-      "fits": false,
-      "fitReason": "Double/Queen · Cheonan-Asan KTX ~5–8 min walk",
-      "lat": 36.84,
-      "lng": 127.13,
-      "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
-      "hasOnSiteLaundry": true,
-      "stationWalkTime": "5 min walk to Cheonan-Asan KTX",
-      "_walkMins": 5,
-      "_bedSizes": [
-        "queen"
-      ],
-      "hasCurrentDeal": true,
-      "excludedOn": "2026-08-09",
-      "exclusionReasons": [
-        "Not near public transport: located at 32 Onsaem-ro, Tangjeong-myeon, Asan — ~6 km (3.7 mi) from Cheonan-Asan KTX Station. Record claimed \"5 min walk to Cheonan-Asan KTX\" which is false; it is a 10–15 min drive.",
-        "officialUrl on bestwestern.com returns an error page (no such property page).",
-        "Property now trades as \"SureStay Plus Hotel by Best Western Asan\"."
-      ],
-      "verificationEvidence": [
-        "Booking.com: \"Located in Asan, 3.7 miles from Cheonan Asan Train Station\" — https://www.booking.com/hotel/kr/surestay-plus-by-best-western.html"
-      ],
-      "verificationNote": "Wrong brand page and wrong proximity claim."
-    },
-    {
-      "id": "cheonan-mains",
-      "city": "Cheonan",
-      "name": "The Mains Hotel",
-      "tier": "mid",
-      "stars": 3,
-      "area": "Central Cheonan",
-      "neighborhood": "Good central location with restaurant",
-      "priceFrom": 55,
-      "priceTo": 80,
-      "currency": "USD",
-      "checkIn": "15:00",
-      "checkOut": "11:00",
-      "policies": [
-        "Check-in from 15:00; check-out by 11:00.",
-        "Free Wi-Fi."
-      ],
-      "rooms": [
-        {
-          "name": "Standard Double",
-          "price": "$55–72/night",
-          "note": "Clean with restaurant on site",
-          "bed": "queen",
-          "bedType": "queen",
-          "bedSize": "Queen (approx 150x200cm)",
-          "oneBed": true,
-          "oneBedOnly": true,
-          "privateBathroom": true,
-          "bedNote": "Single queen bed (not two beds pushed together)"
-        }
-      ],
-      "promos": [
-        "Has on-site restaurant."
-      ],
-      "amenities": [
-        "Restaurant",
-        "Free Wi-Fi",
-        "Laundry facilities"
-      ],
-      "hasOnSiteLaundry": true,
-      "officialUrl": "https://www.shillahotels.com",
-      "officialLabel": "Official site (Shilla)",
-      "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/The-Mains-Hotel",
-      "compareLabel": "Compare rates (KAYAK)",
-      "why": "Good mid-range value with restaurant.",
-      "highlights": [
-        "On-site restaurant",
-        "Solid reviews"
-      ],
-      "fits": false,
-      "fitReason": "Double · Central Cheonan",
-      "lat": 36.82,
-      "lng": 127.15,
-      "stationWalkTime": "8 min walk to station",
-      "_walkMins": 8,
-      "_bedSizes": [
-        "queen"
-      ],
-      "hasCurrentDeal": true,
-      "excludedOn": "2026-08-09",
-      "exclusionReasons": [
-        "Not near public transport: 34 Cheongsu 11-ro, Dongnam-gu — ~2.7 km straight-line from Cheonan Station (~30+ min walk); no rail station within a 15-min walk.",
-        "officialUrl pointed to shillahotels.com, which is unrelated — no official site exists; bookable only via OTAs."
-      ],
-      "verificationEvidence": [
-        "Booking.com / Tripadvisor address and distances — https://www.booking.com/hotel/kr/the-mains.html"
-      ],
-      "verificationNote": "Wrong official link (Shilla domain) and wrong proximity claim removed."
+     "name": "Deluxe",
+     "price": "$75–95/night",
+     "note": "Larger room, popular upgrade",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
     }
-  ],
-  "lastUpdated": "2026-08-09"
+   ],
+   "promos": [
+    "Shilla Rewards membership — earn points (3% room / 1% F&B) across Shilla Stay properties.",
+    "Often has member-only rates and breakfast packages on the official site.",
+    "Current: ~$56–72 near station (excellent value)",
+    "Current ~$56–72 (best value near KTX)",
+    "Current ~$56–72 (KTX convenience)"
+   ],
+   "amenities": [
+    "Fitness center",
+    "Restaurant",
+    "Bar / lounge",
+    "Free Wi-Fi",
+    "Laundry",
+    "Business center"
+   ],
+   "officialUrl": "https://www.shillastay.com/cheonan/main.do?lang=en",
+   "officialLabel": "Official site (shillastay.com)",
+   "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/Shilla-Stay-Cheonan",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Best overall value and reliability — trusted Shilla brand at a much lower price than Seoul or Busan.",
+   "highlights": [
+    "Excellent reviews (8.3–8.4/10)",
+    "Gym + restaurant on site",
+    "Very convenient central location"
+   ],
+   "fits": false,
+   "fitReason": "Queen/Double · Cheonan Station ~5–10 min walk or short taxi",
+   "lat": 36.8257,
+   "lng": 127.1433,
+   "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
+   "hasOnSiteLaundry": true,
+   "stationWalkTime": "8 min walk to Cheonan Station",
+   "_walkMins": 8,
+   "_bedSizes": [
+    "queen"
+   ],
+   "hasCurrentDeal": true,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "Overstated transit access: record claimed \"~8 min walk to Cheonan Station\". Actual straight-line distance is ~1.9 km (≈25-min walk); Cheonan-Asan KTX is a 15-min drive. Fails the 1–15 min walk rule.",
+    "Property itself is fully verified (177 Dongseo-daero, Seobuk-gu; 309 rooms; coin laundry; opened property page on shillahotels.com)."
+   ],
+   "verificationEvidence": [
+    "Official Shilla page: https://www.shillahotels.com/en/shillastay/cheonan/index.do",
+    "Tripadvisor location grade 40/100; KAYAK listing confirms 177 Dongseo-daero address."
+   ],
+   "verificationNote": "Best quality hotel in Cheonan, but the must-have list only covers walk-to-station properties. Re-add only with a documented taxi plan (same rule as the Gyeongju exception)."
+  },
+  {
+   "id": "cheonan-on-city",
+   "city": "Cheonan",
+   "name": "ON City Hotel",
+   "tier": "mid",
+   "stars": 3,
+   "area": "Cheonan Station area",
+   "neighborhood": "Near Cheonan Station; good access to transport and local amenities",
+   "priceFrom": 55,
+   "priceTo": 80,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "Check-in from 15:00; check-out by 11:00.",
+    "Free Wi-Fi. Fitness center available."
+   ],
+   "rooms": [
+    {
+     "name": "Standard Double",
+     "price": "$55–68/night",
+     "note": "Entry level, clean",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
+    },
+    {
+     "name": "Deluxe",
+     "price": "$65–80/night",
+     "note": "More space",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
+    }
+   ],
+   "promos": [
+    "Frequently listed as one of the best value 3-star options in Cheonan."
+   ],
+   "amenities": [
+    "Fitness center",
+    "Free Wi-Fi",
+    "Restaurant options nearby",
+    "Laundry facilities"
+   ],
+   "officialUrl": "https://www.oncityhotel.com",
+   "officialLabel": "Book via OTA (Trip.com / Booking.com)",
+   "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/ON-City-Hotel",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Excellent budget-mid value with fitness amenities and strong guest feedback.",
+   "highlights": [
+    "Fitness center",
+    "Very affordable",
+    "Good location near station"
+   ],
+   "fits": false,
+   "fitReason": "Double/Queen · Cheonan Station ~5–8 min",
+   "lat": 36.82,
+   "lng": 127.14,
+   "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
+   "hasOnSiteLaundry": true,
+   "stationWalkTime": "7 min walk to Cheonan Station",
+   "_walkMins": 7,
+   "_bedSizes": [
+    "queen"
+   ],
+   "hasCurrentDeal": true,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "Not near public transport: located in Buldang-dong (105, Buldang 4-ro, Seobuk-gu), ~3.5 km from Cheonan-Asan KTX and ~3 km from Cheonan Station; nearest rail access requires a taxi."
+   ],
+   "verificationEvidence": [
+    "VISITKOREA official listing: \"just a 5-minute drive away from the KTX Cheonan Asan Station\", address 105 Buldang 4-ro, Seobuk-gu — https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=63352"
+   ],
+   "verificationNote": "Record claimed \"7 min walk to Cheonan Station\" — that is incorrect."
+  },
+  {
+   "id": "cheonan-sono-belle",
+   "city": "Cheonan",
+   "name": "Sono Belle Cheonan",
+   "tier": "mid",
+   "stars": 4,
+   "area": "Cheonan area",
+   "neighborhood": "Resort-style property with good access to KTX and city center",
+   "priceFrom": 80,
+   "priceTo": 120,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "Check-in from 15:00; check-out by 11:00.",
+    "Free Wi-Fi. Seasonal pool available."
+   ],
+   "rooms": [
+    {
+     "name": "Deluxe",
+     "price": "$80–100/night",
+     "note": "Standard resort room",
+     "bed": "queen",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "oneBedOnly": true,
+     "privateBathroom": true,
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)"
+    },
+    {
+     "name": "Suite / Superior",
+     "price": "$100–120/night",
+     "note": "Larger with better views",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
+    }
+   ],
+   "promos": [
+    "Higher-end option with resort amenities at still-reasonable prices."
+   ],
+   "amenities": [
+    "Pool (seasonal)",
+    "Spa",
+    "Restaurant",
+    "Gym",
+    "Free Wi-Fi",
+    "Laundry facilities"
+   ],
+   "officialUrl": "https://www.sonohotelsresorts.com",
+   "officialLabel": "Book via OTA",
+   "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/Sono-Belle-Cheonan",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Best resort-style pick for a more relaxing 6-night stay while staying cost-effective.",
+   "highlights": [
+    "Pool & spa",
+    "Higher comfort level",
+    "Good value for 4-star"
+   ],
+   "fits": false,
+   "fitReason": "Queen · ~15–20 min to Cheonan-Asan KTX",
+   "lat": 36.83,
+   "lng": 127.16,
+   "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
+   "hasOnSiteLaundry": true,
+   "stationWalkTime": "15 min to Cheonan-Asan KTX",
+   "_walkMins": 15,
+   "_bedSizes": [
+    "queen"
+   ],
+   "hasCurrentDeal": true,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "Not near public transport: a water-park resort (Tedin/Ocean Adventure) at 200 Jonghaphyuyangji-ro, Seongnam-myeon — roughly 11 km from Cheonan-Asan KTX and far from any subway/rail station. Record claimed \"~15 min to Cheonan-Asan KTX\" which is actually a 20+ min drive, not a walk.",
+    "Star level: listed 4★ in this dataset; rated 3★ on major OTAs."
+   ],
+   "verificationEvidence": [
+    "VISITKOREA official listing (Sono Belle Cheonan Ocean Adventure), address 200 Jonghaphyuyangji-ro — https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=89151",
+    "Official chain site operates: https://www.sonohotelsresorts.com"
+   ],
+   "verificationNote": "Fine resort for a car-based stay; does not meet the near-transit rule."
+  },
+  {
+   "id": "cheonan-best-western-asan",
+   "city": "Cheonan",
+   "name": "Best Western Asan Hotel",
+   "tier": "mid",
+   "stars": 3,
+   "area": "Cheonan-Asan Station area",
+   "neighborhood": "Very close to Cheonan-Asan KTX station — ideal for rail travelers",
+   "priceFrom": 70,
+   "priceTo": 100,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "Check-in from 15:00; check-out by 11:00.",
+    "Free Wi-Fi and parking."
+   ],
+   "rooms": [
+    {
+     "name": "Standard Double",
+     "price": "$70–85/night",
+     "note": "Clean chain standard",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
+    },
+    {
+     "name": "Deluxe",
+     "price": "$80–100/night",
+     "note": "Larger room",
+     "bed": "queen",
+     "oneBed": true,
+     "bedNote": "Single queen bed (not two beds pushed together)",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "privateBathroom": true,
+     "oneBedOnly": true
+    }
+   ],
+   "promos": [
+    "Best Western Rewards loyalty program."
+   ],
+   "amenities": [
+    "Restaurant",
+    "Free Wi-Fi",
+    "Parking",
+    "Business center",
+    "Laundry facilities"
+   ],
+   "officialUrl": "https://www.bestwestern.com/en_US/book/hotel-details.cheonan-south-korea.html",
+   "officialLabel": "Official site (bestwestern.com)",
+   "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/Best-Western-Asan-Hotel",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Best location for pure KTX convenience — right by the high-speed station.",
+   "highlights": [
+    "Closest to Cheonan-Asan KTX",
+    "Reliable international chain",
+    "Parking included"
+   ],
+   "fits": false,
+   "fitReason": "Double/Queen · Cheonan-Asan KTX ~5–8 min walk",
+   "lat": 36.84,
+   "lng": 127.13,
+   "priceNote": "Prices are typical 2026 estimates for standard double/queen. Check official site or OTA for live rates on your dates.",
+   "hasOnSiteLaundry": true,
+   "stationWalkTime": "5 min walk to Cheonan-Asan KTX",
+   "_walkMins": 5,
+   "_bedSizes": [
+    "queen"
+   ],
+   "hasCurrentDeal": true,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "Not near public transport: located at 32 Onsaem-ro, Tangjeong-myeon, Asan — ~6 km (3.7 mi) from Cheonan-Asan KTX Station. Record claimed \"5 min walk to Cheonan-Asan KTX\" which is false; it is a 10–15 min drive.",
+    "officialUrl on bestwestern.com returns an error page (no such property page).",
+    "Property now trades as \"SureStay Plus Hotel by Best Western Asan\"."
+   ],
+   "verificationEvidence": [
+    "Booking.com: \"Located in Asan, 3.7 miles from Cheonan Asan Train Station\" — https://www.booking.com/hotel/kr/surestay-plus-by-best-western.html"
+   ],
+   "verificationNote": "Wrong brand page and wrong proximity claim."
+  },
+  {
+   "id": "cheonan-mains",
+   "city": "Cheonan",
+   "name": "The Mains Hotel",
+   "tier": "mid",
+   "stars": 3,
+   "area": "Central Cheonan",
+   "neighborhood": "Good central location with restaurant",
+   "priceFrom": 55,
+   "priceTo": 80,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "Check-in from 15:00; check-out by 11:00.",
+    "Free Wi-Fi."
+   ],
+   "rooms": [
+    {
+     "name": "Standard Double",
+     "price": "$55–72/night",
+     "note": "Clean with restaurant on site",
+     "bed": "queen",
+     "bedType": "queen",
+     "bedSize": "Queen (approx 150x200cm)",
+     "oneBed": true,
+     "oneBedOnly": true,
+     "privateBathroom": true,
+     "bedNote": "Single queen bed (not two beds pushed together)"
+    }
+   ],
+   "promos": [
+    "Has on-site restaurant."
+   ],
+   "amenities": [
+    "Restaurant",
+    "Free Wi-Fi",
+    "Laundry facilities"
+   ],
+   "hasOnSiteLaundry": true,
+   "officialUrl": "https://www.shillahotels.com",
+   "officialLabel": "Official site (Shilla)",
+   "compareUrl": "https://www.kayak.com/hotels/Cheonan,c58525/The-Mains-Hotel",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Good mid-range value with restaurant.",
+   "highlights": [
+    "On-site restaurant",
+    "Solid reviews"
+   ],
+   "fits": false,
+   "fitReason": "Double · Central Cheonan",
+   "lat": 36.82,
+   "lng": 127.15,
+   "stationWalkTime": "8 min walk to station",
+   "_walkMins": 8,
+   "_bedSizes": [
+    "queen"
+   ],
+   "hasCurrentDeal": true,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "Not near public transport: 34 Cheongsu 11-ro, Dongnam-gu — ~2.7 km straight-line from Cheonan Station (~30+ min walk); no rail station within a 15-min walk.",
+    "officialUrl pointed to shillahotels.com, which is unrelated — no official site exists; bookable only via OTAs."
+   ],
+   "verificationEvidence": [
+    "Booking.com / Tripadvisor address and distances — https://www.booking.com/hotel/kr/the-mains.html"
+   ],
+   "verificationNote": "Wrong official link (Shilla domain) and wrong proximity claim removed."
+  },
+  {
+   "id": "gyeongju-commodore",
+   "city": "Gyeongju",
+   "name": "Commodore Hotel Gyeongju",
+   "tier": "mid",
+   "stars": 4,
+   "area": "Bomun Lake Resort (Gyeongju)",
+   "neighborhood": "422 Bomun-ro, Bomun Tourist Complex; lakeside, ~6 km from old-town sights",
+   "priceFrom": 66,
+   "priceTo": 130,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "OTA listings differ on exact times (14:00–15:00 check-in, 11:00–12:00 check-out) — confirm on official site.",
+    "Free Wi-Fi; sauna and seasonal outdoor pool; 3 restaurants.",
+    "No pets."
+   ],
+   "rooms": [
+    {
+     "name": "Superior Double (Mountain View)",
+     "price": "$66–80/night",
+     "note": "28–30 m²; private bath (bath + shower)",
+     "bed": "double",
+     "bedType": "double",
+     "bedSize": "1 double bed — OTAs list 'full' (~140cm); some property descriptions say 'king-size' — UNCONFIRMED",
+     "oneBed": true,
+     "privateBathroom": true,
+     "oneBedOnly": true,
+     "bedNote": "One bed unit, but width unconfirmed (140cm 'full' vs king-size claims)"
+    },
+    {
+     "name": "Superior Double (Lake View)",
+     "price": "$100–130/night",
+     "note": "30 m², Bomun Lake view; private bath",
+     "bed": "double",
+     "bedType": "double",
+     "bedSize": "1 double bed — width UNCONFIRMED (sources differ)",
+     "oneBed": true,
+     "privateBathroom": true,
+     "oneBedOnly": true,
+     "bedNote": "One bed unit, but width unconfirmed (140cm 'full' vs king-size claims)"
+    }
+   ],
+   "promos": [
+    "Official site runs seasonal lake-view packages (per guide/gyeongju.md)."
+   ],
+   "amenities": [
+    "Sauna",
+    "Seasonal outdoor pool",
+    "3 restaurants",
+    "Business center",
+    "Convenience store",
+    "Free Wi-Fi",
+    "Free parking"
+   ],
+   "hasOnSiteLaundry": false,
+   "officialUrl": "https://www.commodorehotel.co.kr",
+   "officialLabel": "Official site (commodorehotel.co.kr)",
+   "compareUrl": "https://www.kayak.com/hotels/Gyeongju,c41830/Commodore-Hotel-Gyeongju",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Best mid-price candidate at Bomun Lake — official site and VISITKOREA listing fully verified; withheld pending bed-width confirmation.",
+   "highlights": [
+    "VISITKOREA-verified official source",
+    "Private bathrooms confirmed",
+    "Mid-tier pricing $66–130"
+   ],
+   "fits": false,
+   "fitReason": "Fails one-queen/king rule pending official bed-width confirmation; also transit exception",
+   "lat": 35.844,
+   "lng": 129.285,
+   "priceNote": "Typical 2026 estimates (guide/gyeongju.md + OTA cross-check 2026-08-09).",
+   "stationWalkTime": "Transit exception: KTX Singyeongju Station ~20 min by taxi/shuttle (Gyeongju has no walk-to-station option)",
+   "_walkMins": 20,
+   "_bedSizes": [
+    "double"
+   ],
+   "hasCurrentDeal": false,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "BED RULE (non-negotiable): one-bed rooms listed as '1 double bed (full)' (~140cm) on OTAs; marketing text claims 'double bed or king-size bed' — no official confirmation of a queen/king (>=150cm) one-bed room yet.",
+    "TRANSIT: no walk-to-station option (KTX Singyeongju ~20 min taxi) — acceptable only under the documented transit-exception policy."
+   ],
+   "verificationEvidence": "Existence/address (422 Bomun-ro), official website (commodorehotel.co.kr) and 4-star class confirmed via VISITKOREA official listing (vcontsId 99034, geo 35.8442/129.2851), checked 2026-08-09. Private en-suite bathrooms confirmed across room types (OTA room descriptions). Bed width unresolved: Booking.com lists '1 full bed' for Superior Double; easemytrip states rooms have 'a double bed or a king-size bed'.",
+   "verificationNote": "RE-ADD CRITERIA: publish (with transitException) once the official booking engine or the hotel confirms a one-bed queen/king room category. Everything else already verifies."
+  },
+  {
+   "id": "gyeongju-gg-hotel",
+   "city": "Gyeongju",
+   "name": "GG Hotel Gyeongju",
+   "tier": "budget",
+   "stars": 3,
+   "area": "Gyeongju Old Town edge",
+   "neighborhood": "Taejong-ro 699beon-gil 3, south edge of the historic centre; walkable to tombs/Cheomseongdae area",
+   "priceFrom": 55,
+   "priceTo": 82,
+   "currency": "USD",
+   "checkIn": "15:00",
+   "checkOut": "11:00",
+   "policies": [
+    "Times per OTA listings (no official English site to confirm)."
+   ],
+   "rooms": [
+    {
+     "name": "Standard Double Room",
+     "price": "$55–66/night",
+     "note": "1 double bed (per OTA listings); private bathroom",
+     "bed": "double",
+     "bedType": "double",
+     "bedSize": "Double (~140cm; width unconfirmed by any official source)",
+     "oneBed": true,
+     "privateBathroom": true,
+     "oneBedOnly": true,
+     "bedNote": "One double bed (OTA evidence only)"
+    }
+   ],
+   "promos": [],
+   "amenities": [
+    "Free Wi-Fi (per OTA listings)"
+   ],
+   "hasOnSiteLaundry": false,
+   "officialUrl": null,
+   "officialLabel": "No official English site",
+   "compareUrl": "https://www.kayak.com/hotels/Gyeongju,c41830/GG-Hotel-Gyeongju",
+   "compareLabel": "Compare rates (KAYAK)",
+   "why": "Only budget candidate in Gyeongju — withheld because no official booking source exists.",
+   "highlights": [
+    "Budget pricing $55–82",
+    "Old-town location"
+   ],
+   "fits": false,
+   "fitReason": "Fails official-source rule (OTA-only) + bed width unconfirmed + transit exception",
+   "lat": 35.989,
+   "lng": 129.215,
+   "priceNote": "OTA-observed 2026 pricing ($56–82); cannot verify against an official channel.",
+   "stationWalkTime": "Transit exception: KTX Singyeongju Station ~20 min by taxi/shuttle (Gyeongju has no walk-to-station option)",
+   "_walkMins": 20,
+   "_bedSizes": [
+    "double"
+   ],
+   "hasCurrentDeal": false,
+   "excludedOn": "2026-08-09",
+   "exclusionReasons": [
+    "OFFICIAL-SOURCE RULE: no official English website or chain page — every published record must be verifiable against an official source (OTA-only listings are cross-check tools, not sources).",
+    "BED RULE: '1 double bed' per OTAs; width (~140cm) below the 150cm queen minimum with no official confirmation.",
+    "TRANSIT: no walk-to-station option."
+   ],
+   "verificationEvidence": "Real operating property per KAYAK/Trip.com/Google Hotels listings (Standard Double ~US$56–70, 1 double bed), checked 2026-08-09. No official site found; not listed on VISITKOREA at time of check.",
+   "verificationNote": "RE-ADD CRITERIA: an official/VISITKOREA listing plus a confirmed queen-or-larger one-bed room, under the transit-exception policy."
+  }
+ ],
+ "lastUpdated": "2026-08-09"
 }

@@ -10,7 +10,7 @@
 
 This is a **static information website** (no login, no backend) designed to help you:
 
-- Browse 24 carefully selected 3–5 star hotels (verified against official sources 2026-08-09)
+- Browse 26 carefully selected 3–5 star hotels (verified against official sources 2026-08-09)
 - Compare prices, room types, and amenities
 - Filter by budget, bed type, laundry, and "fits my needs"
 - See official booking links and clear rules
@@ -68,11 +68,15 @@ This ensures we never compromise on our core needs while still being able to com
 | **Busan**  | 7      | Haeundae beach + Station area |
 | **Cheonan**| 2      | Ramada Encore (Bongmyeong Stn) + Brown Dot (Cheonan Stn) — other candidates failed the walk-to-station rule (see `data/excluded.json`) |
 | **Daejeon**| 7      | Good transport hub + hot springs area |
-| **Gyeongju** | 0 | Excluded from the must-have shortlist because the reviewed properties do not pass the near-transit requirement |
+| **Gyeongju** | 2 | Hilton Gyeongju + Lahan Select Gyeongju — published under a **documented transit exception** (no rail in town; KTX Singyeongju ~20 min by taxi/shuttle). Bed & bathroom rules unchanged. Commodore + GG Hotel are on hold in `data/excluded.json` pending bed-width / official-source confirmation |
 
 > **Official-source verification (2026-08-09):** every published hotel was re-checked against
 > its official hotel/chain page. See `guide/verification-report-2026-08-09.md` for the full
 > per-hotel evidence and `data/excluded.json` for the 5 Cheonan records removed from the list.
+>
+> **Transit-exception policy (2026-08-09):** the walk-to-station must-have may be relaxed only
+> with `transitException: true` + a documented `transitPlan` + `_verification` evidence, enforced
+> by `validate.py`. Gyeongju's two resorts are the first records published this way.
 
 All hotels include:
 - Realistic price ranges (2026 estimates)
@@ -109,7 +113,7 @@ Your live site will be available at:
 Korea-hotels/
 ├── index.html              ← The interactive planner (open this)
 ├── data/
-│   ├── hotels.json         ← All hotel data (24 hotels)
+│   ├── hotels.json         ← All hotel data (26 hotels)
 │   ├── itinerary.json      ← Trip dates and cities
 │   └── excluded.json       ← Records removed after official-source verification
 ├── guide/                  ← Detailed markdown guides
