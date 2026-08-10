@@ -1,5 +1,14 @@
 # Gyeongju — Hotels & Booking Guide
 
+> **2026-08-09 update — Gyeongju is bookable again.** Two Bomun Lake resorts are now in the
+> strict shortlist under a documented **transit exception** (Gyeongju has no subway; KTX
+> arrives at Singyeongju ~20 min out of town, taxi ≈ ₩25,000–35,000 or tourist shuttle):
+> **Hilton Gyeongju** (king-bed rooms, hilton.com) and **Lahan Select Gyeongju** (one-queen
+> category, lahan.com). **Commodore Hotel Gyeongju** (official source fully verified) and
+> **GG Hotel** are on hold in `data/excluded.json` — Commodore pending official bed-width
+> confirmation (OTAs list a ~140 cm "full" double), GG Hotel because it has no official
+> English booking source. Bed and bathroom must-haves were **not** relaxed.
+
 **Recommended:** 6 nights (Nov 8 – Nov 14). Gyeongju is the ancient Silla capital —
 a compact historic city where the best places to stay are either the **Old Town**
 (hanok guesthouses near the tombs & Cheomseongdae) or **Bomun Lake Resort** (bigger
