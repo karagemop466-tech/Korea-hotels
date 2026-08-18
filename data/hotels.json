@@ -1251,8 +1251,8 @@
    "stars": 3,
    "area": "Jung-gu (old town) / Jungangno",
    "neighborhood": "Near Jungangno Station (Line 1); one metro stop from Daejeon KTX Station",
-   "priceFrom": 45,
-   "priceTo": 65,
+   "priceFrom": 32,
+   "priceTo": 55,
    "currency": "USD",
    "checkIn": "15:00",
    "checkOut": "11:00",
@@ -1263,7 +1263,7 @@
    "rooms": [
     {
      "name": "Standard Double",
-     "price": "$45–55/night",
+     "price": "$32–45/night",
      "note": "Budget-friendly entry",
      "bed": "queen",
      "oneBed": true,
@@ -1275,7 +1275,7 @@
     },
     {
      "name": "Deluxe",
-     "price": "$52–65/night",
+     "price": "$40–55/night",
      "note": "Slightly larger",
      "bed": "queen",
      "oneBed": true,
@@ -1287,7 +1287,8 @@
     }
    ],
    "promos": [
-    "One of the most affordable options near the station."
+    "One of the most affordable options near the station.",
+    "Both refundable and non-refundable rates verified (EaseMyTrip NonRefundable Booking + Free Cancellation)"
    ],
    "amenities": [
     "Free Wi-Fi",
@@ -1315,7 +1316,8 @@
     "queen"
    ],
    "hasCurrentDeal": true,
-   "_verification": "Verified on official chain site benikea.com (베니키아 호텔 대림 listed, Daejeon). Record claimed \"2–5 min walk to Daejeon Station\" — actually ~1.2 km; correct link is Jungangno Stn ~250–300 m."
+   "_verification": "Verified on official chain site benikea.com (베니키아 호텔 대림 listed, Daejeon). Record claimed \"2–5 min walk to Daejeon Station\" — actually ~1.2 km; correct link is Jungangno Stn ~250–300 m.",
+   "_priceVerification": "2026-08-18 batch: HotelsCombined $20 cheapest, Kayak $36 Standard, Hotels.com $33 $40 total, average $40/night. Previous $45-65 high bias. Adjusted to $32-55. Evidence in verification-report-2026-08-18-full-batch.md"
   },
   {
    "id": "daejeon-hotel-stendhal",
@@ -1401,8 +1403,8 @@
    "stars": 3,
    "area": "Cheonan Station area",
    "neighborhood": "Very close to Cheonan Station",
-   "priceFrom": 45,
-   "priceTo": 70,
+   "priceFrom": 28,
+   "priceTo": 50,
    "currency": "USD",
    "checkIn": "15:00",
    "checkOut": "11:00",
@@ -1413,7 +1415,7 @@
    "rooms": [
     {
      "name": "Standard Double",
-     "price": "$45–58/night",
+     "price": "$28–45/night",
      "note": "Budget-friendly near station",
      "bed": "queen",
      "bedType": "queen",
@@ -1425,7 +1427,8 @@
     }
    ],
    "promos": [
-    "Often one of the cheapest decent options near the station."
+    "Often one of the cheapest decent options near the station.",
+    "Both refundable (free cancellation) and non-refundable (advance) rates available - verified via EaseMyTrip Free Cancellation + Non Refundable split [EaseMyTrip] and Trip.com Free cancellation"
    ],
    "amenities": [
     "Free Wi-Fi",
@@ -1451,7 +1454,8 @@
     "queen"
    ],
    "hasCurrentDeal": true,
-   "_verification": "Property verified (7-1 Keunsijang-gil; private bathrooms; 0.86 km to Cheonan Stn). Chain domain browndot.co.kr returns a hosting-error/403 page — booking via OTA recommended."
+   "_verification": "Property verified (7-1 Keunsijang-gil; private bathrooms; 0.86 km to Cheonan Stn). Chain domain browndot.co.kr returns a hosting-error/403 page — booking via OTA recommended.",
+   "_priceVerification": "2026-08-18 batch: OTA low-season $21-27 (Google Travel $21 [trip], Hotels.com $27 nightly $30 total), Trip.com avg USD42. Previous $45-70 high bias. Adjusted to $28-50 for autumn shoulder; evidence in verification-report-2026-08-18-full-batch.md"
   },
   {
    "id": "daejeon-hotel-interciti",
@@ -1983,14 +1987,14 @@
   }
  ],
  "meta": {
-  "pricingLastChecked": "2026-08-07",
+  "pricingLastChecked": "2026-08-18",
   "pricingSource": "KAYAK, Trip.com, Booking.com, official sites (2026 shoulder estimates)",
-  "lastUpdated": "2026-08-09",
+  "lastUpdated": "2026-08-18",
   "totalHotels": 26,
   "datasetType": "Curated shortlist; every published hotel has an official URL and passes the three must-have checks (single queen/king bed, private en-suite bathroom, walk-to-station). Re-verified against official sources on 2026-08-09.",
   "excludedRecords": 8636,
   "lastOfficialSourceVerification": "2026-08-09",
-  "verificationReport": "guide/verification-report-2026-08-09.md",
+  "verificationReport": "guide/verification-report-2026-08-18-full-batch.md",
   "gyeongjuTransitException": "2026-08-09: 2 Gyeongju hotels (Hilton Gyeongju, Lahan Select Gyeongju) published under the documented transit-exception policy (transitException + transitPlan). Bed & bathroom must-haves unchanged; Commodore Hotel Gyeongju and GG Hotel Gyeongju moved to data/excluded.json pending bed-width/official-source confirmation."
  }
 }
